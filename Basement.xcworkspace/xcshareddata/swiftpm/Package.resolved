@@ -1,0 +1,43 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "Amber",
+        "repositoryURL": "https://github.com/g30r93g/Amber.git",
+        "state": {
+          "branch": "master",
+          "revision": "bdc1cb6353fe181b1bbffced585b4adebcee835c",
+          "version": null
+        }
+      },
+      {
+        "package": "CodableFirebase",
+        "repositoryURL": "https://github.com/alickbass/CodableFirebase.git",
+        "state": {
+          "branch": "master",
+          "revision": "a4cda89948db93ec21249a35ecdacab8c489a116",
+          "version": null
+        }
+      },
+      {
+        "package": "KeyboardLayoutGuide",
+        "repositoryURL": "https://github.com/freshOS/KeyboardLayoutGuide.git",
+        "state": {
+          "branch": "master",
+          "revision": "141e8a97eca2b00d7e216e78d993bce522b54e12",
+          "version": null
+        }
+      },
+      {
+        "package": "MarqueeLabel",
+        "repositoryURL": "https://github.com/cbpowell/MarqueeLabel.git",
+        "state": {
+          "branch": "master",
+          "revision": "53f333932aaf7cce7ce002ed5b21ccf249e23db0",
+          "version": null
+        }
+      }
+    ]
+  },
+  "version": 1
+}

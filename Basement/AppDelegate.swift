@@ -2,23 +2,46 @@
 //  AppDelegate.swift
 //  Basement
 //
-//  Created by George Nick Gorzynski on 29/06/2020.
+//  Created by George Nick Gorzynski on 23/05/2020.
+//  Copyright © 2020 George Nick Gorzynski. All rights reserved.
 //
 
 import UIKit
+import Firebase
+import FirebaseAuth
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        // Configure Firebase
+        FirebaseApp.configure()
+        
+        // Determine if user is signed in, and if so, re-request authorization to user accounts
+        if Auth.auth().currentUser != nil {
+            _ = AppleMusicAPI.currentSession
+            _ = VibeManager.current
+            
+            AppleMusicAPI.currentSession.isAuthed { (_) in
+                
+            }
+        }
+        
+        // TEST: FORCE SIGN OUT
+        do {
+            try Auth.auth().signOut()
+        } catch {
+            print("[AppDelegate] Failed to sign out :/")
+        }
+
         return true
     }
-
+    
+    // MARK: URL Redirects
+    
     // MARK: UISceneSession Lifecycle
-
     func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
         // Called when a new scene session is being created.
         // Use this method to select a configuration to create the new scene with.
@@ -31,6 +54,4 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
 
-
 }
-
