@@ -1,12 +1,18 @@
 //
 //  ContentSelectionCell.swift
-//  Vibe
+//  Basement
 //
 //  Created by George Nick Gorzynski on 21/06/2020.
 //  Copyright © 2020 George Nick Gorzynski. All rights reserved.
 //
 
 import UIKit
+
+protocol ContentOptionsPresenter {
+    
+    func presentOptions(for content: Music.Content, at index: Int)
+    
+}
 
 class ContentSelectionCell: RoundUICollectionViewCell {
     
@@ -15,9 +21,18 @@ class ContentSelectionCell: RoundUICollectionViewCell {
     @IBOutlet weak private var title: UILabel!
     @IBOutlet weak private var subtitle: UILabel!
     @IBOutlet weak private var platforms: UILabel!
+    @IBOutlet weak private var options: UIButton!
+    
+    // MARK: Properties
+    public var optionsDelegate: ContentOptionsPresenter? = nil
+    private var musicContent: Music.Content!
+    private var index: Int!
     
     // MARK: Methods
-    public func setupCell(from data: Music.Content) {
+    public func setupCell(from data: Music.Content, index: Int) {
+        self.index = index
+        self.musicContent = data
+        
         if let song = data as? Music.Song {
             self.setupCell(from: song)
         } else if let playlist = data as? Music.Playlist {
@@ -55,6 +70,10 @@ class ContentSelectionCell: RoundUICollectionViewCell {
         self.title.text = data.name
         self.subtitle.text = data.artist
         self.platforms.text = "Available on \(data.streamingInformation.platform.name)"
+    }
+    
+    @IBAction private func optionsTapped(_ sender: UIButton) {
+        self.optionsDelegate?.presentOptions(for: self.musicContent, at: self.index)
     }
     
 }

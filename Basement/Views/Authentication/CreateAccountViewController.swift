@@ -1,6 +1,6 @@
 //
 //  CreateAccountViewController.swift
-//  Vibe
+//  Basement
 //
 //  Created by George Nick Gorzynski on 16/05/2020.
 //  Copyright © 2020 g30r93g. All rights reserved.
@@ -38,7 +38,7 @@ class CreateAccountViewController: UIViewController {
 		
 		// Pass to firebase auth to create email & passwd account
 		// Upon completion, create firestore entry of account with name, username and email
-		Firebase.shared.createUser(name: name, username: username, email: email, password: password) { (result) in
+        Firebase.shared.createUser(name: name, email: email, username: username, password: password) { (result) in
             self.signUpButton.stopLoading()
             
 			switch result {

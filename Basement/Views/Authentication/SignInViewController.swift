@@ -1,6 +1,6 @@
 //
 //  SignInViewController.swift
-//  Vibe
+//  Basement
 //
 //  Created by George Nick Gorzynski on 16/05/2020.
 //  Copyright © 2020 g30r93g. All rights reserved.
@@ -14,6 +14,7 @@ class SignInViewController: UIViewController {
 	// MARK: IBOutlets
 	@IBOutlet weak private var emailField: UITextField!
 	@IBOutlet weak private var passwordField: UITextField!
+    @IBOutlet weak private var forgotPasswordButton: UIButton!
 	@IBOutlet weak private var signInButton: LoadingButton!
 	@IBOutlet weak private var signUpButton: UIButton!
 
@@ -30,18 +31,18 @@ class SignInViewController: UIViewController {
 		guard let password = self.passwordField.text else { return }
 		
 		// Pass email and passwd to firebase auth
-		Auth.auth().signIn(withEmail: email, password: password) { (result, error) in
-			if let error = error {
-				print("[SignInVC] Error signing in: \(error.localizedDescription)")
-			} else if let result = result {
-                print("[SignInVC] User Signed In Successfully! - \(result)")
-				self.performSegue(withIdentifier: "Sign In Successful", sender: self)
-			} else {
-				print("[SignInVC] User couldn't sign in.")
-			}
-
+        Firebase.shared.signIn(email: email, password: password) { (result) in
+            switch result {
+            case .success(_):
+                print("[SignInVC] User Signed In Successfully)")
+                self.performSegue(withIdentifier: "Sign In Successful", sender: self)
+            case .failure(let error):
+                print("[SignInVC] Error signing in: \(error.localizedDescription)")
+                break
+            }
+            
             self.signInButton.stopLoading()
-		}
+        }
 	}
 	
 	// MARK: IBActions

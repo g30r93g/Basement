@@ -8,7 +8,6 @@
 
 import UIKit
 import Firebase
-import FirebaseAuth
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -19,21 +18,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Configure Firebase
         FirebaseApp.configure()
         
-        // Determine if user is signed in, and if so, re-request authorization to user accounts
-        if Auth.auth().currentUser != nil {
-            _ = AppleMusicAPI.currentSession
-            _ = VibeManager.current
-            
-            AppleMusicAPI.currentSession.isAuthed { (_) in
-                
-            }
-        }
+        // DEBUG: FORCE SIGN OUT
+//        do {
+//            try Auth.auth().signOut()
+//        } catch {
+//            print("[AppDelegate] Failed to sign out :/")
+//        }
         
-        // TEST: FORCE SIGN OUT
-        do {
-            try Auth.auth().signOut()
-        } catch {
-            print("[AppDelegate] Failed to sign out :/")
+        // Determine if user is signed in, and if so, re-request authorization to user accounts
+        if Firebase.isSignedIn {
+            _ = AppleMusicAPI.currentSession
+            _ = SpotifyAPI.currentSession
+            _ = SessionManager.current
         }
 
         return true

@@ -1,6 +1,6 @@
 //
 //  FriendCollectionCell.swift
-//  Vibe
+//  Basement
 //
 //  Created by George Nick Gorzynski on 24/05/2020.
 //  Copyright © 2020 George Nick Gorzynski. All rights reserved.
@@ -18,10 +18,10 @@ class FriendCollectionCell: RoundUICollectionViewCell {
     
     // MARK: Methods
     public func setupCell(from data: Firebase.UserProfile) {
-        self.username.text = "@\(data.username)"
+        self.username.text = "@\(data.information.username)"
         
-//        self.activeVibeIcon.alpha = data.currentVibe != nil ? 1 : 0
-//        if let currentVibe = data.currentVibe {
+//        self.activeVibeIcon.alpha = data.currentSession != nil ? 1 : 0
+//        if let currentSession = data.currentVibe {
 //            self.vibeDetails.text = "\(currentVibe.songName) • \(currentVibe.artist)"
 //        }
     }

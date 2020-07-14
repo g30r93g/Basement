@@ -1,6 +1,6 @@
 //
 //  FriendCell.swift
-//  Vibe
+//  Basement
 //
 //  Created by George Nick Gorzynski on 16/05/2020.
 //  Copyright © 2020 g30r93g. All rights reserved.
@@ -11,7 +11,7 @@ import UIKit
 class FriendCell: UITableViewCell {
     
     // MARK: Properties
-    private var username: String!
+    var userProfile: Firebase.UserProfile?
 	
 	// MARK: IBOutlets
 	@IBOutlet weak private var friendImage: UIImageView!
@@ -20,10 +20,10 @@ class FriendCell: UITableViewCell {
 	
 	// MARK: Methods
 	public func setupCell(from friend: Firebase.UserProfile) {
-        self.username = friend.username
+        self.userProfile = friend
         
-		self.friendName.text = friend.name
-        self.friendUsername.text = "@\(friend.username)"
+        self.friendName.text = friend.information.name
+        self.friendUsername.text = "@\(friend.information.username)"
         
 //        switch friend.status {
 //        case .notFriends, .followsYou:

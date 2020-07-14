@@ -231,6 +231,9 @@ PODS:
   - Firebase/Firestore (6.25.0):
     - Firebase/CoreOnly
     - FirebaseFirestore (~> 1.14.0)
+  - Firebase/Functions (6.25.0):
+    - Firebase/CoreOnly
+    - FirebaseFunctions (~> 2.5.1)
   - Firebase/Storage (6.25.0):
     - Firebase/CoreOnly
     - FirebaseStorage (~> 3.6.1)
@@ -275,6 +278,10 @@ PODS:
     - "gRPC-C++ (~> 1.28.0)"
     - leveldb-library (~> 1.22)
     - nanopb (~> 1.30905.0)
+  - FirebaseFunctions (2.5.1):
+    - FirebaseAuthInterop (~> 1.0)
+    - FirebaseCore (~> 6.0)
+    - GTMSessionFetcher/Core (~> 1.1)
   - FirebaseInstallations (1.2.0):
     - FirebaseCore (~> 6.6)
     - GoogleUtilities/Environment (~> 6.6)
@@ -352,6 +359,7 @@ DEPENDENCIES:
   - Firebase/Auth
   - Firebase/Core
   - Firebase/Firestore
+  - Firebase/Functions
   - Firebase/Storage
   - SpotifyKit
 
@@ -367,6 +375,7 @@ SPEC REPOS:
     - FirebaseCoreDiagnostics
     - FirebaseCoreDiagnosticsInterop
     - FirebaseFirestore
+    - FirebaseFunctions
     - FirebaseInstallations
     - FirebaseStorage
     - GoogleAppMeasurement
@@ -392,6 +401,7 @@ SPEC CHECKSUMS:
   FirebaseCoreDiagnostics: 4a773a47bd83bbd5a9b1ccf1ce7caa8b2d535e67
   FirebaseCoreDiagnosticsInterop: 296e2c5f5314500a850ad0b83e9e7c10b011a850
   FirebaseFirestore: deb7242803734c97376278698de097499cf5194f
+  FirebaseFunctions: 5af7c35d1c5e41608fecbb667eb6c4e672e318d0
   FirebaseInstallations: 2119fb3e46b0a88bfdbf12562f855ee3252462fa
   FirebaseStorage: f4f39ae834a7145963b913f54e2f24a9db1d8fac
   GoogleAppMeasurement: 137afe68bfa406c3f4221b9395253d9e5d4654cf
@@ -406,6 +416,6 @@ SPEC CHECKSUMS:
   PromisesObjC: c119f3cd559f50b7ae681fa59dc1acd19173b7e6
   SpotifyKit: 20abf7e1e170e35683ecbe6d93598e91d4e7b6ab
 
-PODFILE CHECKSUM: 59ffbfdf4459366d59135b4494c0d05c99b56b16
+PODFILE CHECKSUM: a5556104b9fc1dd0afc1dbf6be9b35d4544fb16e
 
 COCOAPODS: 1.9.2

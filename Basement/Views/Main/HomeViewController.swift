@@ -1,6 +1,6 @@
 //
 //  HomeViewController.swift
-//  Vibe
+//  Basement
 //
 //  Created by George Nick Gorzynski on 23/05/2020.
 //  Copyright © 2020 George Nick Gorzynski. All rights reserved.
@@ -11,15 +11,11 @@ import UIKit
 class HomeViewController: UIViewController {
     
     // MARK: IBOutlets
-    @IBOutlet weak private var totalVibersLabel: UILabel!
+    @IBOutlet weak private var activeFriendsInformation: UILabel!
     @IBOutlet weak private var contentTableView: UITableView!
     
-    // MARK: Properties
-    var segueData: Any? = nil
-    
-    // MARK: View Controller Life Cycle
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    override func viewDidLoad() {
+        super.viewDidLoad()
         // Do any additional setup after loading the view.
         
         self.setupView()
@@ -29,26 +25,30 @@ class HomeViewController: UIViewController {
     private func setupView() {
         AppleMusicAPI.currentSession.delegate = self
         
-        Firebase.shared.getCurrentUserProfile { (currentUser) in
-            DispatchQueue.main.async {
-                currentUser?.profile.getFriends() { (result) in
-                    switch result {
-                    case .success(let fetchedFriends):
-                        let totalVibers = fetchedFriends.filter({$0.userProfile.currentVibe != nil}).count
-                        switch totalVibers {
-                        case 0:
-                            self.totalVibersLabel.text = "None of your friends are currently vibing"
-                        case 1:
-                            self.totalVibersLabel.text = "1 friend is currently vibing"
-                        default:
-                            self.totalVibersLabel.text = "\(totalVibers) friends are currently vibing"
+        AppleMusicAPI.currentSession.setup { (setupSuccessful) in
+            if setupSuccessful {
+                AppleMusicAPI.currentSession.performAuth(shouldSetup: true)
+            }
+        }
+        
+        // Fetch Current User
+        Firebase.shared.currentUser { (result) in
+            switch result {
+            case .success(let currentUser):
+                Firebase.shared.getFriends(for: currentUser.userIdentifier()) { (friendResult) in
+                    switch friendResult {
+                    case .success(_):
+                        self.contentTableView.reloadData()
+                        self.triggerUserHistoryFetch(userID: currentUser.userIdentifier())
+                        DispatchQueue.main.async {
+                            self.activeFriendsInformation.text = "None of your friends are streaming."
                         }
-                    case .failure(let error):
+                    case .failure(_):
                         break
                     }
                 }
-                
-                
+            case .failure(_):
+                break
             }
         }
         
@@ -61,14 +61,14 @@ class HomeViewController: UIViewController {
         self.contentTableView.refreshControl?.addTarget(self, action: #selector(refresh), for: .valueChanged)
     }
     
-    @objc func updateFromNotification(_ notification: Notification) {
-        switch notification.name {
-        case .appleMusicLibraryRefreshed:
-            DispatchQueue.main.async {
+    private func triggerUserHistoryFetch(userID: String) {
+        SessionManager.current.fetchHistory(for: userID) { (result) in
+            switch result {
+            case .success(_):
                 self.contentTableView.reloadData()
+            default:
+                break
             }
-        default:
-            break
         }
     }
     
@@ -95,8 +95,8 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     
     /* THREE SECTIONS
      SECTION 1 - Friends
-     SECTION 2 - Recent Vibe Activity
-     SECTION 3 - Streaming Service Activity
+     SECTION 2 - Recent Session Activity
+     SECTION 3,4,5... - Streaming Service Activity
      */
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -104,7 +104,9 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         
         if !AppleMusicAPI.currentSession.userLibrary.recentlyPlayed.isEmpty  {
             numberOfRows += 1
-        } else if !SpotifyAPI.currentSession.userLibrary.playlists.isEmpty {
+        }
+        
+        if !SpotifyAPI.currentSession.userLibrary.playlists.isEmpty {
             numberOfRows += 1
         }
         
@@ -120,7 +122,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         case 0:
             cell.setupCellWithFriends(from: [], withHeader: "Your Friend Activity")
         case 1:
-            cell.setupCellWithRecents(from: [], withHeader: "Your Recent Vibes")
+            cell.setupCellWithRecents(from: SessionManager.current.sessionHistory, withHeader: "Your Recent Sessions")
         case 2:
             cell.setupCellWithLibraryContent(from: AppleMusicAPI.currentSession.userLibrary.recentlyPlayed, withHeader: "Your \(StreamingPlatform.appleMusic.name) Activity")
         case 3:

@@ -1,6 +1,6 @@
 //
 //  AddFriendsViewController.swift
-//  Vibe
+//  Basement
 //
 //  Created by George Nick Gorzynski on 16/05/2020.
 //  Copyright © 2020 g30r93g. All rights reserved.
@@ -75,11 +75,18 @@ extension AddFriendsViewController: UITextFieldDelegate {
     
     @objc private func textFieldDidEdit(_ textField: UITextField) {
         guard let usernameSearchValue = textField.text else { return }
-        Firebase.shared.findUsers(matching: usernameSearchValue) { (users) in
-            self.matchingFriends = users
-            
-            DispatchQueue.main.async {
-                self.friendsTable.reloadData()
+        
+        Firebase.shared.searchUsers(by: usernameSearchValue) { (result) in [self]
+            switch result {
+            case .success(let profiles):
+                guard usernameSearchValue == self.usernameSearchField.text else { return }
+                self.matchingFriends = profiles
+                
+                DispatchQueue.main.async {
+                    self.friendsTable.reloadData()
+                }
+            case .failure(_):
+                return
             }
         }
     }

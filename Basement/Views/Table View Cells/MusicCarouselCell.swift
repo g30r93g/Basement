@@ -1,6 +1,6 @@
 //
 //  MusicCarouselCell.swift
-//  Vibe
+//  Basement
 //
 //  Created by George Nick Gorzynski on 24/05/2020.
 //  Copyright © 2020 George Nick Gorzynski. All rights reserved.
@@ -13,9 +13,9 @@ class MusicCarouselCell: UITableViewCell {
     // MARK: Properties
     private(set) var displayType: CarouselDisplayType!
     private(set) var friends: [Firebase.UserProfile] = []
-    private(set) var recentVibes: [VibeManager.Vibe] = []
+    private(set) var recentSessions: [SessionManager.HistoricalSession] = []
     private(set) var streamableContent: [Music.Content] = []
-    var delegate: Presentable?
+    public var delegate: Presentable?
     
     // MARK: IBOutlets
     @IBOutlet weak private var sectionHeaderLabel: UILabel!
@@ -49,10 +49,10 @@ class MusicCarouselCell: UITableViewCell {
         self.setupCollectionView()
     }
     
-    public func setupCellWithRecents(from data: [VibeManager.Vibe], withHeader header: String) {
+    public func setupCellWithRecents(from data: [SessionManager.HistoricalSession], withHeader header: String) {
         self.sectionHeaderLabel.text = header
         self.displayType = .recents
-        self.recentVibes = data
+        self.recentSessions = data
         
         self.setupCollectionView()
     }
@@ -65,7 +65,7 @@ class MusicCarouselCell: UITableViewCell {
         self.setupCollectionView()
     }
     
-//    public func setupCellWithShowcase(from data: Firebase.UserProfile.LibraryShowcase)
+//    public func setupCellWithShowcase(from data: Music.Showcase)
     
     // MARK: Enums
     public enum CarouselDisplayType {
@@ -83,7 +83,7 @@ extension MusicCarouselCell: UICollectionViewDelegate, UICollectionViewDataSourc
         case .friends:
             return self.friends.count
         case .recents:
-            return self.recentVibes.count
+            return self.recentSessions.count
         case .streamableContent:
             return self.streamableContent.count
         default:
@@ -102,10 +102,10 @@ extension MusicCarouselCell: UICollectionViewDelegate, UICollectionViewDataSourc
             
             return cell
         case .recents:
-            // Setup recentVibes cell
+            // Setup recentSession cell
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MusicContent", for: indexPath) as! MusicContentCell
             
-            let data = self.recentVibes[indexPath.item]
+            let data = self.recentSessions[indexPath.item]
             cell.setupCell(from: data)
             
             return cell
@@ -133,7 +133,7 @@ extension MusicCarouselCell: UICollectionViewDelegate, UICollectionViewDataSourc
             let selectedFriend = self.friends[indexPath.item]
             
         case .recents:
-            let recentVibe = self.recentVibes[indexPath.item]
+            let recentSession = self.recentSessions[indexPath.item]
             
         case .streamableContent:
             if let content = self.streamableContent[indexPath.item] as? Music.ContentContainer {

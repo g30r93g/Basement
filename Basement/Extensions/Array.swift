@@ -1,6 +1,6 @@
 //
 //  Array.swift
-//  Vibe
+//  Basement
 //
 //  Created by George Nick Gorzynski on 16/06/2020.
 //  Copyright © 2020 George Nick Gorzynski. All rights reserved.
@@ -16,6 +16,23 @@ extension Array {
         } else {
             return nil
         }
+    }
+    
+}
+
+extension Array where Element: Equatable {
+    
+    func hasCommonElements(_ array: [Element]) -> Bool {
+        var doesContain = false
+        
+        for element in self {
+            if array.contains(element) {
+                doesContain = true
+                break
+            }
+        }
+        
+        return doesContain
     }
     
 }

@@ -1,6 +1,6 @@
 //
 //  ProfileViewController.swift
-//  Vibe
+//  Basement
 //
 //  Created by George Nick Gorzynski on 23/05/2020.
 //  Copyright © 2020 George Nick Gorzynski. All rights reserved.
@@ -15,14 +15,17 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak private var navigationTitle: UILabel!
     
     @IBOutlet weak private var editProfileButton: UIButton!
-    @IBOutlet weak private var friendsButton: UIButton!
     @IBOutlet weak private var profileImage: UIImageView!
     @IBOutlet weak private var profileNameLabel: UILabel!
     @IBOutlet weak private var profileUsernameLabel: UILabel!
+    @IBOutlet weak private var streamCountLabel: UILabel!
+    @IBOutlet weak private var followerCountLabel: UILabel!
+    @IBOutlet weak private var followingCountLabel: UILabel!
+    
     @IBOutlet weak private var contentTableView: UITableView!
     
     // MARK: Properties
-    var user: Firebase.UserProfile?
+    var user: Firebase.UserProfile? = nil
     
     // MARK: View Controller Life Cycle
     override func viewWillAppear(_ animated: Bool) {
@@ -33,42 +36,35 @@ class ProfileViewController: UIViewController {
     
     // MARK: Methods
     private func setupView() {
-        if self.navigationController?.viewControllers.first == self {
-            // This means that we're viewing our own profile
-            self.navigationBar.alpha = 0
-            self.navigationBar.isUserInteractionEnabled = false
-            
-            self.editProfileButton.alpha = 1
-            self.editProfileButton.isUserInteractionEnabled = true
-            
-            self.friendsButton.alpha = 1
-            self.friendsButton.isUserInteractionEnabled = true
-            
-            Firebase.shared.getCurrentUserProfile() { (currentUser) in
-                if let currentUser = currentUser {
-                    DispatchQueue.main.async {
-                        self.profileNameLabel.text = currentUser.profile.name
-                        self.profileUsernameLabel.text = "@\(currentUser.profile.username)"
-                    }
-                }
-            }
-        } else {
+        if let user = self.user {
+            // Viewing an external profile
             self.navigationBar.alpha = 1
             self.navigationBar.isUserInteractionEnabled = true
             
             self.editProfileButton.alpha = 0
             self.editProfileButton.isUserInteractionEnabled = false
             
-            self.friendsButton.alpha = 0
-            self.friendsButton.isUserInteractionEnabled = false
+                self.profileNameLabel.text = user.information.name
+                self.profileUsernameLabel.text = "@\(user.information.username)"
+        } else {
+            // Viewing own profile
+            self.navigationBar.alpha = 0
+            self.navigationBar.isUserInteractionEnabled = false
             
-            if let user = self.user {
-                self.profileNameLabel.text = user.name
-                self.profileUsernameLabel.text = "@\(user.username)"
+            self.editProfileButton.alpha = 1
+            self.editProfileButton.isUserInteractionEnabled = true
+            
+            Firebase.shared.currentUser() { (result) in
+                switch result {
+                case .success(let user):
+                    DispatchQueue.main.async {
+                        self.profileNameLabel.text = user.publicProfile.information.name
+                        self.profileUsernameLabel.text = "@\(user.publicProfile.information.username)"
+                    }
+                case .failure(let error):
+                    print("[ProfileVC] Failed to fetch current user: \(error.localizedDescription)")
+                }
             }
-//            Firebase.shared.findUser(matching: user.username) { (user) in
-//                self.user = user
-//            }
         }
         
         // Add extra scroll
@@ -100,11 +96,11 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
         switch indexPath.row {
         case 0:
 //            cell.setupCellWithShowcase(from: [], withHeader: "Your Music Showcase")
-            cell.setupCellWithRecents(from: [], withHeader: "Your Music Showcase")
+            cell.setupCellWithRecents(from: [], withHeader: "\(self.user == nil ? "Your" : "Their") Music Showcase")
         case 1:
-            cell.setupCellWithRecents(from: [], withHeader: "Your Recent Vibes")
+            cell.setupCellWithRecents(from: [], withHeader: "\(self.user == nil ? "Your" : "Their") Recent Sessions")
         case 2:
-            cell.setupCellWithFriends(from: [], withHeader: "Your Friend Activity")
+            cell.setupCellWithFriends(from: [], withHeader: "\(self.user == nil ? "Your" : "Their") Friend Activity")
         default:
             break
         }

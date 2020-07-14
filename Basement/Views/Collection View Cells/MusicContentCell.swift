@@ -1,12 +1,13 @@
 //
 //  MusicContentCell.swift
-//  Vibe
+//  Basement
 //
 //  Created by George Nick Gorzynski on 24/05/2020.
 //  Copyright © 2020 George Nick Gorzynski. All rights reserved.
 //
 
 import UIKit
+import Retry
 
 class MusicContentCell: RoundUICollectionViewCell {
     
@@ -53,13 +54,22 @@ class MusicContentCell: RoundUICollectionViewCell {
         self.subtext.text = data.artist
     }
     
-    /// Populator method for `Account.Vibe `
-    public func setupCell(from data: VibeManager.Vibe) {
+    /// Populator method for `SessionManager.HistoricalSession `
+    public func setupCell(from data: SessionManager.HistoricalSession) {
 //        if let artworkURL = data.artwork {
 //            self.artwork.load(url: artworkURL)
 //        }
-//        self.header.text = data.name
-//        self.subtext.text = data.startTime.stringFormat()
+        
+        retryAsync(max: 3, retryStrategy: .immediate) {
+            data.details.hostProfile { (userProfile) in
+                if let profile = userProfile {
+                    self.header.text = "@\(profile.information.username)"
+                    return
+                }
+            }
+        }
+        
+        self.subtext.text = "\(data.content.count) song\(data.content.count != 1 ? "s" : "") • Streamed \(data.details.startDate)"
     }
     
     override func prepareForReuse() {

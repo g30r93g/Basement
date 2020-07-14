@@ -1,16 +1,21 @@
 //
 //  Presentable.swift
-//  Vibe
+//  Basement
 //
-//  Created by George Nick Gorzynski on 14/06/2020.
-//  Copyright © 2020 George Nick Gorzynski. All rights reserved.
+//  Created by George Nick Gorzynski on 05/07/2020.
 //
 
-import UIKit
+import Foundation
 
 protocol Presentable {
     
     func presentContentVC(_ content: Music.ContentContainer)
     func presentNowPlaying()
+    
+}
+
+protocol PresentableOptions {
+    
+    func presentOptions()
     
 }

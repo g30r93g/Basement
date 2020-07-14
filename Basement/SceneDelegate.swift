@@ -19,11 +19,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let _ = (scene as? UIWindowScene) else { return }
         
+        self.window?.overrideUserInterfaceStyle = .dark
         self.determineStoryboard()
     }
     
     func sceneDidBecomeActive(_ scene: UIScene) {
-        if let _ = SpotifyAPI.currentSession.appRemote.connectionParameters.accessToken {
+        if SpotifyAPI.currentSession.appRemote.connectionParameters.accessToken != nil {
             SpotifyAPI.currentSession.appRemote.connect()
         }
     }
@@ -37,13 +38,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
         guard let url = URLContexts.first?.url else { return }
         let appRemote = SpotifyAPI.currentSession.appRemote
-        let spotifyManager = SpotifyAPI.currentSession.spotifyKitManager
-
         let parameters = appRemote.authorizationParameters(from: url)
-        spotifyManager.saveToken(from: url)
 
-        if let accessToken = parameters?[SPTAppRemoteAccessTokenKey] {
-            appRemote.connectionParameters.accessToken = accessToken
+        if parameters?["code"] != nil {
+            SpotifyAPI.currentSession.spotifyKitManager.saveToken(from: url)
         } else if let error = parameters?[SPTAppRemoteErrorDescriptionKey] {
             print("[SceneDelegate/Spotify] Failed to obtain authorization from Spotify SDK - \(error)")
         }
@@ -51,7 +49,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     private func determineStoryboard() {
         var storyboard: UIStoryboard {
-            if Firebase.shared.isSignedIn {
+            if Firebase.isSignedIn {
                 return UIStoryboard(name: "Main", bundle: nil)
             } else {
                 return UIStoryboard(name: "Authentication", bundle: nil)

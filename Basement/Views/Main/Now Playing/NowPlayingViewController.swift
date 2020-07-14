@@ -1,6 +1,6 @@
 //
 //  NowPlayingViewController.swift
-//  Vibe
+//  Basement
 //
 //  Created by George Nick Gorzynski on 18/06/2020.
 //  Copyright © 2020 George Nick Gorzynski. All rights reserved.
@@ -16,89 +16,108 @@ class NowPlayingViewController: UIViewController {
     @IBOutlet weak private var titleLabel: UILabel!
     @IBOutlet weak private var subtitleLabel: UILabel!
     @IBOutlet weak private var scrubber: UISlider!
+    @IBOutlet weak private var timeLapsedLabel: UILabel!
+    @IBOutlet weak private var contentDurationLabel: UILabel!
     @IBOutlet weak private var rewindButton: UIButton!
     @IBOutlet weak private var playPauseButton: UIButton!
     @IBOutlet weak private var forwardButton: UIButton!
-    @IBOutlet weak private var vibers: UIButton!
+    @IBOutlet weak private var audioRouteButton: UIButton!
+    @IBOutlet weak private var listenersButton: UIButton!
+    @IBOutlet weak private var queueButton: UIButton!
     
     // MARK: View Controller Life Cycle
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        Music.session.playbackDelegate = self
+//        Music.session.playbackDelegate = self
         self.updateView()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         
-        Music.session.playbackDelegate = nil
+//        Music.session.playbackDelegate = nil
     }
     
     // MARK: Methods
     private func updateView() {
-        let nowPlaying = Music.session.nowPlaying
-//        let currentVibe = VibeManager.current.currentVibe
-        
-        if let currentSong = nowPlaying.currentSong {
-            self.backgroundImage.image = currentSong.streamingInformation.artwork?.image
-            self.artworkImage.image = currentSong.streamingInformation.artwork?.image
-            
-            self.titleLabel.text = "\(currentSong.name) • \(currentSong.artist)"
-            self.subtitleLabel.text = "Playing from \(currentSong.streamingInformation.platform.name)"
-        } else {
+        // Prevent display of now playing view if is not playing
+        if PlaybackManager.current.playback.state == .notPlaying {
             self.dismiss(animated: true) {
                 if let topVC = UIApplication.getPresentedViewController() {
-                    let nowPlayingStoryboard = UIStoryboard(name: "SetupVibe", bundle: nil)
+                    let nowPlayingStoryboard = UIStoryboard(name: "SetupSession", bundle: nil)
                     guard let nowPlayingVC = nowPlayingStoryboard.instantiateInitialViewController() else { fatalError() }
-                    
+
                     topVC.present(nowPlayingVC, animated: true, completion: nil)
                 }
             }
+            
+            return
         }
         
-        // TODO
-//        if let vibe = currentVibe {
-//            if vibe.isHost {
-//                self.vibers.setTitle("\(vibe.details.numberOfVibers) people vibing with you", for: .normal)
-//            } else {
-//                self.vibers.setTitle("Vibing with @\(vibe.host.username)", for: .normal)
-//            }
-//        }
+        // Show current song
+        let currentPlayback = PlaybackManager.current.playback
+        if let currentSong = currentPlayback.currentSong {
+            self.backgroundImage.image = currentSong.streamingInformation.artwork?.image
+            self.artworkImage.image = currentSong.streamingInformation.artwork?.image
+
+            self.titleLabel.text = "\(currentSong.name)"
+            self.subtitleLabel.text = "\(currentSong.artist) • Playing from \(currentSong.streamingInformation.platform.name)"
+            
+            let runtime = currentSong.runtime / 1000
+            self.contentDurationLabel.text = "\((runtime / 60).twoDigits()):\((runtime % 60).twoDigits())"
+            
+            self.timeLapsedLabel.text = "\((currentPlayback.currentPlaybackRuntime / 60).twoDigits()):\((currentPlayback.currentPlaybackRuntime % 60).twoDigits())"
+            self.scrubber.minimumValue = 0
+            self.scrubber.maximumValue = Float(currentSong.runtime)
+        }
+        
+        // Show listener count
+        if let session = SessionManager.current.session {
+            self.listenersButton.setTitle("\(session.isHost ? session.listeners.count : session.listeners.count - 1) \(session.isHost ? "listening" : "other listeners")", for: .normal)
+        }
     }
     
     // MARK: IBActions
     @IBAction private func playPauseTapped(_ sender: UIButton) {
-        switch Music.session.nowPlaying.currentState {
+        switch PlaybackManager.current.playback.state {
         case .playing:
             self.playPauseButton.setImage(UIImage(systemName: "pause.fill"), for: .normal)
-            Music.session.pause()
+            PlaybackManager.current.performPlaybackCommand(.pause)
         case .paused:
             self.playPauseButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
-            Music.session.continuePlaying()
+            PlaybackManager.current.performPlaybackCommand(.play)
         default:
             break
         }
     }
     
     @IBAction private func rewindTapped(_ sender: UIButton) {
-        Music.session.restartTrack()
+        if PlaybackManager.current.playback.currentPlaybackRuntime < 3000 {
+            PlaybackManager.current.performPlaybackCommand(.previous)
+        } else {
+            PlaybackManager.current.performPlaybackCommand(.restart)
+        }
     }
     
     @IBAction private func forwardTapped(_ sender: UIButton) {
-        Music.session.nextTrack()
+        PlaybackManager.current.performPlaybackCommand(.next)
+    }
+    
+    @IBAction private func playbackScrubberChangedValue(_ sender: UISlider) {
+        PlaybackManager.current.performPlaybackCommand(.skip(Int(sender.value)))
+    }
+    
+    @IBAction private func audioRouteTapped(_ sender: AVRoutePickerViewButton) {
+        sender.presentRoutePicker()
+    }
+    
+    @IBAction private func listenersTapped(_ sender: UIButton) {
+        
+    }
+    
+    @IBAction private func queueTapped(_ semder: UIButton) {
+        
     }
 
-}
-
-extension NowPlayingViewController: PlaybackDelegate {
-    
-    func playbackStateChanged(to state: Music.PlaybackState, nowPlaying: Music.NowPlaying?) {
-        self.updateView()
-    }
-    
-    func didUpdateContent(nowPlaying: Music.NowPlaying?) {
-        self.updateView()
-    }
-    
 }
