@@ -10,6 +10,7 @@ import Foundation
 protocol Presentable {
     
     func presentContentVC(_ content: Music.ContentContainer)
+    func presentUserVC(_ user: Firebase.UserProfile)
     func presentNowPlaying()
     
 }

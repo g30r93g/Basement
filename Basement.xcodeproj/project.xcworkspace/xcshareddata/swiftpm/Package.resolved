@@ -14,9 +14,9 @@
         "package": "CodableFirebase",
         "repositoryURL": "https://github.com/alickbass/CodableFirebase.git",
         "state": {
-          "branch": "master",
+          "branch": null,
           "revision": "a4cda89948db93ec21249a35ecdacab8c489a116",
-          "version": null
+          "version": "0.2.2"
         }
       },
       {
@@ -29,11 +29,38 @@
         }
       },
       {
+        "package": "KeychainAccess",
+        "repositoryURL": "https://github.com/kishikawakatsumi/KeychainAccess.git",
+        "state": {
+          "branch": "master",
+          "revision": "b00f91d92ccb20f67196837db19aaf1a1b9e2ed7",
+          "version": null
+        }
+      },
+      {
         "package": "MarqueeLabel",
         "repositoryURL": "https://github.com/cbpowell/MarqueeLabel.git",
         "state": {
           "branch": "master",
           "revision": "53f333932aaf7cce7ce002ed5b21ccf249e23db0",
+          "version": null
+        }
+      },
+      {
+        "package": "Retry",
+        "repositoryURL": "https://github.com/g30r93g/Retry",
+        "state": {
+          "branch": "master",
+          "revision": "f4450c302a8b9a55a4f3435c7b4df4ca2db35263",
+          "version": null
+        }
+      },
+      {
+        "package": "SPAlert",
+        "repositoryURL": "https://github.com/ivanvorobei/SPAlert.git",
+        "state": {
+          "branch": "master",
+          "revision": "91d48a26585bb4c371504d9d3498e6a36b272ea6",
           "version": null
         }
       }

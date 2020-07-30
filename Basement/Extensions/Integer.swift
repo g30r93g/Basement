@@ -9,13 +9,8 @@ import Foundation
 
 extension Int {
     
-    func twoDigits() -> Int {
-        let formatter = NumberFormatter()
-        formatter.minimumIntegerDigits = 2
-        
-        let number = NSNumber(value: self)
-        
-        return Int(formatter.string(from: number) ?? "0") ?? 0
+    func doubleDigitString() -> String {
+        return String(format: "%02d", self)
     }
     
 }

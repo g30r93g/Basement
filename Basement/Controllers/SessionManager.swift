@@ -11,7 +11,7 @@ import Foundation
 protocol SessionUpdateDelegate {
 	
 	func didStartSessionSetup()
-	func didAddSongToSetup()
+	func queueDidChangeInSetup()
 	func didInitialiseSession()
 	
 	func didJoinSession()
@@ -30,8 +30,8 @@ class SessionManager {
 	}
     
     // MARK: Properties
-	var sessionUpdateDelegate: SessionUpdateDelegate? = nil
-	private(set) var setup: Setup? = nil
+	public var sessionUpdateDelegate: SessionUpdateDelegate? = nil
+    private(set) var setup: Setup? = nil
 	private(set) var session: MusicSession? = nil
     private(set) var sessionHistory: [HistoricalSession] = []
     
@@ -328,7 +328,8 @@ class SessionManager {
 	
 	public func addContentToSetup(_ content: [Music.Content] = []) {
 		self.setup?.addContent(content)
-		self.sessionUpdateDelegate?.didAddSongToSetup()
+        
+        self.sessionUpdateDelegate?.queueDidChangeInSetup()
 	}
     
     public func createSession(from details: MusicSession.Details? = nil, content: [Music.Content]? = nil, users: [Firebase.UserProfile]? = nil, completion: ((Result<MusicSession, SessionError>) -> Void)? = nil) {
@@ -349,6 +350,7 @@ class SessionManager {
             switch result {
             case .success(let responseSession):
 				print("[SessionManager] Successfully initialised a new session: \(responseSession.details.identifier)")
+                print("                 Song IDs for session: \(responseSession.content.map({$0.streamingInformation.identifier}))")
 				
 				// Change from setup to session
 				self.session = responseSession
@@ -449,20 +451,17 @@ class SessionManager {
 //	}
 	
 	// MARK: - Playback Update Methods
-	public func updateSessionPlaybackState(to state: PlaybackManager.PlaybackCommand, completion: ((Bool) -> Void)? = nil) {
-		guard let currentSession = self.session else { completion?(false); return }
+	public func updateSessionPlaybackState(to state: PlaybackManager.PlaybackCommand, completion: ((Result<MusicSession, SessionError>) -> Void)? = nil) {
+        guard let currentSession = self.session else { completion?(.failure(.updateFailed)); return }
 		
-		self.session?.newPlaybackEvent(from: state)
+        currentSession.newPlaybackEvent(from: state)
+        print("[SessionManager] A new playback command has been issued by you (the host) - \(String(describing: currentSession.playback.events.last))")
 		self.updateSession(currentSession) { (result) in
 			switch result {
-			case .success(_):
-				completion?(true)
-				
-				if state == .stop {
-					self.session = nil
-				}
+			case .success(let session):
+                completion?(.success(session))
 			case .failure(_):
-				completion?(false)
+                completion?(.failure(.updateFailed))
 			}
 		}
 	}
@@ -474,8 +473,8 @@ class SessionManager {
         case noConnection
         case failedToStart
         case couldNotInitialise
-		
 		case unableToConnect
+        case updateFailed
     }
     
 }

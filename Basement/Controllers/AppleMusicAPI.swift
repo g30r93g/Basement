@@ -20,7 +20,9 @@ class AppleMusicAPI {
     var delegate: AppleMusicAPIDelegate? = nil
     
     // MARK: Initialiser
-    init() { }
+    init() {
+//        self.player?.playbackDelegate = PlaybackManager.current
+    }
     
     // MARK: Properties
     private var developerToken: String? = nil
@@ -36,7 +38,7 @@ class AppleMusicAPI {
         self.getDeveloperToken { (result) in
             switch result {
             case .success(let token):
-                self.amber = Amber(developerToken: token, storeFront: .unitedKingdom)
+                self.amber = Amber(developerToken: token)
                 completion(true)
             case .failure(_):
                 self.amber = nil
@@ -62,8 +64,6 @@ class AppleMusicAPI {
         self.amber?.fetchUserToken(completion: { (result) in
             switch result {
             case .success(let token):
-                if token.isEmpty { completion?(.failure(.noUserToken)); return }
-                
                 print("[AppleMusicAPI] User token fetched: \(token)")
                 self.amber?.updateUserToken(to: token)
                 self.delegate?.userTokenObtained(userToken: token)
@@ -95,10 +95,11 @@ class AppleMusicAPI {
             switch result {
             case .success(let library):
                 self.userLibrary = library
-                completion?()
             case .failure(let error):
                 print("[AppleMusicAPI] Failure while setting up - \(error.localizedDescription)")
             }
+            
+            completion?()
         }
     }
     

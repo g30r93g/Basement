@@ -158,6 +158,15 @@ extension HomeViewController: AppleMusicAPIDelegate {
 
 extension HomeViewController: Presentable {
     
+    func presentUserVC(_ user: Firebase.UserProfile) {
+        guard let userVC = storyboard?.instantiateViewController(identifier: "UserVC") as? ProfileViewController else { return }
+        self.navigationController?.pushViewController(userVC, animated: true)
+        
+        if let topVC = self.navigationController?.topViewController as? ProfileViewController {
+            topVC.user = user
+        }
+    }
+    
     func presentContentVC(_ content: Music.ContentContainer) {
         guard let contentVC = storyboard?.instantiateViewController(identifier: "ContentVC") as? ContentViewController else { return }
         self.navigationController?.pushViewController(contentVC, animated: true)

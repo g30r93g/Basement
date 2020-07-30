@@ -10,7 +10,7 @@ NS_ASSUME_NONNULL_BEGIN
 typedef NS_OPTIONS(NSUInteger, SPTAuthorizationOptions)
 {
     /// Authorize using a suitable method. If Spotify is installed the app will be used instead of a web view
-    SPTDefaultAuthorizationOption NS_SWIFT_NAME(default) = (0),
+    SPTDefaultAuthorizationOption NS_SWIFT_NAME(default) = (1),
     /// Authorize using only the Spotify client. If Spotify is not installed authorization will fail.
     SPTClientAuthorizationOption NS_SWIFT_NAME(clientOnly) = (1 << 0),
 } NS_SWIFT_NAME(AuthorizationOptions);

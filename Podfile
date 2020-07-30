@@ -8,7 +8,7 @@ target 'Basement' do
   # Pods for Firebase
   pod 'Firebase'
   pod 'Firebase/Core'
-  pod 'Firebase/Auth'
+  pod 'Firebase/Authentication'
   pod 'Firebase/Firestore'
   pod 'Firebase/Storage'
   pod 'Firebase/Functions'

@@ -14,13 +14,13 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak private var navigationBar: UIView!
     @IBOutlet weak private var navigationTitle: UILabel!
     
-    @IBOutlet weak private var editProfileButton: UIButton!
     @IBOutlet weak private var profileImage: UIImageView!
     @IBOutlet weak private var profileNameLabel: UILabel!
     @IBOutlet weak private var profileUsernameLabel: UILabel!
     @IBOutlet weak private var streamCountLabel: UILabel!
     @IBOutlet weak private var followerCountLabel: UILabel!
     @IBOutlet weak private var followingCountLabel: UILabel!
+    @IBOutlet weak private var friendshipButton: LoadingButton!
     
     @IBOutlet weak private var contentTableView: UITableView!
     
@@ -41,18 +41,43 @@ class ProfileViewController: UIViewController {
             self.navigationBar.alpha = 1
             self.navigationBar.isUserInteractionEnabled = true
             
-            self.editProfileButton.alpha = 0
-            self.editProfileButton.isUserInteractionEnabled = false
+            self.profileNameLabel.text = user.information.name
+            self.profileUsernameLabel.text = "@\(user.information.username)"
             
-                self.profileNameLabel.text = user.information.name
-                self.profileUsernameLabel.text = "@\(user.information.username)"
+            DispatchQueue.global(qos: .userInitiated).async {
+                user.fetchPastStreams { (historicalSessions) in
+                    self.streamCountLabel.text = "\(historicalSessions.count)"
+                    self.contentTableView.reloadData()
+                }
+            }
+            
+            let friends = user.friends
+            let followerCount = friends.filter({$0.relationship == .friends || $0.relationship == .followsMe}).count
+            let followingCount = friends.filter({$0.relationship == .friends || $0.relationship == .followsThem}).count
+            
+            self.followerCountLabel.text = "\(followerCount)"
+            self.followingCountLabel.text = "\(followingCount)"
+            
+            self.determineFriendshipStatus() { (relationship) in
+                guard let relationship = relationship else { return }
+                switch relationship {
+                case .notFriends:
+                    self.friendshipButton.setTitle("Add", for: .normal)
+                case .followsMe:
+                    self.friendshipButton.setTitle("Follow Back", for: .normal)
+                case .followsThem:
+                    self.friendshipButton.setTitle("Following", for: .normal)
+                case .friends:
+                    self.friendshipButton.setTitle("Friends", for: .normal)
+                }
+            }
         } else {
             // Viewing own profile
             self.navigationBar.alpha = 0
             self.navigationBar.isUserInteractionEnabled = false
+
             
-            self.editProfileButton.alpha = 1
-            self.editProfileButton.isUserInteractionEnabled = true
+            self.friendshipButton.setTitle("Edit Profile", for: .normal)
             
             Firebase.shared.currentUser() { (result) in
                 switch result {
@@ -60,6 +85,20 @@ class ProfileViewController: UIViewController {
                     DispatchQueue.main.async {
                         self.profileNameLabel.text = user.publicProfile.information.name
                         self.profileUsernameLabel.text = "@\(user.publicProfile.information.username)"
+                        
+                        DispatchQueue.global(qos: .userInitiated).async {
+                            user.publicProfile.fetchPastStreams { (historicalSessions) in
+                                self.streamCountLabel.text = "\(historicalSessions.count)"
+                                self.contentTableView.reloadData()
+                            }
+                        }
+                        
+                        let friends = user.publicProfile.friends
+                        let followerCount = friends.filter({$0.relationship == .friends || $0.relationship == .followsMe}).count
+                        let followingCount = friends.filter({$0.relationship == .friends || $0.relationship == .followsThem}).count
+                        
+                        self.followerCountLabel.text = "\(followerCount)"
+                        self.followingCountLabel.text = "\(followingCount)"
                     }
                 case .failure(let error):
                     print("[ProfileVC] Failed to fetch current user: \(error.localizedDescription)")
@@ -72,9 +111,79 @@ class ProfileViewController: UIViewController {
         
     }
     
+    private func determineFriendshipStatus(completion: @escaping(Firebase.UserRelationship.Relationship?) -> Void) {
+        Firebase.shared.currentUser { (result) in
+            switch result {
+            case .success(let currentUser):
+                
+                guard let friendUser = self.user else { return }
+                let currentUserFriends = currentUser.publicProfile.friends
+                
+                let isMyFriend = currentUserFriends.contains(where: {$0.relatedUser.identifier == friendUser.information.identifier})
+                let isTheirFriend = friendUser.friends.contains(where: {$0.relatedUser.identifier == currentUser.publicProfile.information.identifier})
+                
+                if isMyFriend && isTheirFriend {
+                    completion(.friends)
+                } else if isMyFriend {
+                    completion(.followsThem)
+                } else if isTheirFriend {
+                    completion(.followsMe)
+                } else {
+                    completion(.notFriends)
+                }
+            case .failure(_):
+                return
+            }
+        }
+    }
+    
+    private func updateFriendStatus() {
+        self.determineFriendshipStatus { (relationship) in
+            guard let relationship = relationship else { return }
+            
+            Firebase.shared.currentUser { (result) in
+                switch result {
+                case .success(let currentUserProfile):
+                    let currentUserPublicProfile = currentUserProfile.publicProfile
+                    guard let relationUserPublicProfile = self.user else { return }
+                    
+                    switch relationship {
+                    case .notFriends:
+                        // Send Friend Request
+                        break
+                    case .followsMe:
+                        // Follow Back
+                        break
+                    case .followsThem:
+                        // Send Friend Request Again
+                        break
+                    case .friends:
+                        // Remove Friend
+                        break
+                    }
+                    
+                case.failure(_):
+                    return
+                }
+                
+                self.friendshipButton.stopLoading()
+            }
+        }
+    }
+    
     // MARK: IBActions
     @IBAction private func dismissTapped(_ sender: UIButton) {
         self.navigationController?.popViewController(animated: true)
+    }
+    
+    @IBAction private func friendshipButtonTapped(_ sender: LoadingButton) {
+        if self.user != nil {
+            sender.startLoading()
+            self.updateFriendStatus()
+        } else {
+            // Edit profile
+            self.performSegue(withIdentifier: "Edit Profile", sender: self)
+        }
     }
     
 }
@@ -82,9 +191,9 @@ class ProfileViewController: UIViewController {
 extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     
     /* THREE SECTIONS
-            SECTION 1 - Showcase
-            SECTION 2 - Recent Activity
-            SECTION 3 - Friends (Icons Only)
+     SECTION 1 - Showcase
+     SECTION 2 - Recent Activity
+     SECTION 3 - Friends (Icons Only)
      */
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 3
@@ -95,7 +204,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
         
         switch indexPath.row {
         case 0:
-//            cell.setupCellWithShowcase(from: [], withHeader: "Your Music Showcase")
+            //            cell.setupCellWithShowcase(from: [], withHeader: "Your Music Showcase")
             cell.setupCellWithRecents(from: [], withHeader: "\(self.user == nil ? "Your" : "Their") Music Showcase")
         case 1:
             cell.setupCellWithRecents(from: [], withHeader: "\(self.user == nil ? "Your" : "Their") Recent Sessions")

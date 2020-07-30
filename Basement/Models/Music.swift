@@ -127,7 +127,7 @@ class Music: NSObject {
             case "Spotify":
                 self.platform = .spotify
             default:
-                // Although this will never be executed, compiler fails to interpret otherwise
+                // Although this will never be executed, compiler fails to determine otherwise
                 throw fatalError("No Platform Assigned")
             }
             

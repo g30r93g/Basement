@@ -16,6 +16,7 @@ class QueueViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        
     }
     
     // MARK: Methods
@@ -111,7 +112,7 @@ extension QueueViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Content", for: indexPath) as! ContentCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Queued Content", for: indexPath) as! ContentCell
         
         if indexPath.section == 0 {
             if let data = PlaybackManager.current.playback.history().retrieve(index: indexPath.row) {

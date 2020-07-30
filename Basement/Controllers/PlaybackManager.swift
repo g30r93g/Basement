@@ -5,7 +5,17 @@
 //  Created by George Nick Gorzynski on 06/07/2020.
 //
 
+import Amber
 import Foundation
+import MediaPlayer
+
+protocol MiniPlayerDelegate {
+    func playbackStateUpdated(to state: PlaybackManager.State)
+}
+
+protocol PlaybackUpdateRequestDelegate {
+    func sendPlaybackCommand(_ command: PlaybackManager.PlaybackCommand)
+}
 
 class PlaybackManager {
     
@@ -17,11 +27,21 @@ class PlaybackManager {
     var miniPlayerDelegate: MiniPlayerDelegate? = nil
     
     // MARK: Initialisers
-    init() { }
+    init() {
+        self.setupNowPlayingRemoteCommands()
+    }
+    
+    // MARK: Error Enums
+    public enum PlaybackError: Error {
+        case unknownError
+        
+        case failedToCommunicate
+        case failedToIdentifyPlatform
+    }
     
     // MARK: Enums
     enum State: String, Codable {
-        case notPlaying, paused, playing
+        case notStarted, paused, playing, ended
     }
     
     enum PlaybackCommand: Codable, Equatable {
@@ -85,52 +105,67 @@ class PlaybackManager {
     class CurrentPlayback {
         // MARK: Properties
         var state: PlaybackManager.State
-        var content: [Music.Song] = []
+        var content: [Music.Song] = [] {
+            didSet {
+                // TODO: ONLY WORKS FOR APPLE MUSIC, UPDATE FOR CROSS PLATFORM AVAILABILITY
+//                self.content.forEach({.addToQueue($0.streamingInformation.identifier)})
+                AppleMusicAPI.currentSession.amber?.player.setQueue(with: self.content.map({$0.streamingInformation.identifier}))
+            }
+        }
         var currentSong: Music.Song? {
             get {
-                guard state != .notPlaying,
-                      !self.content.isEmpty
-                else { return nil }
+                guard !self.content.isEmpty else { return nil }
+                
+                // Determines which song we're on based on playback events
+                let playbackEvents = SessionManager.current.session?.playback.events ?? []
+                let numberOfSkipsForward = playbackEvents.reduce(0, {$0 + ($1.state == .next ? 1 : 0)})
+                let numberOfSkipsBackward = playbackEvents.reduce(0, {$0 + ($1.state == .previous ? 1 : 0)})
+                
+                self.currentSongIndex = numberOfSkipsForward - numberOfSkipsBackward
+                if self.currentSongIndex < 0 { self.currentSongIndex = 0 }
                 
                 return self.content.retrieve(index: self.currentSongIndex)
             }
         }
         private var currentSongIndex: Array<Music.Song>.Index = -1
-        var currentPlaybackRuntime: Int {
+        /// Runtime in milliseconds
+        var runtime: Int {
             get {
-                guard let playbackEvents = SessionManager.current.session?.playback.events else { return 0 }
-                let lastSongChangeIndex = playbackEvents.lastIndex(where: {$0.state == .next || $0.state == .previous || $0.state == .restart}) ?? 0
+                guard let currentSong = self.currentSong else { return -1 }
                 
-                let timestamps = playbackEvents[lastSongChangeIndex...].map({$0.date})
-                var previousDate: Date? = nil
-                var currentRuntime: Int = 0
-                
-                for (index, timestamp) in timestamps.enumerated() {
-                    if index == 0 { previousDate = timestamp; continue }
-                    guard let previousTimestamp = previousDate else { continue }
-                    
-                    currentRuntime += Int(timestamp.timeIntervalSince(previousTimestamp) * 1000)
-                    
-                    previousDate = timestamp
+                switch currentSong.streamingInformation.platform {
+                case .appleMusic:
+                    return AppleMusicAPI.currentSession.amber?.player.player.currentPlaybackTime.milliseconds ?? -1
+                case .spotify:
+//                    SpotifyAPI.currentSession.appRemote.playerAPI?.getPlayerState({ (state, error) in
+//                        if error != nil {
+//                            return -1
+//                        }
+//
+//                        guard let state = state as? SPTAppRemotePlayerState else { return -1 }
+//
+//                        return state.playbackPosition
+//                    })
+                    return -1
+                default:
+                    return -1
                 }
-                
-                return currentRuntime
             }
         }
         
         // MARK: Initialisers
-        init(state: PlaybackManager.State = .notPlaying) {
+        init(state: PlaybackManager.State = .notStarted) {
             self.state = state
         }
         
         // MARK: Methods
         public func history() -> [Music.Song] {
-            if self.currentSongIndex < 0 { return [] }
+            guard self.currentSongIndex >= 0 && self.currentSongIndex < self.content.endIndex else { return [] }
             return Array(self.content[0..<currentSongIndex])
         }
         
         public func playingNext() -> [Music.Song] {
-            if self.currentSongIndex < 0 { return self.content }
+            guard self.currentSongIndex >= 0 && self.currentSongIndex < self.content.endIndex else { return self.content }
             return Array(self.content[currentSongIndex..<self.content.endIndex])
         }
         
@@ -167,9 +202,38 @@ class PlaybackManager {
                 return nil
             }
         }
+        
+        @discardableResult
+        public func previousTrack() -> [Music.Song] {
+            let queue = self.content
+            let previousSongIndex = self.currentSongIndex - 1
+            
+            if queue.hasIndex(previousSongIndex) {
+                self.currentSongIndex = previousSongIndex
+            } else {
+                fatalError("Pointer \(previousSongIndex) is outside bounds of queue")
+            }
+            
+            return self.playingNext()
+        }
+        
+        @discardableResult
+        public func nextTrack() -> [Music.Song] {
+            let queue = self.content
+            let nextSongIndex = self.currentSongIndex + 1
+            
+            if queue.hasIndex(nextSongIndex) {
+                self.currentSongIndex = nextSongIndex
+            } else {
+                fatalError("Pointer \(nextSongIndex) is outside bounds of queue")
+            }
+            
+            return self.playingNext()
+        }
     }
     
     // MARK: Update Methods
+    /// This should probably be in SessionManager
     public func sessionUpdated(_ session: SessionManager.MusicSession) {
         guard let newQueue = session.content as? [Music.Song] else { return }
         guard let sessionState = session.playback.events.last?.state else { return }
@@ -185,57 +249,139 @@ class PlaybackManager {
             self.playback.updateState(to: .paused)
             self.miniPlayerDelegate?.playbackStateUpdated(to: .paused)
         case .stop:
-            self.playback.updateState(to: .notPlaying)
-            self.miniPlayerDelegate?.playbackStateUpdated(to: .notPlaying)
+            self.playback.updateState(to: .ended)
+            self.miniPlayerDelegate?.playbackStateUpdated(to: .ended)
         default:
             break
         }
     }
     
     // MARK: Playback Methods
-    public func performPlaybackCommand(_ command: PlaybackCommand) {
-        SessionManager.current.updateSessionPlaybackState(to: command)
+    public func performPlaybackCommand(_ command: PlaybackCommand, completion: ((Result<CurrentPlayback, PlaybackError>) -> Void)? = nil) {
+        self.updateMediaPlayback(command) { (result) in
+            switch result {
+            case .success(_):
+                print("[PlaybackManager] Successfully performed playback command. Updating session for listeners...")
+                SessionManager.current.updateSessionPlaybackState(to: command) { (result) in
+                    switch result {
+                    case .success(_):
+                        print("[PlaybackManager] Listeners have been notified of session update.")
+                        completion?(.success(self.playback))
+                    case .failure(_):
+                        print("[PlaybackManager] Listeners have not been notified of session update.")
+                        completion?(.failure(.failedToCommunicate))
+                    }
+                }
+            case .failure(let error):
+                print("[PlaybackManager] Failed to perform playback command.")
+                completion?(.failure(error))
+            }
+        }
+    }
+    
+    private func updateMediaPlayback(_ command: PlaybackCommand, completion: @escaping(Result<Bool, PlaybackError>) -> Void) {
+        guard let currentSong = self.playback.currentSong else { return }
+        let streamingPlatform = currentSong.streamingInformation.platform
         
-        switch command {
-        case .stop:
-            break
-            // Terminate current session.
+        switch streamingPlatform {
+        case .appleMusic:
+            guard let appleMusicPlayer = AppleMusicAPI.currentSession.amber?.player else { fatalError() }
+            switch command {
+            case .play:
+                appleMusicPlayer.play()
+                self.playback.updateState(to: .playing)
+                completion(.success(true))
+            case .pause:
+                appleMusicPlayer.pause()
+                self.playback.updateState(to: .paused)
+                completion(.success(true))
+            case .stop:
+                appleMusicPlayer.stop()
+                self.playback.updateState(to: .ended)
+                completion(.success(true))
+            case .restart:
+                appleMusicPlayer.restart()
+                completion(.success(true))
+            case .previous:
+                appleMusicPlayer.previous()
+                self.playback.previousTrack()
+                completion(.success(true))
+            case .next:
+                appleMusicPlayer.next()
+                self.playback.nextTrack()
+                completion(.success(true))
+            case .skip(let time):
+                appleMusicPlayer.seek(to: time)
+                completion(.success(true))
+            }
+        case .spotify:
+            fatalError("NOT IMPLEMENTED")
             
-            // This will tell AppleMusicAPI or SpotifyAPI to stop playback and clear the queue.
-            // This will tell SessionManager to send a 'STOP' playback event, set session to nil, and delete the 'Users/{userID}/currentSession/{sessionID}' document
-        case .pause:
-            break
-            // Pause playback.
-        
-            // This will tell AppleMusicAPI or SpotifyAPI to pause playback.
-            // This will tell SessionManager to send a 'PAUSE' playback event, which will be broadcasted to all listeners by the document update trigger
-        case .play:
-            break
-            // Play playback.
-        
-            // This will tell AppleMusicAPI or SpotifyAPI to start playback.
-            // This will tell SessionManager to send a 'PLAY' playback event, which will be broadcasted to all listeners by the document update trigger
-        case .restart:
-            break
-            // Restart playback of current track.
-        
-            // This will tell AppleMusicAPI or SpotifyAPI to restart playback of current track.
-            // This will tell SessionManager to send a 'RESTART' playback event, which will be broadcasted to all listeners by the document update trigger
-        case .previous:
-            break
-            // Play previous track in playback queue.
-        
-            // This will tell AppleMusicAPI or SpotifyAPI to move back a track in the queue, if possible.
-            // If a track does exist before, SessionManager will send a 'PREVIOUS' playback event, which will be broadcasted to all listeners by the document update trigger
-        case .next:
-            break
-            // Play next track in playback queue.
-        
-            // This will tell AppleMusicAPI or SpotifyAPI to move forward a track in the queue, if possible.
-            // If a track does exist after, SessionManager will send a 'NEXT' playback event, which will be broadcasted to all listeneres by the document update trigger
-        case .skip(let amount):
+            switch command {
+            case .play:
+                SpotifyAPI.currentSession.appRemote.playerAPI?.resume({ (_, error) in
+                    guard error == nil else { completion(.failure(.failedToCommunicate)); return }
+                    self.playback.updateState(to: .playing)
+                    
+                    completion(.success(true))
+                })
+            case .pause:
+                SpotifyAPI.currentSession.appRemote.playerAPI?.pause({ (_, error) in
+                    guard error == nil else { completion(.failure(.failedToCommunicate)); return }
+                    self.playback.updateState(to: .paused)
+                    
+                    completion(.success(true))
+                })
+            case .stop:
+                SpotifyAPI.currentSession.appRemote.playerAPI?.pause({ (_, error) in
+                    guard error == nil else { completion(.failure(.failedToCommunicate)); return }
+                    self.playback.updateState(to: .ended)
+                    
+                    completion(.success(true))
+                })
+                // TODO: Clear the queue
+            case .restart:
+                SpotifyAPI.currentSession.appRemote.playerAPI?.seek(toPosition: 0, callback: { (_, error) in
+                    guard error == nil else { completion(.failure(.failedToCommunicate)); return }
+                    
+                    completion(.success(true))
+                })
+                SpotifyAPI.currentSession.appRemote.playerAPI?.resume({ (_, error) in
+                    guard error == nil else { completion(.failure(.failedToCommunicate)); return }
+                    
+                    completion(.success(true))
+                })
+            case .previous:
+                SpotifyAPI.currentSession.appRemote.playerAPI?.skip(toPrevious: { (_, error) in
+                    guard error == nil else { completion(.failure(.failedToCommunicate)); return }
+                    
+                    completion(.success(true))
+                })
+            case .next:
+                SpotifyAPI.currentSession.appRemote.playerAPI?.skip(toNext: { (_, error) in
+                    guard error == nil else { completion(.failure(.failedToCommunicate)); return }
+                    
+                    completion(.success(true))
+                })
+            case .skip(let time):
+                SpotifyAPI.currentSession.appRemote.playerAPI?.seek(toPosition: time, callback: { (_, error) in
+                    guard error == nil else { completion(.failure(.failedToCommunicate)); return }
+                    
+                    completion(.success(true))
+                })
+            }
+        default:
             break
         }
+    }
+    
+    // MARK: - MediaPlayer
+    func setupNowPlayingRemoteCommands() {
+        let remoteCommands = MPRemoteCommandCenter.shared()
+        
+//        remoteCommands.playCommand.addTarget { [unowned self] (event) -> MPRemoteCommandHandlerStatus in
+//            self.performPlaybackCommand(<#T##command: PlaybackCommand##PlaybackCommand#>)
+//        }
     }
     
 }
@@ -248,12 +394,4 @@ extension Notification.Name {
     public static let musicRestartTrack = Notification.Name("Restart Track")
     
     public static let currentPlaybackStateDidChange = Notification.Name("currentPlaybackStateDidChange")
-}
-
-protocol MiniPlayerDelegate {
-    func playbackStateUpdated(to state: PlaybackManager.State)
-}
-
-protocol PlaybackUpdateRequestDelegate {
-    func sendPlaybackCommand(_ command: PlaybackManager.PlaybackCommand)
 }

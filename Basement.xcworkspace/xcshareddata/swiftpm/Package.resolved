@@ -6,7 +6,7 @@
         "repositoryURL": "https://github.com/g30r93g/Amber.git",
         "state": {
           "branch": "master",
-          "revision": "d6f70ae1d7a59b6fe2628a8519afd7a7673b8125",
+          "revision": "0ad0e703eebb0110b0c3d1841e06f9ab9af789e9",
           "version": null
         }
       },
@@ -57,10 +57,19 @@
       },
       {
         "package": "Retry",
-        "repositoryURL": "https://github.com/g30r93g/Retry",
+        "repositoryURL": "https://github.com/icanzilb/Retry.git",
         "state": {
           "branch": "master",
-          "revision": "f3df330f3021d91ad7c1df958343e55f1528b709",
+          "revision": "59ce66464ef440ccdebf4589a6aef1976eda2689",
+          "version": null
+        }
+      },
+      {
+        "package": "SPAlert",
+        "repositoryURL": "https://github.com/ivanvorobei/SPAlert.git",
+        "state": {
+          "branch": "master",
+          "revision": "91d48a26585bb4c371504d9d3498e6a36b272ea6",
           "version": null
         }
       }

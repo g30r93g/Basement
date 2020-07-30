@@ -130,8 +130,8 @@ extension MusicCarouselCell: UICollectionViewDelegate, UICollectionViewDataSourc
         
         switch self.displayType {
         case .friends:
-            let selectedFriend = self.friends[indexPath.item]
-            
+            let selectedUser = self.friends[indexPath.item]
+            delegate?.presentUserVC(selectedUser)
         case .recents:
             let recentSession = self.recentSessions[indexPath.item]
             

@@ -49,8 +49,10 @@ class ContentViewController: UIViewController {
                         self.contentTableView.scrollToRow(at: indexPathOfRequestedSong, at: .none, animated: true)
                     }
                 }
-            case .failure(let error):
-                self.navigationController?.popViewController(animated: true)
+            case .failure(_):
+                DispatchQueue.main.async {
+                    self.navigationController?.popViewController(animated: true)
+                }
             }
         })
     }

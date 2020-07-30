@@ -18,6 +18,10 @@ extension Array {
         }
     }
     
+    func hasIndex(_ index: Int) -> Bool {
+        return index >= self.startIndex && index < self.endIndex
+    }
+    
 }
 
 extension Array where Element: Equatable {

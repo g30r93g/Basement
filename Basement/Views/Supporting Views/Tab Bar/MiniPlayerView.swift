@@ -25,13 +25,14 @@ class MiniPlayerView: RoundView {
         super.awakeFromNib()
         
         PlaybackManager.current.miniPlayerDelegate = self
+        SessionManager.current.sessionUpdateDelegate = self
         
         self.updateContent()
     }
     
     // MARK: Methods
     private func updateContent() {
-        if PlaybackManager.current.playback.state == .notPlaying && SessionManager.current.session == nil {
+        if PlaybackManager.current.playback.state == .notStarted && SessionManager.current.session == nil {
             self.displaySetupText()
         } else if let currentSong = PlaybackManager.current.playback.currentSong {
             self.displaySong(currentSong)
@@ -84,7 +85,7 @@ class MiniPlayerView: RoundView {
                 self.numberOfListeners.alpha = 1
                 self.playbackViewHeight.constant = 100
             }
-        case .notPlaying:
+        case .notStarted, .ended:
             // Hide Listener Count
             self.playPauseButton?.setImage(UIImage(systemName: "arrow.right"), for: .normal)
             
@@ -97,14 +98,14 @@ class MiniPlayerView: RoundView {
     
     // MARK: IBActions
     @IBAction private func playPauseButtonTapped(_ sender: UIButton) {
-        switch PlaybackManager.current.playback.state {
-        case .playing:
-            break
-        case .paused:
-            break
-        default:
-            break
+        let playbackState = PlaybackManager.current.playback.state
+        
+        guard playbackState == .playing || playbackState == .paused else { return }
+        DispatchQueue.main.async {
+            self.playPauseButton.setImage(UIImage(systemName: playbackState == .playing ? "pause.fill" : "play.fill"), for: .normal)
         }
+        
+        PlaybackManager.current.performPlaybackCommand(playbackState == .playing ? .pause : .play)
     }
     
     @IBAction private func miniPlayerTapped(_ sender: UIButton) {
@@ -115,10 +116,12 @@ class MiniPlayerView: RoundView {
                 
                 topVC.present(nowPlayingVC, animated: true, completion: nil)
             }
-        case .notPlaying:
+        case .notStarted, .ended:
             if let topVC = UIApplication.getPresentedViewController() {
                 let newVibeStoryboard = UIStoryboard(name: "NewSession", bundle: nil)
                 guard let newVibeTopVC = newVibeStoryboard.instantiateInitialViewController() else { fatalError() }
+                
+                self.updateContent()
                 
                 topVC.present(newVibeTopVC, animated: true, completion: nil)
             }
@@ -138,19 +141,15 @@ extension MiniPlayerView: MiniPlayerDelegate {
 
 extension MiniPlayerView: SessionUpdateDelegate {
     
+    func queueDidChangeInSetup() {
+        self.updateContent()
+    }
+    
     func didStartSessionSetup() {
         self.updateContent()
     }
     
-    func didAddSongToSetup() {
-        self.updateContent()
-    }
-    
     func didInitialiseSession() {
-        self.updateContent()
-    }
-    
-    func didStartSession() {
         self.updateContent()
     }
     

@@ -113,8 +113,8 @@ class Firebase {
         // MARK: Enums
         enum Relationship: String, Codable, Equatable {
             case notFriends
-            case isMyFriend
-            case areTheirFriend
+            case followsMe
+            case followsThem
             case friends
         }
         
@@ -130,7 +130,7 @@ class Firebase {
             case baseUser, relatedUser, relationship
         }
         
-        // MARK: Deocdable
+        // MARK: Decodable
         required init(from decoder: Decoder) throws {
             let container = try decoder.container(keyedBy: CodingKeys.self)
             
@@ -153,16 +153,30 @@ class Firebase {
         // MARK: Properties
         let information: UserInformation
         let friends: [UserRelationship]
+        private(set) var pastStreams: [SessionManager.HistoricalSession]
         
         // MARK: Initialiser
         init(information: UserInformation, friends: [UserRelationship]) {
             self.information = information
             self.friends = friends
+            self.pastStreams = []
+        }
+        
+        func fetchPastStreams(completion: @escaping([SessionManager.HistoricalSession]) -> Void) {
+            SessionManager.current.fetchHistory(for: self.information.identifier) { (result) in
+                switch result {
+                case .success(let pastStreams):
+                    self.pastStreams = pastStreams
+                    completion(pastStreams)
+                case .failure(_):
+                    completion([])
+                }
+            }
         }
         
         // MARK: Codable
         private enum CodingKeys: String, CodingKey {
-            case information, friends
+            case information, friends, pastStreams
         }
         
         // MARK: Decodable
@@ -171,6 +185,7 @@ class Firebase {
             
             self.information = try container.decode(UserInformation.self, forKey: .information)
             self.friends = try container.decode([UserRelationship].self, forKey: .friends)
+            self.pastStreams = []
         }
         
         // MARK: Encodable
@@ -238,7 +253,7 @@ class Firebase {
 //            }
 //        }
         
-        let tokenString = "eyJhbGciOiJFUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IllVOUE2MkhTTjYifQ.eyJpc3MiOiIzVjkzQTNBQ1Y5IiwiaWF0IjoxNTk0NzQzMDE5LCJleHAiOjE1OTQ3ODYyMTl9.IDI8pNxx-_3wkrBYMzexYb-Jc0hEa1vuqhgVQWCQchfcfDLrL8NAQF8XL4Bz7H19oYG69ZtNlIg4oTHc95yIJA"
+        let tokenString = "eyJhbGciOiJFUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IjhER05EUjlBV1gifQ.eyJpc3MiOiIzVjkzQTNBQ1Y5IiwiaWF0IjoxNTk2MTA1MDI1LCJleHAiOjE1OTYxNDgyMjV9.12LQz1ieUGD48ccnWgkLzpC_Pt6ev-iI6XPO6miDyammKcWlQ4kOiRqR_ms8GeStSIi5OB_ksPDq5DuiRTBHpg"
         
         completion(.success(tokenString))
     }

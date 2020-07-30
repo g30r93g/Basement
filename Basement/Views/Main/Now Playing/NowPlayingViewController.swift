@@ -25,12 +25,21 @@ class NowPlayingViewController: UIViewController {
     @IBOutlet weak private var listenersButton: UIButton!
     @IBOutlet weak private var queueButton: UIButton!
     
+    // MARK: Properties
+    private var playbackPositionTimer: Timer!
+ 
     // MARK: View Controller Life Cycle
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
 //        Music.session.playbackDelegate = self
         self.updateView()
+        
+//        self.scrubber.isUserInteractionEnabled = false
+        self.playbackPositionTimer = Timer.scheduledTimer(withTimeInterval: 0.01, repeats: true, block: { (_) in
+            self.updatePlaybackPosition()
+        })
+        self.playbackPositionTimer.fire()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -41,8 +50,10 @@ class NowPlayingViewController: UIViewController {
     
     // MARK: Methods
     private func updateView() {
+        let currentPlayback = PlaybackManager.current.playback
+        
         // Prevent display of now playing view if is not playing
-        if PlaybackManager.current.playback.state == .notPlaying {
+        if currentPlayback.state == .notStarted || currentPlayback.state == .ended {
             self.dismiss(animated: true) {
                 if let topVC = UIApplication.getPresentedViewController() {
                     let nowPlayingStoryboard = UIStoryboard(name: "SetupSession", bundle: nil)
@@ -55,8 +66,15 @@ class NowPlayingViewController: UIViewController {
             return
         }
         
-        // Show current song
+        self.updateNowPlayingInformation()
+        
+        self.updateListenerCount()
+    }
+    
+    private func updateNowPlayingInformation() {
         let currentPlayback = PlaybackManager.current.playback
+        
+        // Show current song
         if let currentSong = currentPlayback.currentSong {
             self.backgroundImage.image = currentSong.streamingInformation.artwork?.image
             self.artworkImage.image = currentSong.streamingInformation.artwork?.image
@@ -64,17 +82,39 @@ class NowPlayingViewController: UIViewController {
             self.titleLabel.text = "\(currentSong.name)"
             self.subtitleLabel.text = "\(currentSong.artist) • Playing from \(currentSong.streamingInformation.platform.name)"
             
-            let runtime = currentSong.runtime / 1000
-            self.contentDurationLabel.text = "\((runtime / 60).twoDigits()):\((runtime % 60).twoDigits())"
+            let totalRuntime = currentSong.runtime / 1000
+            self.contentDurationLabel.text = "\((totalRuntime / 60)):\((totalRuntime % 60).doubleDigitString())"
             
-            self.timeLapsedLabel.text = "\((currentPlayback.currentPlaybackRuntime / 60).twoDigits()):\((currentPlayback.currentPlaybackRuntime % 60).twoDigits())"
+            self.timeLapsedLabel.text = "\((currentPlayback.runtime / 60)):\((currentPlayback.runtime % 60).doubleDigitString())"
             self.scrubber.minimumValue = 0
             self.scrubber.maximumValue = Float(currentSong.runtime)
         }
-        
+    }
+    
+    private func updateListenerCount() {
         // Show listener count
         if let session = SessionManager.current.session {
             self.listenersButton.setTitle("\(session.isHost ? session.listeners.count : session.listeners.count - 1) \(session.isHost ? "listening" : "other listeners")", for: .normal)
+        }
+    }
+    
+    private func updatePlaybackPosition() {
+        let currentPlayback = PlaybackManager.current.playback
+        guard let currentSong = currentPlayback.currentSong else { return }
+        
+        let trackRuntime = currentSong.runtime
+        let playbackRuntime = currentPlayback.runtime
+         
+        let runtimeInSecs = playbackRuntime / 1000
+        let runtimeMins = runtimeInSecs / 60
+        let runtimeSecs = runtimeInSecs % 60
+        
+        DispatchQueue.main.async {
+            if !self.scrubber.isTouchInside {
+                self.scrubber.setValue(Float(playbackRuntime), animated: false)
+            }
+            
+            self.timeLapsedLabel.text = "\(runtimeMins):\(runtimeSecs.doubleDigitString())"
         }
     }
     
@@ -82,30 +122,42 @@ class NowPlayingViewController: UIViewController {
     @IBAction private func playPauseTapped(_ sender: UIButton) {
         switch PlaybackManager.current.playback.state {
         case .playing:
-            self.playPauseButton.setImage(UIImage(systemName: "pause.fill"), for: .normal)
+            DispatchQueue.main.async {
+                self.playPauseButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
+            }
             PlaybackManager.current.performPlaybackCommand(.pause)
         case .paused:
-            self.playPauseButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
+            DispatchQueue.main.async {
+                self.playPauseButton.setImage(UIImage(systemName: "pause.fill"), for: .normal)
+            }
             PlaybackManager.current.performPlaybackCommand(.play)
         default:
             break
         }
+        
+        self.updateNowPlayingInformation()
     }
     
     @IBAction private func rewindTapped(_ sender: UIButton) {
-        if PlaybackManager.current.playback.currentPlaybackRuntime < 3000 {
+        if PlaybackManager.current.playback.runtime < 3000 {
             PlaybackManager.current.performPlaybackCommand(.previous)
         } else {
             PlaybackManager.current.performPlaybackCommand(.restart)
         }
+        
+        self.updateNowPlayingInformation()
     }
     
     @IBAction private func forwardTapped(_ sender: UIButton) {
         PlaybackManager.current.performPlaybackCommand(.next)
+        self.updateNowPlayingInformation()
     }
     
     @IBAction private func playbackScrubberChangedValue(_ sender: UISlider) {
-        PlaybackManager.current.performPlaybackCommand(.skip(Int(sender.value)))
+        let playbackPosition = Int(sender.value)
+        
+        PlaybackManager.current.performPlaybackCommand(.skip(playbackPosition))
+        self.updateNowPlayingInformation()
     }
     
     @IBAction private func audioRouteTapped(_ sender: AVRoutePickerViewButton) {
@@ -113,11 +165,11 @@ class NowPlayingViewController: UIViewController {
     }
     
     @IBAction private func listenersTapped(_ sender: UIButton) {
-        
+        // Segues in storyboards to list of listeners
     }
     
     @IBAction private func queueTapped(_ semder: UIButton) {
-        
+        // Segues in storyboards to queue
     }
 
 }

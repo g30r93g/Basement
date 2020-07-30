@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1F24EFA024BEE711002D263C /* SPAlert in Frameworks */ = {isa = PBXBuildFile; productRef = 1F24EF9F24BEE711002D263C /* SPAlert */; };
+		1F2CFC5124BF7153009FDD3A /* TimeInterval.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2CFC5024BF7153009FDD3A /* TimeInterval.swift */; };
 		1F5ABF2924BDD97600E03C0B /* LeftImageTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5ABEDA24BDD97600E03C0B /* LeftImageTextField.swift */; };
 		1F5ABF2A24BDD97600E03C0B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1F5ABEDB24BDD97600E03C0B /* Assets.xcassets */; };
 		1F5ABF2B24BDD97600E03C0B /* ShadowButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5ABEDC24BDD97600E03C0B /* ShadowButton.swift */; };
@@ -70,7 +72,7 @@
 		1F5ABF6724BDD97600E03C0B /* BestMatchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5ABF2724BDD97600E03C0B /* BestMatchCell.swift */; };
 		1F5ABF6824BDD97600E03C0B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5ABF2824BDD97600E03C0B /* SceneDelegate.swift */; };
 		1F5B005D24BDDD38003410B0 /* Amber in Frameworks */ = {isa = PBXBuildFile; productRef = 1F5B005C24BDDD38003410B0 /* Amber */; };
-		1F71D65624BE06C600B353B8 /* Retry in Frameworks */ = {isa = PBXBuildFile; productRef = 1F71D65524BE06C600B353B8 /* Retry */; };
+		1F5D077924D17F29004FF719 /* Retry in Frameworks */ = {isa = PBXBuildFile; productRef = 1F5D077824D17F29004FF719 /* Retry */; };
 		1F71D65924BE34D300B353B8 /* KeychainAccess in Frameworks */ = {isa = PBXBuildFile; productRef = 1F71D65824BE34D300B353B8 /* KeychainAccess */; };
 		1F71D65B24BE38DF00B353B8 /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F71D65A24BE38DF00B353B8 /* KeychainManager.swift */; };
 		1FA50C3A24AA773F0026577D /* BasementTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA50C3924AA773F0026577D /* BasementTests.swift */; };
@@ -104,6 +106,7 @@
 
 /* Begin PBXFileReference section */
 		0EAFBCC4BB1DA39883CFE32F /* Pods_Basement.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Basement.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1F2CFC5024BF7153009FDD3A /* TimeInterval.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeInterval.swift; sourceTree = "<group>"; };
 		1F5ABED824BDD97600E03C0B /* Basement-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Basement-Bridging-Header.h"; sourceTree = "<group>"; };
 		1F5ABEDA24BDD97600E03C0B /* LeftImageTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeftImageTextField.swift; sourceTree = "<group>"; };
 		1F5ABEDB24BDD97600E03C0B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -199,11 +202,12 @@
 				1FCD449624AA7CB900FCB990 /* KeyboardLayoutGuide in Frameworks */,
 				1F71D65924BE34D300B353B8 /* KeychainAccess in Frameworks */,
 				1FCD448D24AA7C4F00FCB990 /* CodableFirebase in Frameworks */,
-				1F71D65624BE06C600B353B8 /* Retry in Frameworks */,
 				1F5B005D24BDDD38003410B0 /* Amber in Frameworks */,
+				1F24EFA024BEE711002D263C /* SPAlert in Frameworks */,
 				1FDAC8A524AE2307004F7533 /* SpotifyiOS.framework in Frameworks */,
 				1FCD449324AA7C9700FCB990 /* MarqueeLabel in Frameworks */,
 				A2D1597FDCBE9EFC23B1EAA4 /* Pods_Basement.framework in Frameworks */,
+				1F5D077924D17F29004FF719 /* Retry in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -282,6 +286,7 @@
 				1F5ABEF124BDD97600E03C0B /* String.swift */,
 				1F5ABEF224BDD97600E03C0B /* UIImage.swift */,
 				1F5ABEF324BDD97600E03C0B /* UIApplication.swift */,
+				1F2CFC5024BF7153009FDD3A /* TimeInterval.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -500,8 +505,9 @@
 				1FCD449224AA7C9700FCB990 /* MarqueeLabel */,
 				1FCD449524AA7CB900FCB990 /* KeyboardLayoutGuide */,
 				1F5B005C24BDDD38003410B0 /* Amber */,
-				1F71D65524BE06C600B353B8 /* Retry */,
 				1F71D65824BE34D300B353B8 /* KeychainAccess */,
+				1F24EF9F24BEE711002D263C /* SPAlert */,
+				1F5D077824D17F29004FF719 /* Retry */,
 			);
 			productName = Basement;
 			productReference = 1FA50C1F24AA773E0026577D /* Basement.app */;
@@ -582,8 +588,9 @@
 				1FCD449124AA7C9700FCB990 /* XCRemoteSwiftPackageReference "MarqueeLabel" */,
 				1FCD449424AA7CB900FCB990 /* XCRemoteSwiftPackageReference "KeyboardLayoutGuide" */,
 				1F5B005B24BDDD38003410B0 /* XCRemoteSwiftPackageReference "Amber" */,
-				1F71D65424BE06C600B353B8 /* XCRemoteSwiftPackageReference "Retry" */,
 				1F71D65724BE34D300B353B8 /* XCRemoteSwiftPackageReference "KeychainAccess" */,
+				1F24EF9E24BEE711002D263C /* XCRemoteSwiftPackageReference "SPAlert" */,
+				1F5D077724D17F29004FF719 /* XCRemoteSwiftPackageReference "Retry" */,
 			);
 			productRefGroup = 1FA50C2024AA773E0026577D /* Products */;
 			projectDirPath = "";
@@ -785,6 +792,7 @@
 				1F5ABF2F24BDD97600E03C0B /* Round.swift in Sources */,
 				1F5ABF6224BDD97600E03C0B /* SignInWithAppleButton.swift in Sources */,
 				1F5ABF3624BDD97600E03C0B /* Date.swift in Sources */,
+				1F2CFC5124BF7153009FDD3A /* TimeInterval.swift in Sources */,
 				1F5ABF4C24BDD97600E03C0B /* QueueViewController.swift in Sources */,
 				1F5ABF2C24BDD97600E03C0B /* Presentable.swift in Sources */,
 				1F5ABF5C24BDD97600E03C0B /* CreateAccountViewController.swift in Sources */,
@@ -1143,6 +1151,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		1F24EF9E24BEE711002D263C /* XCRemoteSwiftPackageReference "SPAlert" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ivanvorobei/SPAlert.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 		1F5B005B24BDDD38003410B0 /* XCRemoteSwiftPackageReference "Amber" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/g30r93g/Amber.git";
@@ -1151,9 +1167,9 @@
 				kind = branch;
 			};
 		};
-		1F71D65424BE06C600B353B8 /* XCRemoteSwiftPackageReference "Retry" */ = {
+		1F5D077724D17F29004FF719 /* XCRemoteSwiftPackageReference "Retry" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/g30r93g/Retry";
+			repositoryURL = "https://github.com/icanzilb/Retry.git";
 			requirement = {
 				branch = master;
 				kind = branch;
@@ -1194,14 +1210,19 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		1F24EF9F24BEE711002D263C /* SPAlert */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1F24EF9E24BEE711002D263C /* XCRemoteSwiftPackageReference "SPAlert" */;
+			productName = SPAlert;
+		};
 		1F5B005C24BDDD38003410B0 /* Amber */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 1F5B005B24BDDD38003410B0 /* XCRemoteSwiftPackageReference "Amber" */;
 			productName = Amber;
 		};
-		1F71D65524BE06C600B353B8 /* Retry */ = {
+		1F5D077824D17F29004FF719 /* Retry */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 1F71D65424BE06C600B353B8 /* XCRemoteSwiftPackageReference "Retry" */;
+			package = 1F5D077724D17F29004FF719 /* XCRemoteSwiftPackageReference "Retry" */;
 			productName = Retry;
 		};
 		1F71D65824BE34D300B353B8 /* KeychainAccess */ = {
