@@ -45,8 +45,8 @@ class ProfileViewController: UIViewController {
             self.profileUsernameLabel.text = "@\(user.information.username)"
             
             DispatchQueue.global(qos: .userInitiated).async {
-                user.fetchPastStreams { (historicalSessions) in
-                    self.streamCountLabel.text = "\(historicalSessions.count)"
+                user.fetchSessions { (sessions) in
+                    self.streamCountLabel.text = "\(sessions.count)"
                     self.contentTableView.reloadData()
                 }
             }
@@ -62,20 +62,21 @@ class ProfileViewController: UIViewController {
                 guard let relationship = relationship else { return }
                 switch relationship {
                 case .notFriends:
-                    self.friendshipButton.setTitle("Add", for: .normal)
+                    self.friendshipButton.setTitle("Follow", for: .normal)
                 case .followsMe:
                     self.friendshipButton.setTitle("Follow Back", for: .normal)
                 case .followsThem:
                     self.friendshipButton.setTitle("Following", for: .normal)
                 case .friends:
                     self.friendshipButton.setTitle("Friends", for: .normal)
+                case .blocked:
+                    self.friendshipButton.setTitle("User Blocked", for: .normal)
                 }
             }
         } else {
             // Viewing own profile
             self.navigationBar.alpha = 0
             self.navigationBar.isUserInteractionEnabled = false
-
             
             self.friendshipButton.setTitle("Edit Profile", for: .normal)
             
@@ -87,8 +88,8 @@ class ProfileViewController: UIViewController {
                         self.profileUsernameLabel.text = "@\(user.publicProfile.information.username)"
                         
                         DispatchQueue.global(qos: .userInitiated).async {
-                            user.publicProfile.fetchPastStreams { (historicalSessions) in
-                                self.streamCountLabel.text = "\(historicalSessions.count)"
+                            user.publicProfile.fetchSessions { (sessions) in
+                                self.streamCountLabel.text = "\(sessions.count)"
                                 self.contentTableView.reloadData()
                             }
                         }
@@ -106,9 +107,8 @@ class ProfileViewController: UIViewController {
             }
         }
         
-        // Add extra scroll
+        // Add extra scroll for mini player
         self.contentTableView.contentInset.bottom = self.view.safeAreaInsets.bottom + 80
-        
     }
     
     private func determineFriendshipStatus(completion: @escaping(Firebase.UserRelationship.Relationship?) -> Void) {
@@ -141,24 +141,37 @@ class ProfileViewController: UIViewController {
         self.determineFriendshipStatus { (relationship) in
             guard let relationship = relationship else { return }
             
-            Firebase.shared.currentUser { (result) in
-                switch result {
+            Firebase.shared.currentUser { (currentUserResult) in
+                switch currentUserResult {
                 case .success(let currentUserProfile):
                     let currentUserPublicProfile = currentUserProfile.publicProfile
                     guard let relationUserPublicProfile = self.user else { return }
                     
                     switch relationship {
-                    case .notFriends:
-                        // Send Friend Request
-                        break
-                    case .followsMe:
-                        // Follow Back
-                        break
-                    case .followsThem:
-                        // Send Friend Request Again
-                        break
+                    case .notFriends, .followsThem, .followsMe:
+                        // Send Friend Request / Send Again / Send Back
+                        Firebase.shared.sendFriendRequest(from: currentUserPublicProfile.information, to: relationUserPublicProfile.information) { (result) in
+                            switch result {
+                            case .success(let newRelationship):
+                                break
+                            case .failure(_):
+                                break
+                            }
+                        }
                     case .friends:
                         // Remove Friend
+                        Firebase.shared.removeRelationship(between: currentUserPublicProfile.information, and: relationUserPublicProfile.information) { (result) in
+                            switch result {
+                            case .success(let newRelationship):
+                                break
+                            case .failure(_):
+                                break
+                            }
+                        }
+                        break
+                    case .blocked:
+                        // Block User
+                        fatalError("NOT IMPLEMENTED")
                         break
                     }
                     
@@ -196,6 +209,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
      SECTION 3 - Friends (Icons Only)
      */
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        // TODO: Add Friend Request Row
         return 3
     }
     
@@ -204,12 +218,15 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
         
         switch indexPath.row {
         case 0:
-            //            cell.setupCellWithShowcase(from: [], withHeader: "Your Music Showcase")
-            cell.setupCellWithRecents(from: [], withHeader: "\(self.user == nil ? "Your" : "Their") Music Showcase")
+//            cell.setupCellWithShowcase(from: [], withHeader: "\(self.user == nil ? "Your" : "Their") Music Showcase")
+            cell.setupCellWithLibraryContent(from: self.user == nil ? AppleMusicAPI.currentSession.userLibrary.recentlyPlayed : [],
+                                             withHeader: "\(self.user == nil ? "Your" : "Their") Music Showcase")
         case 1:
-            cell.setupCellWithRecents(from: [], withHeader: "\(self.user == nil ? "Your" : "Their") Recent Sessions")
+            cell.setupCellWithSessions(from: self.user == nil ? SessionManager.current.sessionHistory : self.user?.streams ?? [],
+                                       withHeader: "\(self.user == nil ? "Your" : "Their") Sessions")
         case 2:
-            cell.setupCellWithFriends(from: [], withHeader: "\(self.user == nil ? "Your" : "Their") Friend Activity")
+            cell.setupCellWithFriends(from: [],
+                                      withHeader: self.user == nil ? "Your Friend Activity" : "Their Friends")
         default:
             break
         }

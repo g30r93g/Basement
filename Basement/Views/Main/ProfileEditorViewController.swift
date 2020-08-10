@@ -23,5 +23,12 @@ class ProfileEditorViewController: UIViewController {
     // MARK: Methods
     
     // MARK: IBActions
+    @IBAction private func signOut() {
+        Firebase.shared.signOut() { (success) in
+            if success {
+                self.performSegue(withIdentifier: "Sign Out", sender: self)
+            }
+        }
+    }
 
 }

@@ -26,7 +26,7 @@ class SearchViewController: UIViewController {
         super.viewDidLoad()
         
         self.searchResultsTable.bottomAnchor.constraint(equalTo: self.view.keyboardLayoutGuide.topAnchor).isActive = true
-        NotificationCenter.default.addObserver(self, selector: #selector(reloadTableView), name: .imageDidLoad, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadView(notification:)), name: .imageDidLoad, object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -57,13 +57,14 @@ class SearchViewController: UIViewController {
     }
     
     @objc private func textFieldDidEdit(textField: UITextField) {
-        
         self.search()
     }
     
-    @objc private func reloadTableView() {
+    @objc private func reloadView(notification: NSNotification) {
+        guard let indexPathToRefresh = notification.userInfo?["indexPath"] as? IndexPath else { return }
+        
         DispatchQueue.main.async {
-            self.searchResultsTable.reloadData()
+            self.searchResultsTable.reloadRows(at: [indexPathToRefresh], with: .fade)
         }
     }
     
@@ -73,7 +74,8 @@ class SearchViewController: UIViewController {
         if searchTerm.isEmpty {
             self.contentResults.removeAll()
             self.userResults.removeAll()
-            self.reloadTableView()
+            
+            DispatchQueue.main.async { self.searchResultsTable.reloadData() }
             return
         }
         
@@ -104,7 +106,7 @@ class SearchViewController: UIViewController {
                             
                             self.contentResults.sort(by: {$0.name.levenshteinDistanceScore(to: searchTerm) > $1.name.levenshteinDistanceScore(to: searchTerm)})
                             
-                            self.reloadTableView()
+                            DispatchQueue.main.async { self.searchResultsTable.reloadData() }
                         }
                     }
                 case .failure(let error):
@@ -122,7 +124,7 @@ class SearchViewController: UIViewController {
                         else { self.userResults.removeAll(); return }
                         
                         self.userResults = matchingUsers.sorted(by: {$0.information.username.levenshteinDistanceScore(to: searchTerm) > $1.information.username.levenshteinDistanceScore(to: searchTerm)})
-                        self.reloadTableView()
+                        DispatchQueue.main.async { self.searchResultsTable.reloadData() }
                     }
                 case .failure(let error):
                     print("[SearchVC] Failed to search for users with username \(searchTerm) - \(error)")

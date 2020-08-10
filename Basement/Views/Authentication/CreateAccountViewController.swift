@@ -13,6 +13,8 @@ class CreateAccountViewController: UIViewController {
 	// MARK: IBOutlets
 	@IBOutlet weak private var nameField: UITextField!
     @IBOutlet weak private var usernameField: UITextField!
+    @IBOutlet weak private var usernameAvailabilityStatus: UIImageView!
+    @IBOutlet weak private var usernameAvailabilityLoadingIndicator: UIActivityIndicatorView!
 	@IBOutlet weak private var emailField: UITextField!
 	@IBOutlet weak private var passwordField: UITextField!
     @IBOutlet weak private var signUpButton: LoadingButton!
@@ -23,6 +25,14 @@ class CreateAccountViewController: UIViewController {
         // Do any additional setup after loading the view.
         
         self.nameField.becomeFirstResponder()
+        self.addTextFieldEvents()
+        self.usernameAvailabilityLoadingIndicator.stopAnimating()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        self.removeTextFieldEvents()
     }
 	
 	// MARK: Methods
@@ -50,6 +60,54 @@ class CreateAccountViewController: UIViewController {
 			}
 		}
 	}
+    
+    private func checkIfUsernameIsAvailable() {
+        guard let username = self.usernameField.text else { return }
+        
+        self.setUsernameActivityVisibility(to: true)
+        
+        Firebase.shared.determineUsernameAvailability(username) { (result) in
+            self.setUsernameActivityVisibility(to: false)
+            
+            switch result {
+            case .success(let isAvailable):
+                guard let currentUsernameEntered = self.usernameField.text,
+                      username == currentUsernameEntered
+                else { return }
+                
+                self.setUsernameAvailabilityState(to: isAvailable)
+            case .failure(_):
+                return
+            }
+        }
+    }
+    
+    private func setUsernameActivityVisibility(to state: Bool) {
+        DispatchQueue.main.async {
+            state ? self.usernameAvailabilityLoadingIndicator.startAnimating() : self.usernameAvailabilityLoadingIndicator.stopAnimating()
+            self.usernameAvailabilityStatus.tintColor = .clear
+        }
+    }
+    
+    private func setUsernameAvailabilityState(to state: Bool) {
+        DispatchQueue.main.async {
+            self.usernameAvailabilityStatus.alpha = 1
+            self.usernameAvailabilityStatus.image = UIImage(systemName: state ? "checkmark.circle.fill" : "xmark.circle.fill")
+            self.usernameAvailabilityStatus.tintColor = state ? .systemGreen : .systemRed
+        }
+    }
+    
+    private func addTextFieldEvents() {
+        self.usernameField.addTarget(self, action: #selector(textFieldDidEdit), for: .editingChanged)
+    }
+    
+    private func removeTextFieldEvents() {
+        self.usernameField.removeTarget(self, action: #selector(textFieldDidEdit), for: .editingChanged)
+    }
+    
+    @objc private func textFieldDidEdit(textField: UITextField) {
+        self.checkIfUsernameIsAvailable()
+    }
 	
 	// MARK: IBActions
 	@IBAction private func signUpTapped(_ sender: LoadingButton) {

@@ -27,7 +27,14 @@ class HomeViewController: UIViewController {
         
         AppleMusicAPI.currentSession.setup { (setupSuccessful) in
             if setupSuccessful {
-                AppleMusicAPI.currentSession.performAuth(shouldSetup: true)
+                AppleMusicAPI.currentSession.performAuth { (result) in
+                    switch result {
+                    case .success(_):
+                        break
+                    case .failure(_):
+                        break
+                    }
+                }
             }
         }
         
@@ -65,7 +72,11 @@ class HomeViewController: UIViewController {
         SessionManager.current.fetchHistory(for: userID) { (result) in
             switch result {
             case .success(_):
-                self.contentTableView.reloadData()
+                DispatchQueue.main.async {
+                    self.contentTableView.refreshControl?.endRefreshing()
+                    
+                    self.contentTableView.reloadData()
+                }
             default:
                 break
             }
@@ -73,12 +84,16 @@ class HomeViewController: UIViewController {
     }
     
     @objc func refresh() {
-        AppleMusicAPI.currentSession.fetchUserLibrary { (result) in
+        AppleMusicAPI.currentSession.fetchUserLibrary { (_) in
             DispatchQueue.main.async {
                 self.contentTableView.refreshControl?.endRefreshing()
                 
                 self.contentTableView.reloadData()
             }
+        }
+        
+        if let currentUserIdentifier = Firebase.shared.currentUserIdentifier {
+            self.triggerUserHistoryFetch(userID: currentUserIdentifier)
         }
     }
     
@@ -122,7 +137,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         case 0:
             cell.setupCellWithFriends(from: [], withHeader: "Your Friend Activity")
         case 1:
-            cell.setupCellWithRecents(from: SessionManager.current.sessionHistory, withHeader: "Your Recent Sessions")
+            cell.setupCellWithSessions(from: SessionManager.current.sessionHistory, withHeader: "Your Recent Sessions")
         case 2:
             cell.setupCellWithLibraryContent(from: AppleMusicAPI.currentSession.userLibrary.recentlyPlayed, withHeader: "Your \(StreamingPlatform.appleMusic.name) Activity")
         case 3:

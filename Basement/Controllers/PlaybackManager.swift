@@ -211,7 +211,8 @@ class PlaybackManager {
             if queue.hasIndex(previousSongIndex) {
                 self.currentSongIndex = previousSongIndex
             } else {
-                fatalError("Pointer \(previousSongIndex) is outside bounds of queue")
+                self.currentSongIndex = 0
+//                fatalError("Pointer \(previousSongIndex) is outside bounds of queue - TOO SMALL")
             }
             
             return self.playingNext()
@@ -224,12 +225,22 @@ class PlaybackManager {
             
             if queue.hasIndex(nextSongIndex) {
                 self.currentSongIndex = nextSongIndex
+                
+                return self.playingNext()
             } else {
-                fatalError("Pointer \(nextSongIndex) is outside bounds of queue")
+                return self.endPlayback()
+//                fatalError("Pointer \(nextSongIndex) is outside bounds of queue - TOO LARGE")
             }
-            
-            return self.playingNext()
         }
+        
+        private func endPlayback() -> [Music.Song] {
+            self.currentSongIndex = -1
+            self.content.removeAll()
+            self.updateState(to: .ended)
+            
+            return self.content
+        }
+        
     }
     
     // MARK: Update Methods

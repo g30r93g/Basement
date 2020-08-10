@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17132" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="1Hx-Nw-u2S">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17140" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="1Hx-Nw-u2S">
     <device id="retina6_1" orientation="portrait" appearance="dark"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17105"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17115"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -238,6 +239,19 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="rmP-c9-JfU">
+                                <rect key="frame" x="342" y="192" width="34" height="29.5"/>
+                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="34" id="J67-8b-FAe"/>
+                                    <constraint firstAttribute="height" constant="34" id="jYn-zr-Dy8"/>
+                                </constraints>
+                                <imageReference key="image" image="circle.fill" catalog="system" symbolScale="small" renderingMode="template"/>
+                            </imageView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="Tct-HB-gK2">
+                                <rect key="frame" x="342" y="190" width="34" height="34"/>
+                                <color key="color" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="9m9-nv-rl2"/>
                         <color key="backgroundColor" name="Background"/>
@@ -246,13 +260,16 @@
                             <constraint firstItem="Q8W-75-2UO" firstAttribute="top" secondItem="kAO-rH-sQX" secondAttribute="top" id="0mZ-2I-ULW"/>
                             <constraint firstItem="DZJ-RM-W5z" firstAttribute="top" secondItem="9m9-nv-rl2" secondAttribute="top" constant="50" id="3PN-VG-Mqm"/>
                             <constraint firstItem="IWH-vL-IGm" firstAttribute="top" secondItem="hum-Ba-avl" secondAttribute="bottom" constant="30" id="4oK-vc-36a"/>
+                            <constraint firstItem="rmP-c9-JfU" firstAttribute="bottom" secondItem="hum-Ba-avl" secondAttribute="bottom" id="7bb-gV-RQH"/>
                             <constraint firstItem="kAO-rH-sQX" firstAttribute="leading" secondItem="GHV-m8-wXj" secondAttribute="leading" id="BrQ-JW-TR2"/>
+                            <constraint firstItem="Tct-HB-gK2" firstAttribute="leading" secondItem="rmP-c9-JfU" secondAttribute="leading" id="DsR-4E-Vfe"/>
                             <constraint firstItem="DZJ-RM-W5z" firstAttribute="leading" secondItem="9m9-nv-rl2" secondAttribute="leading" constant="30" id="GX3-rk-Hgs"/>
                             <constraint firstItem="MQN-av-N8h" firstAttribute="trailing" secondItem="IWH-vL-IGm" secondAttribute="trailing" id="Gkt-zN-maS"/>
                             <constraint firstItem="Aim-xo-d9L" firstAttribute="centerX" secondItem="9m9-nv-rl2" secondAttribute="centerX" id="GrH-BX-gj8"/>
                             <constraint firstItem="IWH-vL-IGm" firstAttribute="trailing" secondItem="hum-Ba-avl" secondAttribute="trailing" id="HN9-vv-VMm"/>
                             <constraint firstItem="Q8W-75-2UO" firstAttribute="bottom" secondItem="kAO-rH-sQX" secondAttribute="bottom" id="HaS-YJ-M82"/>
                             <constraint firstItem="8d8-cr-0T0" firstAttribute="leading" secondItem="Q8W-75-2UO" secondAttribute="trailing" constant="5" id="IeO-C8-Vp9"/>
+                            <constraint firstItem="Tct-HB-gK2" firstAttribute="top" secondItem="rmP-c9-JfU" secondAttribute="top" id="JHL-9n-ten"/>
                             <constraint firstItem="Yd2-YI-2Db" firstAttribute="top" secondItem="8d8-cr-0T0" secondAttribute="bottom" constant="18" id="QwG-nC-MY1"/>
                             <constraint firstItem="GHV-m8-wXj" firstAttribute="leading" secondItem="MQN-av-N8h" secondAttribute="leading" id="RKt-AN-xxN"/>
                             <constraint firstItem="hum-Ba-avl" firstAttribute="trailing" secondItem="Aim-xo-d9L" secondAttribute="trailing" id="Trq-NF-PN3"/>
@@ -261,13 +278,17 @@
                             <constraint firstItem="Aim-xo-d9L" firstAttribute="leading" secondItem="DZJ-RM-W5z" secondAttribute="leading" constant="8" id="Yli-76-vnl"/>
                             <constraint firstItem="8d8-cr-0T0" firstAttribute="bottom" secondItem="Q8W-75-2UO" secondAttribute="bottom" id="cs5-jT-w8H"/>
                             <constraint firstItem="GHV-m8-wXj" firstAttribute="top" secondItem="MQN-av-N8h" secondAttribute="bottom" constant="18" id="cwI-FI-otL"/>
+                            <constraint firstItem="Tct-HB-gK2" firstAttribute="trailing" secondItem="rmP-c9-JfU" secondAttribute="trailing" id="d7k-bL-EbT"/>
                             <constraint firstItem="hum-Ba-avl" firstAttribute="leading" secondItem="Aim-xo-d9L" secondAttribute="leading" id="dTP-1j-vqj"/>
+                            <constraint firstItem="rmP-c9-JfU" firstAttribute="top" secondItem="hum-Ba-avl" secondAttribute="top" id="gwN-Vh-ECz"/>
                             <constraint firstItem="8d8-cr-0T0" firstAttribute="top" secondItem="Q8W-75-2UO" secondAttribute="top" id="kWA-f0-gcq"/>
                             <constraint firstItem="IWH-vL-IGm" firstAttribute="leading" secondItem="hum-Ba-avl" secondAttribute="leading" id="lBy-Fp-45k"/>
                             <constraint firstItem="kAO-rH-sQX" firstAttribute="top" secondItem="GHV-m8-wXj" secondAttribute="bottom" id="lp6-Re-eCU"/>
                             <constraint firstItem="hum-Ba-avl" firstAttribute="top" secondItem="Aim-xo-d9L" secondAttribute="bottom" constant="30" id="rav-Au-HDg"/>
                             <constraint firstItem="MQN-av-N8h" firstAttribute="leading" secondItem="IWH-vL-IGm" secondAttribute="leading" id="sb5-IV-xiU"/>
+                            <constraint firstItem="rmP-c9-JfU" firstAttribute="trailing" secondItem="hum-Ba-avl" secondAttribute="trailing" id="t3W-Rl-YIH"/>
                             <constraint firstItem="Aim-xo-d9L" firstAttribute="top" secondItem="DZJ-RM-W5z" secondAttribute="bottom" constant="40" id="t7g-Ip-Pjo"/>
+                            <constraint firstItem="Tct-HB-gK2" firstAttribute="bottom" secondItem="rmP-c9-JfU" secondAttribute="bottom" id="yhx-Dw-9Ot"/>
                         </constraints>
                     </view>
                     <connections>
@@ -275,6 +296,8 @@
                         <outlet property="nameField" destination="Aim-xo-d9L" id="P4b-Kv-AKq"/>
                         <outlet property="passwordField" destination="MQN-av-N8h" id="ut7-Kp-7EH"/>
                         <outlet property="signUpButton" destination="Yd2-YI-2Db" id="l6j-Ab-HMU"/>
+                        <outlet property="usernameAvailabilityLoadingIndicator" destination="Tct-HB-gK2" id="otH-hZ-NzS"/>
+                        <outlet property="usernameAvailabilityStatus" destination="rmP-c9-JfU" id="s7w-8N-tgf"/>
                         <outlet property="usernameField" destination="hum-Ba-avl" id="Ny9-Vp-XWT"/>
                         <segue destination="616-Uk-O9w" kind="presentation" identifier="Link Music Services" modalPresentationStyle="fullScreen" modalTransitionStyle="crossDissolve" id="mUP-Ni-qHR"/>
                     </connections>
@@ -389,8 +412,9 @@
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Spotify" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oCz-Wg-85m">
                                         <rect key="frame" x="87" y="12.5" width="255" height="55"/>
+                                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
-                                        <color key="textColor" red="0.12165153770000001" green="0.8481531739" blue="0.38029420380000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <color key="textColor" red="0.094001464549999997" green="0.078502379359999999" blue="0.074509136379999993" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="agI-pN-CMn">
@@ -402,7 +426,7 @@
                                     </button>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="plus" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="92a-MC-iLG">
                                         <rect key="frame" x="317" y="29" width="25" height="21.5"/>
-                                        <color key="tintColor" name="Spotify"/>
+                                        <color key="tintColor" red="0.094001464549999997" green="0.078502379359999999" blue="0.074509136379999993" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="25" id="1TW-6y-TJb"/>
                                             <constraint firstAttribute="height" constant="25" id="j7r-sp-41f"/>
@@ -411,10 +435,10 @@
                                     </imageView>
                                     <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="HTk-rg-QfQ">
                                         <rect key="frame" x="319.5" y="30" width="20" height="20"/>
-                                        <color key="color" name="Spotify"/>
+                                        <color key="color" red="0.094001464549999997" green="0.078502379359999999" blue="0.074509136379999993" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                     </activityIndicatorView>
                                 </subviews>
-                                <color key="backgroundColor" red="0.094001464549999997" green="0.078502379359999999" blue="0.074509136379999993" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <color key="backgroundColor" red="0.12165153770000001" green="0.8481531739" blue="0.38029420380000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="80" id="2V7-ed-JDk"/>
                                     <constraint firstItem="agI-pN-CMn" firstAttribute="leading" secondItem="WJm-E8-2Vw" secondAttribute="leading" id="4yJ-Kb-aud"/>
@@ -688,6 +712,7 @@
     <resources>
         <image name="Apple Music" width="512" height="512"/>
         <image name="Spotify" width="1024" height="1024"/>
+        <image name="circle.fill" catalog="system" width="128" height="121"/>
         <image name="ellipsis" catalog="system" width="128" height="37"/>
         <image name="plus" catalog="system" width="128" height="113"/>
         <namedColor name="Apple Music">
@@ -698,9 +723,6 @@
         </namedColor>
         <namedColor name="Button">
             <color red="0.0" green="0.19699999690055847" blue="0.64999997615814209" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-        </namedColor>
-        <namedColor name="Spotify">
-            <color red="0.11372549019607843" green="0.72549019607843135" blue="0.32941176470588235" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>
         <systemColor name="linkColor">
             <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

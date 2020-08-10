@@ -7,63 +7,47 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "92AB8A39-3132-40AA-B661-9233FCB1FEFE"
-            shouldBeEnabled = "No"
+            uuid = "F7F8120A-7A5F-49A9-8ECC-780580EB4450"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Basement/Views/Supporting Views/Tab Bar/MiniPlayerView.swift"
+            filePath = "Basement/Controllers/SessionManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "35"
-            endingLineNumber = "35"
-            landmarkName = "updateContent()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "3108F37A-50D2-4E86-BE6F-BB05C772BAD8"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Basement/Views/Supporting Views/Tab Bar/MiniPlayerView.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "37"
-            endingLineNumber = "37"
-            landmarkName = "updateContent()"
+            startingLineNumber = "278"
+            endingLineNumber = "278"
+            landmarkName = "fetchHistory(for:completion:)"
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "3108F37A-50D2-4E86-BE6F-BB05C772BAD8 - d9e80be605388bf0"
+                  uuid = "F7F8120A-7A5F-49A9-8ECC-780580EB4450 - 67addac8d3971d6b"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "Basement.MiniPlayerView.(updateContent in _5543727997BF2C448D19FF5710DDED10)() -&gt; ()"
+                  symbolName = "closure #1 (Swift.Result&lt;Swift.Array&lt;Basement.SessionManager.MusicSession&gt;, Basement.Firebase.FirebaseError&gt;) -&gt; () in Basement.SessionManager.fetchHistory(for: Swift.String, completion: (Swift.Result&lt;Swift.Array&lt;Basement.SessionManager.MusicSession&gt;, Basement.SessionManager.SessionError&gt;) -&gt; ()) -&gt; ()"
                   moduleName = "Basement"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/g30r93g/GitHub/Basement/Basement/Views/Supporting%20Views/Tab%20Bar/MiniPlayerView.swift"
+                  urlString = "file:///Users/g30r93g/GitHub/Basement/Basement/Controllers/SessionManager.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "37"
-                  endingLineNumber = "37"
-                  offsetFromSymbolStart = "408">
+                  startingLineNumber = "279"
+                  endingLineNumber = "279"
+                  offsetFromSymbolStart = "180">
                </Location>
                <Location
-                  uuid = "3108F37A-50D2-4E86-BE6F-BB05C772BAD8 - d9e80be605388bf0"
+                  uuid = "F7F8120A-7A5F-49A9-8ECC-780580EB4450 - 67addac8d3971d6b"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "Basement.MiniPlayerView.(updateContent in _5543727997BF2C448D19FF5710DDED10)() -&gt; ()"
+                  symbolName = "closure #1 (Swift.Result&lt;Swift.Array&lt;Basement.SessionManager.MusicSession&gt;, Basement.Firebase.FirebaseError&gt;) -&gt; () in Basement.SessionManager.fetchHistory(for: Swift.String, completion: (Swift.Result&lt;Swift.Array&lt;Basement.SessionManager.MusicSession&gt;, Basement.SessionManager.SessionError&gt;) -&gt; ()) -&gt; ()"
                   moduleName = "Basement"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/g30r93g/GitHub/Basement/Basement/Views/Supporting%20Views/Tab%20Bar/MiniPlayerView.swift"
+                  urlString = "file:///Users/g30r93g/GitHub/Basement/Basement/Controllers/SessionManager.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "37"
-                  endingLineNumber = "37"
-                  offsetFromSymbolStart = "412">
+                  startingLineNumber = "279"
+                  endingLineNumber = "279"
+                  offsetFromSymbolStart = "192">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -71,256 +55,224 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "E657CA5D-7A36-4B5C-A9D5-E16C8D389871"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Basement/Views/Supporting Views/Tab Bar/MiniPlayerView.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "39"
-            endingLineNumber = "39"
-            landmarkName = "updateContent()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "40EF620E-E1E6-44F8-9124-6EF54B9D04B7"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Basement/Views/Supporting Views/Tab Bar/MiniPlayerView.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "38"
-            endingLineNumber = "38"
-            landmarkName = "updateContent()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "B2E89A30-5BEC-444B-ACDD-21E2F6A66E8F"
+            uuid = "35695B13-0792-434E-9E9C-B17E35AAAE9D"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Basement/Views/Main/Now Playing/NowPlayingViewController.swift"
+            filePath = "Basement/Controllers/SessionManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "158"
-            endingLineNumber = "158"
-            landmarkName = "playbackScrubberChangedValue(_:)"
+            startingLineNumber = "277"
+            endingLineNumber = "277"
+            landmarkName = "fetchHistory(for:completion:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "35695B13-0792-434E-9E9C-B17E35AAAE9D - 6a0b42b896387139"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Basement.SessionManager.fetchHistory(for: Swift.String, completion: (Swift.Result&lt;Swift.Array&lt;Basement.SessionManager.MusicSession&gt;, Basement.SessionManager.SessionError&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "Basement"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/g30r93g/GitHub/Basement/Basement/Controllers/SessionManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "277"
+                  endingLineNumber = "277"
+                  offsetFromSymbolStart = "84">
+               </Location>
+               <Location
+                  uuid = "35695B13-0792-434E-9E9C-B17E35AAAE9D - 67addac8d3971d6b"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Result&lt;Swift.Array&lt;Basement.SessionManager.MusicSession&gt;, Basement.Firebase.FirebaseError&gt;) -&gt; () in Basement.SessionManager.fetchHistory(for: Swift.String, completion: (Swift.Result&lt;Swift.Array&lt;Basement.SessionManager.MusicSession&gt;, Basement.SessionManager.SessionError&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "Basement"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/g30r93g/GitHub/Basement/Basement/Controllers/SessionManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "279"
+                  endingLineNumber = "279"
+                  offsetFromSymbolStart = "180">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "4B8D7026-AC9C-400A-9F8A-8CDC61FEBE64"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Basement/Views/Main/ProfileViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "50"
+            endingLineNumber = "50"
+            landmarkName = "setupView()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "1FD95BC8-C931-4AEA-B2FE-9B538F3639A1"
+            uuid = "263D37AE-58AD-4E99-A632-FFB4F6600D58"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Basement/Controllers/PlaybackManager.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "222"
-            endingLineNumber = "222"
-            landmarkName = "nextTrack()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "DD4B8CD0-89F7-4DFA-B619-F186BA89669D"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Basement/Controllers/PlaybackManager.swift"
+            filePath = "Basement/Views/Main/ProfileViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "225"
             endingLineNumber = "225"
-            landmarkName = "nextTrack()"
+            landmarkName = "tableView(_:cellForRowAt:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "AEC403F2-4DFB-4FC0-9F60-9548E8EBD9A4"
+            uuid = "93A587F4-7D71-4234-8159-479028EB445A"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Basement/Controllers/PlaybackManager.swift"
+            filePath = "Basement/Controllers/Firebase.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "231"
-            endingLineNumber = "231"
-            landmarkName = "CurrentPlayback"
-            landmarkType = "3">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "9B3A783F-BCE9-4D0B-9CF2-4B1A2AE9A7E2"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Basement/Controllers/PlaybackManager.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "208"
-            endingLineNumber = "208"
-            landmarkName = "previousTrack()"
+            startingLineNumber = "590"
+            endingLineNumber = "590"
+            landmarkName = "fetchUserSessions(for:completion:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "B7BC6A0C-D7D6-49C5-9C75-D0AB908733FA"
+            uuid = "36BFDED2-9F7D-434C-BB7F-6A111750CE77"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Basement/Controllers/PlaybackManager.swift"
+            filePath = "Basement/Controllers/Firebase.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "211"
-            endingLineNumber = "211"
-            landmarkName = "previousTrack()"
+            startingLineNumber = "596"
+            endingLineNumber = "596"
+            landmarkName = "fetchUserSessions(for:completion:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "F8454F23-40C0-48C3-964B-E6B0BDA55BA4"
+            uuid = "B3B5CFAE-21B1-4E21-966F-CEFAAA013ED4"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Basement/Controllers/PlaybackManager.swift"
+            filePath = "Basement/Controllers/Firebase.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "177"
-            endingLineNumber = "177"
-            landmarkName = "updateQueue(with:)"
+            startingLineNumber = "599"
+            endingLineNumber = "599"
+            landmarkName = "fetchUserSessions(for:completion:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "FB459873-ECF8-4A26-8C93-1A7BBD0D3E39"
+            uuid = "C3E1C76B-DB72-4684-8A39-56601A1D0530"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Basement/Controllers/PlaybackManager.swift"
+            filePath = "Basement/Controllers/SessionManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "178"
-            endingLineNumber = "178"
-            landmarkName = "updateQueue(with:)"
+            startingLineNumber = "247"
+            endingLineNumber = "247"
+            landmarkName = "init(from:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "221D1299-EF91-401A-8B66-B4C177DF6485"
+            uuid = "135313A7-5A2C-48A9-B518-59E0BED08690"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Basement/Controllers/PlaybackManager.swift"
+            filePath = "Basement/Controllers/SessionManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "181"
-            endingLineNumber = "181"
-            landmarkName = "updateQueue(with:)"
+            startingLineNumber = "249"
+            endingLineNumber = "249"
+            landmarkName = "init(from:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "CE20EBCE-731C-4AAD-98A3-6CE1CDC95684"
+            uuid = "975A4D88-A166-4082-B98C-F88F0061F371"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Basement/Controllers/PlaybackManager.swift"
+            filePath = "Basement/Controllers/SessionManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "184"
-            endingLineNumber = "184"
-            landmarkName = "updateQueue(with:)"
+            startingLineNumber = "250"
+            endingLineNumber = "250"
+            landmarkName = "init(from:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "0AA58A6E-8EF6-4A46-A6FE-D84AC8EAA10C"
+            uuid = "F8D068EC-D366-4BDA-93C8-87C8703EF052"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Basement/Controllers/PlaybackManager.swift"
+            filePath = "Basement/Controllers/SessionManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "169"
-            endingLineNumber = "169"
-            landmarkName = "playingNext()"
+            startingLineNumber = "251"
+            endingLineNumber = "251"
+            landmarkName = "init(from:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "0F9C474D-5EFF-451D-9C6B-39B8C913EB2B"
+            uuid = "BD4EC787-764D-44A7-AEB1-9FBD90F9D23F"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Basement/Controllers/PlaybackManager.swift"
+            filePath = "Basement/Controllers/SessionManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "164"
-            endingLineNumber = "164"
-            landmarkName = "history()"
+            startingLineNumber = "252"
+            endingLineNumber = "252"
+            landmarkName = "init(from:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "E9E05F4B-0DE7-45D3-8CAF-D5A4FE19C946"
+            uuid = "39FA59C0-7450-4375-A3AD-64F38B508774"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Basement/Controllers/PlaybackManager.swift"
+            filePath = "Basement/Controllers/Firebase.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "168"
-            endingLineNumber = "168"
-            landmarkName = "playingNext()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "FD04BB8C-D442-4E77-8002-6BC419608453"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Basement/Controllers/PlaybackManager.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "163"
-            endingLineNumber = "163"
-            landmarkName = "history()"
+            startingLineNumber = "588"
+            endingLineNumber = "588"
+            landmarkName = "fetchUserSessions(for:completion:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		1F24EFA024BEE711002D263C /* SPAlert in Frameworks */ = {isa = PBXBuildFile; productRef = 1F24EF9F24BEE711002D263C /* SPAlert */; };
 		1F2CFC5124BF7153009FDD3A /* TimeInterval.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2CFC5024BF7153009FDD3A /* TimeInterval.swift */; };
+		1F3DB2FA24E03B4C001C2F40 /* PromiseKit in Frameworks */ = {isa = PBXBuildFile; productRef = 1F3DB2F924E03B4C001C2F40 /* PromiseKit */; };
 		1F5ABF2924BDD97600E03C0B /* LeftImageTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5ABEDA24BDD97600E03C0B /* LeftImageTextField.swift */; };
 		1F5ABF2A24BDD97600E03C0B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1F5ABEDB24BDD97600E03C0B /* Assets.xcassets */; };
 		1F5ABF2B24BDD97600E03C0B /* ShadowButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5ABEDC24BDD97600E03C0B /* ShadowButton.swift */; };
@@ -201,6 +202,7 @@
 				1FCD449F24AA7D4000FCB990 /* AuthenticationServices.framework in Frameworks */,
 				1FCD449624AA7CB900FCB990 /* KeyboardLayoutGuide in Frameworks */,
 				1F71D65924BE34D300B353B8 /* KeychainAccess in Frameworks */,
+				1F3DB2FA24E03B4C001C2F40 /* PromiseKit in Frameworks */,
 				1FCD448D24AA7C4F00FCB990 /* CodableFirebase in Frameworks */,
 				1F5B005D24BDDD38003410B0 /* Amber in Frameworks */,
 				1F24EFA024BEE711002D263C /* SPAlert in Frameworks */,
@@ -508,6 +510,7 @@
 				1F71D65824BE34D300B353B8 /* KeychainAccess */,
 				1F24EF9F24BEE711002D263C /* SPAlert */,
 				1F5D077824D17F29004FF719 /* Retry */,
+				1F3DB2F924E03B4C001C2F40 /* PromiseKit */,
 			);
 			productName = Basement;
 			productReference = 1FA50C1F24AA773E0026577D /* Basement.app */;
@@ -591,6 +594,7 @@
 				1F71D65724BE34D300B353B8 /* XCRemoteSwiftPackageReference "KeychainAccess" */,
 				1F24EF9E24BEE711002D263C /* XCRemoteSwiftPackageReference "SPAlert" */,
 				1F5D077724D17F29004FF719 /* XCRemoteSwiftPackageReference "Retry" */,
+				1F3DB2F824E03B4C001C2F40 /* XCRemoteSwiftPackageReference "PromiseKit" */,
 			);
 			productRefGroup = 1FA50C2024AA773E0026577D /* Products */;
 			projectDirPath = "";
@@ -1159,6 +1163,14 @@
 				kind = branch;
 			};
 		};
+		1F3DB2F824E03B4C001C2F40 /* XCRemoteSwiftPackageReference "PromiseKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/mxcl/PromiseKit";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 		1F5B005B24BDDD38003410B0 /* XCRemoteSwiftPackageReference "Amber" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/g30r93g/Amber.git";
@@ -1214,6 +1226,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 1F24EF9E24BEE711002D263C /* XCRemoteSwiftPackageReference "SPAlert" */;
 			productName = SPAlert;
+		};
+		1F3DB2F924E03B4C001C2F40 /* PromiseKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1F3DB2F824E03B4C001C2F40 /* XCRemoteSwiftPackageReference "PromiseKit" */;
+			productName = PromiseKit;
 		};
 		1F5B005C24BDDD38003410B0 /* Amber */ = {
 			isa = XCSwiftPackageProductDependency;

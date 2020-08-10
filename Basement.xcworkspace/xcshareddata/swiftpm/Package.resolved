@@ -6,7 +6,7 @@
         "repositoryURL": "https://github.com/g30r93g/Amber.git",
         "state": {
           "branch": "master",
-          "revision": "0ad0e703eebb0110b0c3d1841e06f9ab9af789e9",
+          "revision": "8551eeec3ecb3027b6e28da82bcc5cd2d2934f29",
           "version": null
         }
       },
@@ -51,7 +51,16 @@
         "repositoryURL": "https://github.com/cbpowell/MarqueeLabel.git",
         "state": {
           "branch": "master",
-          "revision": "53f333932aaf7cce7ce002ed5b21ccf249e23db0",
+          "revision": "7fd264e891e1715c3a42ebfbd8b890fbc6636bbf",
+          "version": null
+        }
+      },
+      {
+        "package": "PromiseKit",
+        "repositoryURL": "https://github.com/mxcl/PromiseKit",
+        "state": {
+          "branch": "master",
+          "revision": "f6b15b7626a4399864ffa1d5ec2ed9cf0cea5556",
           "version": null
         }
       },

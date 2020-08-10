@@ -55,7 +55,7 @@ class MusicContentCell: RoundUICollectionViewCell {
     }
     
     /// Populator method for `SessionManager.HistoricalSession `
-    public func setupCell(from data: SessionManager.HistoricalSession) {
+    public func setupCell(from data: SessionManager.MusicSession) {
 //        if let artworkURL = data.artwork {
 //            self.artwork.load(url: artworkURL)
 //        }

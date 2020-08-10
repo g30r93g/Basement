@@ -20,7 +20,7 @@ extension UIImage {
 
 extension UIImageView {
     
-    func load(url: URL, shouldNotify: Bool = false) {
+    func load(url: URL, indexPath: IndexPath? = nil, shouldNotify: Bool = false) {
         DispatchQueue.global().async { [weak self] in
             if let data = try? Data(contentsOf: url) {
                 if let image = UIImage(data: data) {
@@ -28,7 +28,10 @@ extension UIImageView {
                         self?.image = image
                         
                         if shouldNotify {
-                            NotificationCenter.default.post(Notification(name: .imageDidLoad))
+                            guard indexPath != nil,
+                                  let indexPath = indexPath
+                            else { NotificationCenter.default.post(Notification(name: .imageDidLoad)); return }
+                            NotificationCenter.default.post(name: .imageDidLoad, object: nil, userInfo: ["indexPath" : indexPath])
                         }
                     }
                 }
@@ -38,6 +41,6 @@ extension UIImageView {
     
 }
 
-extension Notification.Name {
+extension NSNotification.Name {
     static let imageDidLoad = Notification.Name("imageDidLoad")
 }

@@ -22,6 +22,7 @@ class AppleMusicAPI {
     // MARK: Initialiser
     init() {
 //        self.player?.playbackDelegate = PlaybackManager.current
+        self.setup { (_) in }
     }
     
     // MARK: Properties
@@ -61,22 +62,29 @@ class AppleMusicAPI {
     }
     
     public func performAuth(shouldSetup: Bool = true, completion: ((Result<String, AmberError>) -> Void)? = nil) {
-        self.amber?.fetchUserToken(completion: { (result) in
-            switch result {
-            case .success(let token):
-                print("[AppleMusicAPI] User token fetched: \(token)")
-                self.amber?.updateUserToken(to: token)
-                self.delegate?.userTokenObtained(userToken: token)
-                
-                if shouldSetup {
-                    self.fetchUserRelatedContent()
-                }
-            case .failure(_):
-                break
+        if self.amber == nil {
+            self.setup { (didSetup) in
+                if didSetup { self.performAuth(shouldSetup: shouldSetup, completion: completion) }
+                else { completion?(.failure(.unknownError)) }
             }
-            
-            completion?(result)
-        })
+        } else {
+            self.amber?.fetchUserToken(completion: { (result) in
+                switch result {
+                case .success(let token):
+                    print("[AppleMusicAPI] User token fetched: \(token)")
+                    self.amber?.updateUserToken(to: token)
+                    self.delegate?.userTokenObtained(userToken: token)
+                    
+                    if shouldSetup {
+                        self.fetchUserRelatedContent()
+                    }
+                case .failure(_):
+                    break
+                }
+                
+                completion?(result)
+            })
+        }
     }
     
     public func isAuthed(completion: ((Bool) -> Void)? = nil) {
@@ -141,7 +149,7 @@ class AppleMusicAPI {
         self.amber?.getRecentlyPlayedResources(limit: 10) { (result) in
             switch result {
             case .success(let fetchedRecentPlays):
-                print("[AppleMusicAPI] \(fetchedRecentPlays.count) recently played resources fetched.)")
+                print("[AppleMusicAPI] \(fetchedRecentPlays.count) recently played resources fetched.")
                 
                 for resource in fetchedRecentPlays {
                     if let playlistResource = resource.asPlaylist() {

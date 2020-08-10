@@ -33,7 +33,7 @@ class SessionManager {
 	public var sessionUpdateDelegate: SessionUpdateDelegate? = nil
     private(set) var setup: Setup? = nil
 	private(set) var session: MusicSession? = nil
-    private(set) var sessionHistory: [HistoricalSession] = []
+    private(set) var sessionHistory: [MusicSession] = []
     
     // MARK: Classes
     class Setup: Equatable {
@@ -130,12 +130,14 @@ class SessionManager {
             let identifier: String
             let privacy: MusicSession.Privacy
             let startDate: Date
+            let endDate: Date?
             private(set) var host: Firebase.UserProfile
             
             init(privacy: MusicSession.Privacy, hostIdentifier: String) {
 				self.identifier = (UUID().uuidString + "|\(hostIdentifier)|" + UUID().uuidString)
                 self.privacy = privacy
                 self.startDate = Date()
+                self.endDate = nil
                 
                 let hostDetails = Firebase.UserInformation(identifier: hostIdentifier, username: "", name: "")
                 self.host = Firebase.UserProfile(information: hostDetails, friends: [])
@@ -237,7 +239,7 @@ class SessionManager {
         
         // MARK: Codable
         private enum CodingKeys: String, CodingKey {
-            case details, content, playback, listeners
+            case details, content, playback
         }
         
         // MARK: Decodable
@@ -247,7 +249,7 @@ class SessionManager {
             self.details = try container.decode(MusicSession.Details.self, forKey: .details)
             self.content = try container.decode([Music.Song].self, forKey: .content)
             self.playback = try container.decode(MusicSession.PlaybackDetails.self, forKey: .playback)
-            self.listeners = try container.decode([MusicSession.Listener].self, forKey: .listeners)
+            self.listeners = []
         }
 		
 		// MARK: Encodable
@@ -257,12 +259,11 @@ class SessionManager {
 			try container.encode(self.details, forKey: .details)
 			try container.encode(self.content as! [Music.Song], forKey: .content)
 			try container.encode(self.playback, forKey: .playback)
-			try container.encode(self.listeners, forKey: .listeners)
 		}
     }
     
     // MARK: - History
-    public struct HistoricalSession: Codable {
+    public class HistoricalSession: Codable {
         let details: MusicSession.Details
         let content: [Music.Content]
         
@@ -272,13 +273,15 @@ class SessionManager {
         }
     }
     
-    public func fetchHistory(for userID: String, completion: @escaping(Result<[HistoricalSession], SessionManager.SessionError>) -> Void) {
+    public func fetchHistory(for userID: String, completion: @escaping(Result<[SessionManager.MusicSession], SessionManager.SessionError>) -> Void) {
         Firebase.shared.fetchUserSessions(for: userID) { (result) in
             switch result {
             case .success(let sessions):
-                let historicalSessions = sessions.map({HistoricalSession(details: $0.details, content: $0.content)})
-                self.sessionHistory = historicalSessions
-                completion(.success(historicalSessions))
+                if userID == Firebase.shared.currentUserIdentifier {
+                    self.sessionHistory = sessions
+                }
+                
+                completion(.success(sessions))
             case .failure(_):
                 completion(.failure(.unknownError))
             }

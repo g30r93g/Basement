@@ -83,15 +83,19 @@ class ContentViewController: UIViewController {
     }
     
     private func setupNotifications() {
-        NotificationCenter.default.addObserver(self, selector: #selector(reloadView), name: .imageDidLoad, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadView(notification:)), name: .imageDidLoad, object: nil)
     }
     
     private func removeNotifications() {
         NotificationCenter.default.removeObserver(self, name: .imageDidLoad, object: nil)
     }
     
-    @objc private func reloadView() {
-        self.contentTableView.reloadData()
+    @objc private func reloadView(notification: NSNotification) {
+        guard let indexPathToRefresh = notification.userInfo?["indexPath"] as? IndexPath else { return }
+        
+        DispatchQueue.main.async {
+            self.contentTableView.reloadRows(at: [indexPathToRefresh], with: .fade)
+        }
     }
     
     private func addToSession(_ content: [Music.Content], completion: ((Bool) -> Void)? = nil) {

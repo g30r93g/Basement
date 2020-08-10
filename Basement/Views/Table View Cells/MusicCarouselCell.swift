@@ -13,7 +13,7 @@ class MusicCarouselCell: UITableViewCell {
     // MARK: Properties
     private(set) var displayType: CarouselDisplayType!
     private(set) var friends: [Firebase.UserProfile] = []
-    private(set) var recentSessions: [SessionManager.HistoricalSession] = []
+    private(set) var recentSessions: [SessionManager.MusicSession] = []
     private(set) var streamableContent: [Music.Content] = []
     public var delegate: Presentable?
     
@@ -49,7 +49,7 @@ class MusicCarouselCell: UITableViewCell {
         self.setupCollectionView()
     }
     
-    public func setupCellWithRecents(from data: [SessionManager.HistoricalSession], withHeader header: String) {
+    public func setupCellWithSessions(from data: [SessionManager.MusicSession], withHeader header: String) {
         self.sectionHeaderLabel.text = header
         self.displayType = .recents
         self.recentSessions = data
