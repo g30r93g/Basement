@@ -8,7 +8,7 @@
 
 import UIKit
 
-class StreamingPlatform: Codable {
+class StreamingPlatformOLD: Codable {
     
     // Static Instances
     static private(set) var appleMusic = StreamingPlatform(platform: .appleMusic)

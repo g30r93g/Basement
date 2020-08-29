@@ -6,7 +6,7 @@
         "repositoryURL": "https://github.com/g30r93g/Amber.git",
         "state": {
           "branch": "master",
-          "revision": "8551eeec3ecb3027b6e28da82bcc5cd2d2934f29",
+          "revision": "296a4e831880592a83b2655a142e3324db8ed911",
           "version": null
         }
       },
@@ -14,9 +14,9 @@
         "package": "CodableFirebase",
         "repositoryURL": "https://github.com/alickbass/CodableFirebase.git",
         "state": {
-          "branch": null,
-          "revision": "a4cda89948db93ec21249a35ecdacab8c489a116",
-          "version": "0.2.2"
+          "branch": "master",
+          "revision": "5491be775c22311c7ee0542dc5856b3ff4c99958",
+          "version": null
         }
       },
       {

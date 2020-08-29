@@ -20,65 +20,22 @@ class ContentCell: UITableViewCell {
     var optionsPresentationDelegate: PresentableOptions? = nil
     var musicContent: Music.Content?
     
-    // MARK: Methods
-    public func setupCell(from data: Music.Content) {
-        self.musicContent = data
-        
-        if let song = data as? Music.Song {
-            self.setupCell(from: song)
-        } else if let playlist = data as? Music.Playlist {
-            self.setupCell(from: playlist)
-        } else if let album = data as? Music.Album {
-            self.setupCell(from: album)
-        }
-    }
-    
-    /// Populator method for `Music.Song`
-    private func setupCell(from data: Music.Song) {
-        if let artwork = data.streamingInformation.artwork {
-            self.artwork.image = artwork.image
-        } else if let artworkURL = data.streamingInformation.artworkURL {
-            self.artwork.load(url: artworkURL, shouldNotify: true)
-        }
-        
-        self.title.text = data.name
-        self.subtitle.text = "\(data.artist) • \(data.streamingInformation.platform.name)"
-    }
-    
-    /// Populator method for `Music.Playlist`
-    private func setupCell(from data: Music.Playlist) {
-        if let artwork = data.streamingInformation.artwork {
-            self.artwork.image = artwork.image
-        } else if let artworkURL = data.streamingInformation.artworkURL {
-            self.artwork.load(url: artworkURL, shouldNotify: true)
-        }
-        
-        self.title.text = data.name
-        self.subtitle.text = "Playlist from \(data.streamingInformation.platform.name)"
-    }
-    
-    /// Populator method for `Music.Album`
-    private func setupCell(from data: Music.Album) {
-        if let artwork = data.streamingInformation.artwork {
-            self.artwork.image = artwork.image
-        } else if let artworkURL = data.streamingInformation.artworkURL {
-            self.artwork.load(url: artworkURL, shouldNotify: true)
-        }
-        
-        self.title.text = data.name
-        self.subtitle.text = "\(data.artist) • Album from \(data.streamingInformation.platform.name)"
-    }
-    
+    // MARK: Override Methods
     override func prepareForReuse() {
         super.prepareForReuse()
         
         self.artwork.image = nil
     }
     
+    // MARK: Methods
+    public func setupCell(from data: [Music.Content]) {
+        
+    }
+    
     // MARK: IBActions
     @IBAction private func optionsTapped(_ sender: UIButton) {
         // TOOD: Present options to user
-        
+        self.optionsPresentationDelegate?.presentOptions()
     }
     
 }
