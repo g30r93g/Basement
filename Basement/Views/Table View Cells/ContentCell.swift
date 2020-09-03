@@ -28,8 +28,15 @@ class ContentCell: UITableViewCell {
     }
     
     // MARK: Methods
-    public func setupCell(from data: [Music.Content]) {
+    public func setupCell(from data: Music.Content) {
+        self.artwork.image = data.streamingInformation.artwork?.image
+        self.title.text = data.name
         
+        if let song = data as? Music.Song {
+            self.subtitle.text = "\(song.artist)"
+        } else if let album = data as? Music.Album {
+            self.subtitle.text = ""
+        }
     }
     
     // MARK: IBActions
