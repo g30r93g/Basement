@@ -7,6 +7,7 @@
 
 import UIKit
 import SDWebImage
+import LinkPresentation
 
 class SessionViewController: UIViewController {
     
@@ -14,13 +15,14 @@ class SessionViewController: UIViewController {
     @IBOutlet weak private var sessionTitle: UILabel!
     @IBOutlet weak private var hostLabel: UILabel!
     @IBOutlet weak private var joinCode: UILabel!
+    @IBOutlet weak private var optionButton: UIButton!
     
     @IBOutlet weak private var nowPlayingView: UIView!
     @IBOutlet weak private var nowPlayingViewHeight: NSLayoutConstraint!
     @IBOutlet weak private var nowPlayingArtwork: UIImageView!
     @IBOutlet weak private var nowPlayingTrackName: UILabel!
     @IBOutlet weak private var nowPlayingTrackDetails: UILabel!
-    @IBOutlet weak private var nowPlayingPosition: UISlider!
+    @IBOutlet weak private var nowPlayingSlider: UISlider!
     @IBOutlet weak private var nowPlayingCurrentTimePosition: UILabel!
     @IBOutlet weak private var nowPlayingEndTimePosition: UILabel!
     @IBOutlet weak private var nowPlayingPreviousButton: UIButton!
@@ -121,8 +123,8 @@ class SessionViewController: UIViewController {
         self.nowPlayingArtwork.sd_setImage(with: track.streamingInformation.artworkURL, placeholderImage: nil, options: [])
         self.nowPlayingTrackName.text = track.name
         self.nowPlayingTrackDetails.text = "\(track.artist) • \(track.album)"
-        self.nowPlayingPosition.minimumValue = 0
-        self.nowPlayingPosition.maximumValue = Float(track.runtime)
+        self.nowPlayingSlider.minimumValue = 0
+        self.nowPlayingSlider.maximumValue = Float(track.runtime)
         self.nowPlayingEndTimePosition.text = "\(track.runtime.minutes().doubleDigitString()):\(track.runtime.seconds().doubleDigitString())"
         
         self.detailTableView.reloadData()
@@ -133,9 +135,7 @@ class SessionViewController: UIViewController {
         
         self.nowPlayingCurrentTimePosition.text = "\(playbackPosition.minutes().doubleDigitString()):\(playbackPosition.seconds().doubleDigitString())"
         
-        UIView.animate(withDuration: 1.1) {
-            self.nowPlayingPosition.setValue(Float(playbackPosition), animated: true)
-        }
+        self.nowPlayingSlider.value = Float(playbackPosition)
     }
     
     private func setupUpdateTimer() {
@@ -156,6 +156,10 @@ class SessionViewController: UIViewController {
     }
     
     // MARK: IBActions
+    @IBAction private func optionButtonTapped(_ sender: UIButton) {
+        self.displayShareSheet()
+    }
+    
     @IBAction private func nowPlayingPreviousButtonTapped(_ sender: UIButton) {
         SessionManager.current.uploadPlaybackStateChange(command: .previous) { (_) in
             self.updateNowPlaying()
@@ -189,6 +193,69 @@ class SessionViewController: UIViewController {
         DispatchQueue.main.async { self.detailTableView.reloadData() }
     }
 
+}
+
+extension SessionViewController: UIActivityItemSource {
+    
+    func activityViewControllerPlaceholderItem(_ activityViewController: UIActivityViewController) -> Any {
+        return "I've started a Basement session."
+    }
+
+    func activityViewController(_ activityViewController: UIActivityViewController, itemForActivityType activityType: UIActivity.ActivityType?) -> Any? {
+        guard let currentSession = SessionManager.current.activeSession else { return nil }
+        let joinCode = currentSession.joinDetails.code
+        
+        if activityType == .copyToPasteboard {
+            return joinCode
+        } else if activityType == .message {
+            return "Join me on Basement. Join Code: \(joinCode)"
+        } else if activityType == .airDrop {
+            // TODO: Create Deep Link URL
+            return joinCode
+        } else {
+            return nil
+        }
+    }
+    
+    func leaveSessionAction() {
+        // Check User is not host
+        
+        // Perform leaveSession
+    }
+    
+    func endSessionAction() {
+        // Check User is host
+        
+        // Perform endSession
+    }
+    
+    func displayShareSheet() {
+        let shareSheetController = UIActivityViewController(activityItems: [self], applicationActivities: nil)
+        
+        shareSheetController.excludedActivityTypes = [
+            .addToReadingList,
+            .assignToContact,
+            .markupAsPDF,
+            .openInIBooks,
+            .postToFacebook,
+            .postToFlickr,
+            .postToTencentWeibo,
+            .postToTwitter,
+            .postToVimeo,
+            .postToWeibo,
+            .print,
+            .saveToCameraRoll
+        ]
+        
+        self.present(shareSheetController, animated: true)
+    }
+    
+    func activityViewControllerLinkMetadata(_ activityViewController: UIActivityViewController) -> LPLinkMetadata? {
+        let metadata = LPLinkMetadata()
+        metadata.title = "Share Sesion"
+        return metadata
+    }
+    
 }
 
 extension SessionViewController: UITableViewDelegate, UITableViewDataSource {
