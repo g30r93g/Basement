@@ -23,36 +23,24 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         self.determineStoryboard()
     }
     
-    func sceneDidBecomeActive(_ scene: UIScene) {
-        if SpotifyAPI.currentSession.appRemote.connectionParameters.accessToken != nil {
-            SpotifyAPI.currentSession.appRemote.connect()
-        }
-    }
-    
-    func sceneWillResignActive(_ scene: UIScene) {
-        if SpotifyAPI.currentSession.appRemote.isConnected {
-            SpotifyAPI.currentSession.appRemote.disconnect()
-        }
-    }
-    
-    func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
-        guard let url = URLContexts.first?.url else { return }
-        let appRemote = SpotifyAPI.currentSession.appRemote
-        let parameters = appRemote.authorizationParameters(from: url)
-
-        if parameters?["code"] != nil {
-            SpotifyAPI.currentSession.spotifyKitManager.saveToken(from: url)
-        } else if let error = parameters?[SPTAppRemoteErrorDescriptionKey] {
-            print("[SceneDelegate/Spotify] Failed to obtain authorization from Spotify SDK - \(error)")
-        }
-    }
+//    func sceneDidBecomeActive(_ scene: UIScene) {
+//        
+//    }
+//    
+//    func sceneWillResignActive(_ scene: UIScene) {
+//        
+//    }
+//    
+//    func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
+//        
+//    }
     
     private func determineStoryboard() {
         var storyboard: UIStoryboard {
-            if Firebase.isSignedIn {
+            if Firebase.auth.isSignedIn {
                 return UIStoryboard(name: "Main", bundle: nil)
             } else {
-                return UIStoryboard(name: "Authentication", bundle: nil)
+                return UIStoryboard(name: "Auth", bundle: nil)
             }
         }
         

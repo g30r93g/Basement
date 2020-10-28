@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 class ContentCell: UITableViewCell {
     
@@ -14,71 +15,39 @@ class ContentCell: UITableViewCell {
     @IBOutlet weak private var artwork: UIImageView!
     @IBOutlet weak private var title: UILabel!
     @IBOutlet weak private var subtitle: UILabel!
-    @IBOutlet weak private var options: UIButton?
+    
     
     // MARK: Properties
-    var optionsPresentationDelegate: PresentableOptions? = nil
     var musicContent: Music.Content?
+    
+    // MARK: Override Methods
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        self.artwork.image = nil
+        self.deselect()
+    }
     
     // MARK: Methods
     public func setupCell(from data: Music.Content) {
         self.musicContent = data
         
+        self.artwork.sd_setImage(with: data.streamingInformation.artworkURL, placeholderImage: nil, options: [])
+        self.title.text = data.name
+        
         if let song = data as? Music.Song {
-            self.setupCell(from: song)
-        } else if let playlist = data as? Music.Playlist {
-            self.setupCell(from: playlist)
+            self.subtitle.text = "\(song.artist) • \(song.album)"
         } else if let album = data as? Music.Album {
-            self.setupCell(from: album)
+            self.subtitle.text = "\(album.artist)"
         }
     }
     
-    /// Populator method for `Music.Song`
-    private func setupCell(from data: Music.Song) {
-        if let artwork = data.streamingInformation.artwork {
-            self.artwork.image = artwork.image
-        } else if let artworkURL = data.streamingInformation.artworkURL {
-            self.artwork.load(url: artworkURL, shouldNotify: true)
-        }
-        
-        self.title.text = data.name
-        self.subtitle.text = "\(data.artist) • \(data.streamingInformation.platform.name)"
+    public func select() {
+        self.accessoryType = .checkmark
     }
     
-    /// Populator method for `Music.Playlist`
-    private func setupCell(from data: Music.Playlist) {
-        if let artwork = data.streamingInformation.artwork {
-            self.artwork.image = artwork.image
-        } else if let artworkURL = data.streamingInformation.artworkURL {
-            self.artwork.load(url: artworkURL, shouldNotify: true)
-        }
-        
-        self.title.text = data.name
-        self.subtitle.text = "Playlist from \(data.streamingInformation.platform.name)"
-    }
-    
-    /// Populator method for `Music.Album`
-    private func setupCell(from data: Music.Album) {
-        if let artwork = data.streamingInformation.artwork {
-            self.artwork.image = artwork.image
-        } else if let artworkURL = data.streamingInformation.artworkURL {
-            self.artwork.load(url: artworkURL, shouldNotify: true)
-        }
-        
-        self.title.text = data.name
-        self.subtitle.text = "\(data.artist) • Album from \(data.streamingInformation.platform.name)"
-    }
-    
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        
-        self.artwork.image = nil
-    }
-    
-    // MARK: IBActions
-    @IBAction private func optionsTapped(_ sender: UIButton) {
-        // TOOD: Present options to user
-        
+    public func deselect() {
+        self.accessoryType = .none
     }
     
 }
