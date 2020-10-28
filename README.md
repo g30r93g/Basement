@@ -9,12 +9,13 @@ During the 2020 COVID pandemic, content consumption increased dramatically since
 ## Supported Streaming Platforms
 
  • Apple Music
- • Spotify
+ 
+ • Spotify (Coming Soon)
  
  ## Release Plan
  
  1. Apple Music support
  2. Spotify support
  3. Party streams
- 4. Radio
+ 4. CarPlay support
  5. Spotlight and Artist Focus
