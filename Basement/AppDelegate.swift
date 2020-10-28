@@ -25,11 +25,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //            print("[AppDelegate] Failed to sign out :/")
 //        }
         
-        // Determine if user is signed in, and if so, re-request authorization to user accounts
-        if Firebase.isSignedIn {
-            _ = AppleMusicAPI.currentSession
-            _ = SpotifyAPI.currentSession
+        // Determine if user is signed in, and if so, re-request authorization to platforms
+        if Firebase.auth.isSignedIn {
             _ = SessionManager.current
+            _ = BasementProfile.shared.fetchCurrentUser(completion: { (_) in })
         }
 
         return true

@@ -8,11 +8,24 @@
 
 /* Begin PBXBuildFile section */
 		1F24EFA024BEE711002D263C /* SPAlert in Frameworks */ = {isa = PBXBuildFile; productRef = 1F24EF9F24BEE711002D263C /* SPAlert */; };
-		1F2736E924EDD235003C86FD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1F2736E824EDD235003C86FD /* Main.storyboard */; };
-		1F2736EB24EFD8EE003C86FD /* ConnectMusicServiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2736EA24EFD8EE003C86FD /* ConnectMusicServiceViewController.swift */; };
-		1F2736EE24EFD9DD003C86FD /* StreamingPlatform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2736ED24EFD9DD003C86FD /* StreamingPlatform.swift */; };
 		1F2CFC5124BF7153009FDD3A /* TimeInterval.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2CFC5024BF7153009FDD3A /* TimeInterval.swift */; };
+		1F31321A254859C000796C28 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F313219254859C000796C28 /* StoreKit.framework */; };
+		1F3132202548E98D00796C28 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 1F31321F2548E98D00796C28 /* SDWebImage */; };
+		1F3573DB25464AAF00F02B9E /* FirebaseFirestoreSwift-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = 1F3573DA25464AAF00F02B9E /* FirebaseFirestoreSwift-Beta */; };
+		1F3573DD25464AAF00F02B9E /* FirebaseStorageSwift-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = 1F3573DC25464AAF00F02B9E /* FirebaseStorageSwift-Beta */; };
+		1F3573ED25468E8B00F02B9E /* Auth.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1F3573EC25468E8B00F02B9E /* Auth.storyboard */; };
+		1F3573F225468E9C00F02B9E /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F3573F125468E9C00F02B9E /* SignInViewController.swift */; };
+		1F3573F725468EA200F02B9E /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F3573F625468EA200F02B9E /* SignUpViewController.swift */; };
+		1F3573FC254709B300F02B9E /* ConnectStreamingPlatformViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F3573FB254709B300F02B9E /* ConnectStreamingPlatformViewController.swift */; };
 		1F3DB2FA24E03B4C001C2F40 /* PromiseKit in Frameworks */ = {isa = PBXBuildFile; productRef = 1F3DB2F924E03B4C001C2F40 /* PromiseKit */; };
+		1F436F81254263B600948838 /* PlatformMatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F436F80254263B600948838 /* PlatformMatcher.swift */; };
+		1F58ABF325472754006B9A96 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1F58ABF225472754006B9A96 /* Main.storyboard */; };
+		1F58ABF82547275F006B9A96 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F58ABF72547275F006B9A96 /* HomeViewController.swift */; };
+		1F58ABFD25472773006B9A96 /* JoinSessionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F58ABFC25472773006B9A96 /* JoinSessionViewController.swift */; };
+		1F58AC0525472C46006B9A96 /* SetupSessionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F58AC0425472C46006B9A96 /* SetupSessionViewController.swift */; };
+		1F58AC0A25473462006B9A96 /* TrackListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F58AC0925473462006B9A96 /* TrackListViewController.swift */; };
+		1F58AC0F254734E4006B9A96 /* SessionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F58AC0E254734E4006B9A96 /* SessionViewController.swift */; };
+		1F58AC1A25476C38006B9A96 /* TrackSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F58AC1925476C38006B9A96 /* TrackSelectionViewController.swift */; };
 		1F5ABF2924BDD97600E03C0B /* LeftImageTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5ABEDA24BDD97600E03C0B /* LeftImageTextField.swift */; };
 		1F5ABF2A24BDD97600E03C0B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1F5ABEDB24BDD97600E03C0B /* Assets.xcassets */; };
 		1F5ABF2B24BDD97600E03C0B /* ShadowButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5ABEDC24BDD97600E03C0B /* ShadowButton.swift */; };
@@ -21,8 +34,6 @@
 		1F5ABF2E24BDD97600E03C0B /* ShadowImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5ABEE024BDD97600E03C0B /* ShadowImage.swift */; };
 		1F5ABF2F24BDD97600E03C0B /* Round.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5ABEE124BDD97600E03C0B /* Round.swift */; };
 		1F5ABF3024BDD97600E03C0B /* LoadingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5ABEE224BDD97600E03C0B /* LoadingButton.swift */; };
-		1F5ABF3324BDD97600E03C0B /* Music.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5ABEE624BDD97600E03C0B /* Music.swift */; };
-		1F5ABF3424BDD97600E03C0B /* StreamingPlatform-OLD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5ABEE724BDD97600E03C0B /* StreamingPlatform-OLD.swift */; };
 		1F5ABF3524BDD97600E03C0B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1F5ABEE824BDD97600E03C0B /* GoogleService-Info.plist */; };
 		1F5ABF3624BDD97600E03C0B /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5ABEEA24BDD97600E03C0B /* Date.swift */; };
 		1F5ABF3724BDD97600E03C0B /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5ABEEB24BDD97600E03C0B /* UIView.swift */; };
@@ -34,7 +45,6 @@
 		1F5ABF3D24BDD97600E03C0B /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5ABEF124BDD97600E03C0B /* String.swift */; };
 		1F5ABF3E24BDD97600E03C0B /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5ABEF224BDD97600E03C0B /* UIImage.swift */; };
 		1F5ABF3F24BDD97600E03C0B /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5ABEF324BDD97600E03C0B /* UIApplication.swift */; };
-		1F5ABF4424BDD97600E03C0B /* AppleMusicAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5ABEFA24BDD97600E03C0B /* AppleMusicAPI.swift */; };
 		1F5ABF4524BDD97600E03C0B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5ABEFB24BDD97600E03C0B /* AppDelegate.swift */; };
 		1F5ABF4924BDD97600E03C0B /* ContentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5ABF0124BDD97600E03C0B /* ContentCell.swift */; };
 		1F5ABF6224BDD97600E03C0B /* SignInWithAppleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5ABF2024BDD97600E03C0B /* SignInWithAppleButton.swift */; };
@@ -43,26 +53,26 @@
 		1F5ABF6524BDD97600E03C0B /* BasementTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5ABF2424BDD97600E03C0B /* BasementTabBar.swift */; };
 		1F5ABF6624BDD97600E03C0B /* MiniPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5ABF2524BDD97600E03C0B /* MiniPlayerView.swift */; };
 		1F5ABF6824BDD97600E03C0B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5ABF2824BDD97600E03C0B /* SceneDelegate.swift */; };
-		1F5D077924D17F29004FF719 /* Retry in Frameworks */ = {isa = PBXBuildFile; productRef = 1F5D077824D17F29004FF719 /* Retry */; };
 		1F71D65924BE34D300B353B8 /* KeychainAccess in Frameworks */ = {isa = PBXBuildFile; productRef = 1F71D65824BE34D300B353B8 /* KeychainAccess */; };
 		1F89725624F27C4D00360472 /* Firebase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F89725524F27C4D00360472 /* Firebase.swift */; };
 		1F89725824F4246400360472 /* SessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F89725724F4246400360472 /* SessionManager.swift */; };
-		1F89725A24F425BF00360472 /* PlaybackManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F89725924F425BF00360472 /* PlaybackManager.swift */; };
 		1FA50C3A24AA773F0026577D /* BasementTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA50C3924AA773F0026577D /* BasementTests.swift */; };
 		1FA50C4524AA773F0026577D /* BasementUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA50C4424AA773F0026577D /* BasementUITests.swift */; };
-		1FCD448D24AA7C4F00FCB990 /* CodableFirebase in Frameworks */ = {isa = PBXBuildFile; productRef = 1FCD448C24AA7C4F00FCB990 /* CodableFirebase */; };
 		1FCD449324AA7C9700FCB990 /* MarqueeLabel in Frameworks */ = {isa = PBXBuildFile; productRef = 1FCD449224AA7C9700FCB990 /* MarqueeLabel */; };
 		1FCD449624AA7CB900FCB990 /* KeyboardLayoutGuide in Frameworks */ = {isa = PBXBuildFile; productRef = 1FCD449524AA7CB900FCB990 /* KeyboardLayoutGuide */; };
 		1FCD449F24AA7D4000FCB990 /* AuthenticationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FCD449E24AA7D4000FCB990 /* AuthenticationServices.framework */; };
-		1FCD878224F14FA9006A12E5 /* JoinStreamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCD878124F14FA9006A12E5 /* JoinStreamViewController.swift */; };
-		1FCD878424F15018006A12E5 /* SetupStreamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCD878324F15018006A12E5 /* SetupStreamViewController.swift */; };
-		1FCD878624F15025006A12E5 /* StreamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCD878524F15025006A12E5 /* StreamViewController.swift */; };
-		1FCD878824F1506A006A12E5 /* MiniPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCD878724F1506A006A12E5 /* MiniPlayerViewController.swift */; };
 		1FCD878B24F15841006A12E5 /* Amber in Frameworks */ = {isa = PBXBuildFile; productRef = 1FCD878A24F15841006A12E5 /* Amber */; };
-		1FDAC8A524AE2307004F7533 /* SpotifyiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FDAC8A424AE2307004F7533 /* SpotifyiOS.framework */; };
-		88CCF8371007811AF7C31DC5 /* Pods_BasementTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 209C2F261C549D6AEF373A5E /* Pods_BasementTests.framework */; };
-		A2D1597FDCBE9EFC23B1EAA4 /* Pods_Basement.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0EAFBCC4BB1DA39883CFE32F /* Pods_Basement.framework */; };
-		FDC57A1D66F75623B694CE15 /* Pods_Basement_BasementUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEE02BE8FB33C13C0865F31F /* Pods_Basement_BasementUITests.framework */; };
+		1FCFA2C62540D52200ED365D /* BasementProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCFA2C52540D52200ED365D /* BasementProfile.swift */; };
+		1FCFA2E32540EE5700ED365D /* PlaybackManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCFA2E22540EE5700ED365D /* PlaybackManager.swift */; };
+		1FCFA2E82540F21000ED365D /* Music.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCFA2E72540F21000ED365D /* Music.swift */; };
+		1FCFA2F42540F77E00ED365D /* StreamingPlatform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCFA2F32540F77E00ED365D /* StreamingPlatform.swift */; };
+		1FCFA2FF2540F84500ED365D /* AppleMusic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCFA2FE2540F84500ED365D /* AppleMusic.swift */; };
+		1FDFA28925311C8900BA77A8 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 1FDFA28825311C8900BA77A8 /* FirebaseFirestore */; };
+		1FDFA28D25311C8900BA77A8 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 1FDFA28C25311C8900BA77A8 /* FirebaseStorage */; };
+		1FDFA28F25311C8900BA77A8 /* FirebaseFunctions in Frameworks */ = {isa = PBXBuildFile; productRef = 1FDFA28E25311C8900BA77A8 /* FirebaseFunctions */; };
+		1FDFA29125311C8900BA77A8 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 1FDFA29025311C8900BA77A8 /* FirebaseAuth */; };
+		1FDFA29525311C8900BA77A8 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 1FDFA29425311C8900BA77A8 /* FirebaseMessaging */; };
+		1FFE6EA2254844E80001C405 /* Haptics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FFE6EA1254844E80001C405 /* Haptics.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -83,12 +93,20 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0EAFBCC4BB1DA39883CFE32F /* Pods_Basement.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Basement.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		1F2736E824EDD235003C86FD /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
-		1F2736EA24EFD8EE003C86FD /* ConnectMusicServiceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectMusicServiceViewController.swift; sourceTree = "<group>"; };
-		1F2736ED24EFD9DD003C86FD /* StreamingPlatform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamingPlatform.swift; sourceTree = "<group>"; };
 		1F2CFC5024BF7153009FDD3A /* TimeInterval.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeInterval.swift; sourceTree = "<group>"; };
-		1F5ABED824BDD97600E03C0B /* Basement-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Basement-Bridging-Header.h"; sourceTree = "<group>"; };
+		1F313219254859C000796C28 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		1F3573EC25468E8B00F02B9E /* Auth.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Auth.storyboard; sourceTree = "<group>"; };
+		1F3573F125468E9C00F02B9E /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
+		1F3573F625468EA200F02B9E /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		1F3573FB254709B300F02B9E /* ConnectStreamingPlatformViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectStreamingPlatformViewController.swift; sourceTree = "<group>"; };
+		1F436F80254263B600948838 /* PlatformMatcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlatformMatcher.swift; sourceTree = "<group>"; };
+		1F58ABF225472754006B9A96 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		1F58ABF72547275F006B9A96 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		1F58ABFC25472773006B9A96 /* JoinSessionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinSessionViewController.swift; sourceTree = "<group>"; };
+		1F58AC0425472C46006B9A96 /* SetupSessionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupSessionViewController.swift; sourceTree = "<group>"; };
+		1F58AC0925473462006B9A96 /* TrackListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackListViewController.swift; sourceTree = "<group>"; };
+		1F58AC0E254734E4006B9A96 /* SessionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionViewController.swift; sourceTree = "<group>"; };
+		1F58AC1925476C38006B9A96 /* TrackSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackSelectionViewController.swift; sourceTree = "<group>"; };
 		1F5ABEDA24BDD97600E03C0B /* LeftImageTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeftImageTextField.swift; sourceTree = "<group>"; };
 		1F5ABEDB24BDD97600E03C0B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1F5ABEDC24BDD97600E03C0B /* ShadowButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShadowButton.swift; sourceTree = "<group>"; };
@@ -97,10 +115,7 @@
 		1F5ABEE024BDD97600E03C0B /* ShadowImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShadowImage.swift; sourceTree = "<group>"; };
 		1F5ABEE124BDD97600E03C0B /* Round.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Round.swift; sourceTree = "<group>"; };
 		1F5ABEE224BDD97600E03C0B /* LoadingButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingButton.swift; sourceTree = "<group>"; };
-		1F5ABEE324BDD97600E03C0B /* SpotifyiOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SpotifyiOS.framework; sourceTree = "<group>"; };
 		1F5ABEE424BDD97600E03C0B /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		1F5ABEE624BDD97600E03C0B /* Music.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Music.swift; sourceTree = "<group>"; };
-		1F5ABEE724BDD97600E03C0B /* StreamingPlatform-OLD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "StreamingPlatform-OLD.swift"; sourceTree = "<group>"; };
 		1F5ABEE824BDD97600E03C0B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		1F5ABEEA24BDD97600E03C0B /* Date.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		1F5ABEEB24BDD97600E03C0B /* UIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
@@ -113,7 +128,6 @@
 		1F5ABEF224BDD97600E03C0B /* UIImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
 		1F5ABEF324BDD97600E03C0B /* UIApplication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIApplication.swift; sourceTree = "<group>"; };
 		1F5ABEF424BDD97600E03C0B /* Basement.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = Basement.entitlements; sourceTree = "<group>"; };
-		1F5ABEFA24BDD97600E03C0B /* AppleMusicAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppleMusicAPI.swift; sourceTree = "<group>"; };
 		1F5ABEFB24BDD97600E03C0B /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1F5ABF0124BDD97600E03C0B /* ContentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentCell.swift; sourceTree = "<group>"; };
 		1F5ABF2024BDD97600E03C0B /* SignInWithAppleButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInWithAppleButton.swift; sourceTree = "<group>"; };
@@ -124,7 +138,6 @@
 		1F5ABF2824BDD97600E03C0B /* SceneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		1F89725524F27C4D00360472 /* Firebase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Firebase.swift; sourceTree = "<group>"; };
 		1F89725724F4246400360472 /* SessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionManager.swift; sourceTree = "<group>"; };
-		1F89725924F425BF00360472 /* PlaybackManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaybackManager.swift; sourceTree = "<group>"; };
 		1FA50C1F24AA773E0026577D /* Basement.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Basement.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1FA50C3524AA773F0026577D /* BasementTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BasementTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1FA50C3924AA773F0026577D /* BasementTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasementTests.swift; sourceTree = "<group>"; };
@@ -133,19 +146,13 @@
 		1FA50C4424AA773F0026577D /* BasementUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasementUITests.swift; sourceTree = "<group>"; };
 		1FA50C4624AA773F0026577D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1FCD449E24AA7D4000FCB990 /* AuthenticationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AuthenticationServices.framework; path = System/Library/Frameworks/AuthenticationServices.framework; sourceTree = SDKROOT; };
-		1FCD878124F14FA9006A12E5 /* JoinStreamViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinStreamViewController.swift; sourceTree = "<group>"; };
-		1FCD878324F15018006A12E5 /* SetupStreamViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupStreamViewController.swift; sourceTree = "<group>"; };
-		1FCD878524F15025006A12E5 /* StreamViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamViewController.swift; sourceTree = "<group>"; };
-		1FCD878724F1506A006A12E5 /* MiniPlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniPlayerViewController.swift; sourceTree = "<group>"; };
+		1FCFA2C52540D52200ED365D /* BasementProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasementProfile.swift; sourceTree = "<group>"; };
+		1FCFA2E22540EE5700ED365D /* PlaybackManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaybackManager.swift; sourceTree = "<group>"; };
+		1FCFA2E72540F21000ED365D /* Music.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Music.swift; sourceTree = "<group>"; };
+		1FCFA2F32540F77E00ED365D /* StreamingPlatform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamingPlatform.swift; sourceTree = "<group>"; };
+		1FCFA2FE2540F84500ED365D /* AppleMusic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleMusic.swift; sourceTree = "<group>"; };
 		1FDAC8A424AE2307004F7533 /* SpotifyiOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpotifyiOS.framework; path = Basement/Resources/SpotifyiOS.framework; sourceTree = "<group>"; };
-		209C2F261C549D6AEF373A5E /* Pods_BasementTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BasementTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		34532477239776B14676CB44 /* Pods-Basement-BasementUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Basement-BasementUITests.debug.xcconfig"; path = "Target Support Files/Pods-Basement-BasementUITests/Pods-Basement-BasementUITests.debug.xcconfig"; sourceTree = "<group>"; };
-		4F2F46E25F669DFE1C21ED7E /* Pods-Basement.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Basement.release.xcconfig"; path = "Target Support Files/Pods-Basement/Pods-Basement.release.xcconfig"; sourceTree = "<group>"; };
-		7C0269A0B70D7E127B0B8271 /* Pods-Basement-BasementUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Basement-BasementUITests.release.xcconfig"; path = "Target Support Files/Pods-Basement-BasementUITests/Pods-Basement-BasementUITests.release.xcconfig"; sourceTree = "<group>"; };
-		BEE02BE8FB33C13C0865F31F /* Pods_Basement_BasementUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Basement_BasementUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		BF882AC294EAFA7A2BE0E6D7 /* Pods-BasementTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BasementTests.release.xcconfig"; path = "Target Support Files/Pods-BasementTests/Pods-BasementTests.release.xcconfig"; sourceTree = "<group>"; };
-		D5C547580320CC0205365DA6 /* Pods-Basement.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Basement.debug.xcconfig"; path = "Target Support Files/Pods-Basement/Pods-Basement.debug.xcconfig"; sourceTree = "<group>"; };
-		E7272F98C76A003650D5B9D9 /* Pods-BasementTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BasementTests.debug.xcconfig"; path = "Target Support Files/Pods-BasementTests/Pods-BasementTests.debug.xcconfig"; sourceTree = "<group>"; };
+		1FFE6EA1254844E80001C405 /* Haptics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Haptics.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -154,16 +161,21 @@
 			buildActionMask = 2147483647;
 			files = (
 				1FCD878B24F15841006A12E5 /* Amber in Frameworks */,
+				1FDFA29125311C8900BA77A8 /* FirebaseAuth in Frameworks */,
+				1FDFA28F25311C8900BA77A8 /* FirebaseFunctions in Frameworks */,
 				1FCD449F24AA7D4000FCB990 /* AuthenticationServices.framework in Frameworks */,
 				1FCD449624AA7CB900FCB990 /* KeyboardLayoutGuide in Frameworks */,
+				1F3573DD25464AAF00F02B9E /* FirebaseStorageSwift-Beta in Frameworks */,
+				1F3132202548E98D00796C28 /* SDWebImage in Frameworks */,
 				1F71D65924BE34D300B353B8 /* KeychainAccess in Frameworks */,
 				1F3DB2FA24E03B4C001C2F40 /* PromiseKit in Frameworks */,
-				1FCD448D24AA7C4F00FCB990 /* CodableFirebase in Frameworks */,
+				1FDFA29525311C8900BA77A8 /* FirebaseMessaging in Frameworks */,
 				1F24EFA024BEE711002D263C /* SPAlert in Frameworks */,
-				1FDAC8A524AE2307004F7533 /* SpotifyiOS.framework in Frameworks */,
+				1FDFA28D25311C8900BA77A8 /* FirebaseStorage in Frameworks */,
+				1F3573DB25464AAF00F02B9E /* FirebaseFirestoreSwift-Beta in Frameworks */,
+				1F31321A254859C000796C28 /* StoreKit.framework in Frameworks */,
 				1FCD449324AA7C9700FCB990 /* MarqueeLabel in Frameworks */,
-				A2D1597FDCBE9EFC23B1EAA4 /* Pods_Basement.framework in Frameworks */,
-				1F5D077924D17F29004FF719 /* Retry in Frameworks */,
+				1FDFA28925311C8900BA77A8 /* FirebaseFirestore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -171,7 +183,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				88CCF8371007811AF7C31DC5 /* Pods_BasementTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -179,36 +190,48 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FDC57A1D66F75623B694CE15 /* Pods_Basement_BasementUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		1F2736E724EDD221003C86FD /* Main */ = {
-			isa = PBXGroup;
-			children = (
-				1F2736E824EDD235003C86FD /* Main.storyboard */,
-				1F2736EA24EFD8EE003C86FD /* ConnectMusicServiceViewController.swift */,
-				1FCD878124F14FA9006A12E5 /* JoinStreamViewController.swift */,
-				1FCD878324F15018006A12E5 /* SetupStreamViewController.swift */,
-				1FCD878524F15025006A12E5 /* StreamViewController.swift */,
-				1FCD878724F1506A006A12E5 /* MiniPlayerViewController.swift */,
-			);
-			path = Main;
-			sourceTree = "<group>";
-		};
 		1F2736EC24EFD9CB003C86FD /* Controllers & Models */ = {
 			isa = PBXGroup;
 			children = (
+				1FCFA2E72540F21000ED365D /* Music.swift */,
 				1F89725524F27C4D00360472 /* Firebase.swift */,
+				1FCFA2C52540D52200ED365D /* BasementProfile.swift */,
 				1F89725724F4246400360472 /* SessionManager.swift */,
-				1F89725924F425BF00360472 /* PlaybackManager.swift */,
-				1F5ABEFA24BDD97600E03C0B /* AppleMusicAPI.swift */,
-				1F2736ED24EFD9DD003C86FD /* StreamingPlatform.swift */,
+				1FCFA2E22540EE5700ED365D /* PlaybackManager.swift */,
+				1FCFA2F22540F76F00ED365D /* Streaming Platforms */,
 			);
 			path = "Controllers & Models";
+			sourceTree = "<group>";
+		};
+		1F3573EA25468E2100F02B9E /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				1F3573EC25468E8B00F02B9E /* Auth.storyboard */,
+				1F3573F125468E9C00F02B9E /* SignInViewController.swift */,
+				1F3573F625468EA200F02B9E /* SignUpViewController.swift */,
+				1F3573FB254709B300F02B9E /* ConnectStreamingPlatformViewController.swift */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
+		1F3573EB25468E2600F02B9E /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				1F58ABF225472754006B9A96 /* Main.storyboard */,
+				1F58ABF72547275F006B9A96 /* HomeViewController.swift */,
+				1F58AC0425472C46006B9A96 /* SetupSessionViewController.swift */,
+				1F58AC0925473462006B9A96 /* TrackListViewController.swift */,
+				1F58AC1925476C38006B9A96 /* TrackSelectionViewController.swift */,
+				1F58ABFC25472773006B9A96 /* JoinSessionViewController.swift */,
+				1F58AC0E254734E4006B9A96 /* SessionViewController.swift */,
+			);
+			path = Main;
 			sourceTree = "<group>";
 		};
 		1F5ABED724BDD97600E03C0B /* Basement */ = {
@@ -216,12 +239,10 @@
 			children = (
 				1F5ABEF424BDD97600E03C0B /* Basement.entitlements */,
 				1F5ABEE824BDD97600E03C0B /* GoogleService-Info.plist */,
-				1F5ABED824BDD97600E03C0B /* Basement-Bridging-Header.h */,
 				1F5ABEFB24BDD97600E03C0B /* AppDelegate.swift */,
 				1F5ABF2824BDD97600E03C0B /* SceneDelegate.swift */,
 				1F5ABEFC24BDD97600E03C0B /* Views */,
 				1F2736EC24EFD9CB003C86FD /* Controllers & Models */,
-				1F5ABEE524BDD97600E03C0B /* Models */,
 				1F5ABED924BDD97600E03C0B /* Resources */,
 				1F5ABEE924BDD97600E03C0B /* Extensions */,
 			);
@@ -233,7 +254,6 @@
 			children = (
 				1F5ABEE424BDD97600E03C0B /* Info.plist */,
 				1F5ABEDB24BDD97600E03C0B /* Assets.xcassets */,
-				1F5ABEE324BDD97600E03C0B /* SpotifyiOS.framework */,
 				1F5ABEDE24BDD97600E03C0B /* LaunchScreen.storyboard */,
 				1F5ABEDA24BDD97600E03C0B /* LeftImageTextField.swift */,
 				1F5ABEDC24BDD97600E03C0B /* ShadowButton.swift */,
@@ -241,17 +261,9 @@
 				1F5ABEE024BDD97600E03C0B /* ShadowImage.swift */,
 				1F5ABEE124BDD97600E03C0B /* Round.swift */,
 				1F5ABEE224BDD97600E03C0B /* LoadingButton.swift */,
+				1FFE6EA1254844E80001C405 /* Haptics.swift */,
 			);
 			path = Resources;
-			sourceTree = "<group>";
-		};
-		1F5ABEE524BDD97600E03C0B /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				1F5ABEE624BDD97600E03C0B /* Music.swift */,
-				1F5ABEE724BDD97600E03C0B /* StreamingPlatform-OLD.swift */,
-			);
-			path = Models;
 			sourceTree = "<group>";
 		};
 		1F5ABEE924BDD97600E03C0B /* Extensions */ = {
@@ -275,7 +287,8 @@
 		1F5ABEFC24BDD97600E03C0B /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				1F2736E724EDD221003C86FD /* Main */,
+				1F3573EA25468E2100F02B9E /* Auth */,
+				1F3573EB25468E2600F02B9E /* Main */,
 				1F5ABF1F24BDD97600E03C0B /* Supporting Views */,
 				1F5ABEFD24BDD97600E03C0B /* Table View Cells */,
 			);
@@ -318,7 +331,6 @@
 				1FA50C4324AA773F0026577D /* BasementUITests */,
 				1FA50C2024AA773E0026577D /* Products */,
 				58EF2E197C577D31049E3BCE /* Frameworks */,
-				2F411FCE834CD7745E21FBA4 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -350,27 +362,22 @@
 			path = BasementUITests;
 			sourceTree = "<group>";
 		};
-		2F411FCE834CD7745E21FBA4 /* Pods */ = {
+		1FCFA2F22540F76F00ED365D /* Streaming Platforms */ = {
 			isa = PBXGroup;
 			children = (
-				D5C547580320CC0205365DA6 /* Pods-Basement.debug.xcconfig */,
-				4F2F46E25F669DFE1C21ED7E /* Pods-Basement.release.xcconfig */,
-				34532477239776B14676CB44 /* Pods-Basement-BasementUITests.debug.xcconfig */,
-				7C0269A0B70D7E127B0B8271 /* Pods-Basement-BasementUITests.release.xcconfig */,
-				E7272F98C76A003650D5B9D9 /* Pods-BasementTests.debug.xcconfig */,
-				BF882AC294EAFA7A2BE0E6D7 /* Pods-BasementTests.release.xcconfig */,
+				1FCFA2F32540F77E00ED365D /* StreamingPlatform.swift */,
+				1F436F80254263B600948838 /* PlatformMatcher.swift */,
+				1FCFA2FE2540F84500ED365D /* AppleMusic.swift */,
 			);
-			path = Pods;
+			path = "Streaming Platforms";
 			sourceTree = "<group>";
 		};
 		58EF2E197C577D31049E3BCE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1F313219254859C000796C28 /* StoreKit.framework */,
 				1FDAC8A424AE2307004F7533 /* SpotifyiOS.framework */,
 				1FCD449E24AA7D4000FCB990 /* AuthenticationServices.framework */,
-				0EAFBCC4BB1DA39883CFE32F /* Pods_Basement.framework */,
-				BEE02BE8FB33C13C0865F31F /* Pods_Basement_BasementUITests.framework */,
-				209C2F261C549D6AEF373A5E /* Pods_BasementTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -382,11 +389,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1FA50C4924AA773F0026577D /* Build configuration list for PBXNativeTarget "Basement" */;
 			buildPhases = (
-				FD52FD799F4016B5A0DD888A /* [CP] Check Pods Manifest.lock */,
 				1FA50C1B24AA773E0026577D /* Sources */,
 				1FA50C1C24AA773E0026577D /* Frameworks */,
 				1FA50C1D24AA773E0026577D /* Resources */,
-				C30C8D49C16F3AC85B19BC83 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -394,14 +399,20 @@
 			);
 			name = Basement;
 			packageProductDependencies = (
-				1FCD448C24AA7C4F00FCB990 /* CodableFirebase */,
 				1FCD449224AA7C9700FCB990 /* MarqueeLabel */,
 				1FCD449524AA7CB900FCB990 /* KeyboardLayoutGuide */,
 				1F71D65824BE34D300B353B8 /* KeychainAccess */,
 				1F24EF9F24BEE711002D263C /* SPAlert */,
-				1F5D077824D17F29004FF719 /* Retry */,
 				1F3DB2F924E03B4C001C2F40 /* PromiseKit */,
 				1FCD878A24F15841006A12E5 /* Amber */,
+				1FDFA28825311C8900BA77A8 /* FirebaseFirestore */,
+				1FDFA28C25311C8900BA77A8 /* FirebaseStorage */,
+				1FDFA28E25311C8900BA77A8 /* FirebaseFunctions */,
+				1FDFA29025311C8900BA77A8 /* FirebaseAuth */,
+				1FDFA29425311C8900BA77A8 /* FirebaseMessaging */,
+				1F3573DA25464AAF00F02B9E /* FirebaseFirestoreSwift-Beta */,
+				1F3573DC25464AAF00F02B9E /* FirebaseStorageSwift-Beta */,
+				1F31321F2548E98D00796C28 /* SDWebImage */,
 			);
 			productName = Basement;
 			productReference = 1FA50C1F24AA773E0026577D /* Basement.app */;
@@ -411,7 +422,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1FA50C4C24AA773F0026577D /* Build configuration list for PBXNativeTarget "BasementTests" */;
 			buildPhases = (
-				2C2AAD4B74CD8C352986D488 /* [CP] Check Pods Manifest.lock */,
 				1FA50C3124AA773F0026577D /* Sources */,
 				1FA50C3224AA773F0026577D /* Frameworks */,
 				1FA50C3324AA773F0026577D /* Resources */,
@@ -430,11 +440,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1FA50C4F24AA773F0026577D /* Build configuration list for PBXNativeTarget "BasementUITests" */;
 			buildPhases = (
-				F60836C7C960353F4FD32C2C /* [CP] Check Pods Manifest.lock */,
 				1FA50C3C24AA773F0026577D /* Sources */,
 				1FA50C3D24AA773F0026577D /* Frameworks */,
 				1FA50C3E24AA773F0026577D /* Resources */,
-				AA491062B70E31B17C966E99 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -478,14 +486,14 @@
 			);
 			mainGroup = 1FA50C1624AA773E0026577D;
 			packageReferences = (
-				1FCD448B24AA7C4F00FCB990 /* XCRemoteSwiftPackageReference "CodableFirebase" */,
 				1FCD449124AA7C9700FCB990 /* XCRemoteSwiftPackageReference "MarqueeLabel" */,
 				1FCD449424AA7CB900FCB990 /* XCRemoteSwiftPackageReference "KeyboardLayoutGuide" */,
 				1F71D65724BE34D300B353B8 /* XCRemoteSwiftPackageReference "KeychainAccess" */,
 				1F24EF9E24BEE711002D263C /* XCRemoteSwiftPackageReference "SPAlert" */,
-				1F5D077724D17F29004FF719 /* XCRemoteSwiftPackageReference "Retry" */,
 				1F3DB2F824E03B4C001C2F40 /* XCRemoteSwiftPackageReference "PromiseKit" */,
 				1FCD878924F15841006A12E5 /* XCRemoteSwiftPackageReference "Amber" */,
+				1FDFA28725311C8900BA77A8 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				1F31321E2548E98C00796C28 /* XCRemoteSwiftPackageReference "SDWebImage" */,
 			);
 			productRefGroup = 1FA50C2024AA773E0026577D /* Products */;
 			projectDirPath = "";
@@ -503,9 +511,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1F3573ED25468E8B00F02B9E /* Auth.storyboard in Resources */,
 				1F5ABF2A24BDD97600E03C0B /* Assets.xcassets in Resources */,
 				1F5ABF3524BDD97600E03C0B /* GoogleService-Info.plist in Resources */,
-				1F2736E924EDD235003C86FD /* Main.storyboard in Resources */,
+				1F58ABF325472754006B9A96 /* Main.storyboard in Resources */,
 				1F5ABF2D24BDD97600E03C0B /* LaunchScreen.storyboard in Resources */,
 				1F5ABF6424BDD97600E03C0B /* MiniPlayerView.xib in Resources */,
 			);
@@ -527,150 +536,53 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
-/* Begin PBXShellScriptBuildPhase section */
-		2C2AAD4B74CD8C352986D488 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-BasementTests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		AA491062B70E31B17C966E99 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Basement-BasementUITests/Pods-Basement-BasementUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Basement-BasementUITests/Pods-Basement-BasementUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Basement-BasementUITests/Pods-Basement-BasementUITests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		C30C8D49C16F3AC85B19BC83 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Basement/Pods-Basement-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Basement/Pods-Basement-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Basement/Pods-Basement-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		F60836C7C960353F4FD32C2C /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Basement-BasementUITests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		FD52FD799F4016B5A0DD888A /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Basement-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
-
 /* Begin PBXSourcesBuildPhase section */
 		1FA50C1B24AA773E0026577D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1FFE6EA2254844E80001C405 /* Haptics.swift in Sources */,
 				1F5ABF4524BDD97600E03C0B /* AppDelegate.swift in Sources */,
 				1F5ABF3F24BDD97600E03C0B /* UIApplication.swift in Sources */,
+				1F58ABFD25472773006B9A96 /* JoinSessionViewController.swift in Sources */,
 				1F5ABF3A24BDD97600E03C0B /* Integer.swift in Sources */,
 				1F89725624F27C4D00360472 /* Firebase.swift in Sources */,
 				1F5ABF6624BDD97600E03C0B /* MiniPlayerView.swift in Sources */,
 				1F5ABF3724BDD97600E03C0B /* UIView.swift in Sources */,
 				1F5ABF3924BDD97600E03C0B /* UIColor.swift in Sources */,
 				1F5ABF3024BDD97600E03C0B /* LoadingButton.swift in Sources */,
-				1F5ABF3424BDD97600E03C0B /* StreamingPlatform-OLD.swift in Sources */,
 				1F5ABF6824BDD97600E03C0B /* SceneDelegate.swift in Sources */,
 				1F5ABF2924BDD97600E03C0B /* LeftImageTextField.swift in Sources */,
 				1F5ABF3E24BDD97600E03C0B /* UIImage.swift in Sources */,
-				1F2736EB24EFD8EE003C86FD /* ConnectMusicServiceViewController.swift in Sources */,
-				1FCD878624F15025006A12E5 /* StreamViewController.swift in Sources */,
+				1FCFA2E82540F21000ED365D /* Music.swift in Sources */,
 				1F5ABF2E24BDD97600E03C0B /* ShadowImage.swift in Sources */,
 				1F5ABF6524BDD97600E03C0B /* BasementTabBar.swift in Sources */,
 				1F5ABF6324BDD97600E03C0B /* AVRoutePickerViewButton.swift in Sources */,
-				1FCD878424F15018006A12E5 /* SetupStreamViewController.swift in Sources */,
+				1F58AC0525472C46006B9A96 /* SetupSessionViewController.swift in Sources */,
 				1F5ABF4924BDD97600E03C0B /* ContentCell.swift in Sources */,
-				1FCD878224F14FA9006A12E5 /* JoinStreamViewController.swift in Sources */,
 				1F5ABF2B24BDD97600E03C0B /* ShadowButton.swift in Sources */,
-				1F2736EE24EFD9DD003C86FD /* StreamingPlatform.swift in Sources */,
-				1F5ABF4424BDD97600E03C0B /* AppleMusicAPI.swift in Sources */,
 				1F5ABF3C24BDD97600E03C0B /* AVRoutePickerView.swift in Sources */,
 				1F5ABF3824BDD97600E03C0B /* Array.swift in Sources */,
-				1F5ABF3324BDD97600E03C0B /* Music.swift in Sources */,
 				1F5ABF2F24BDD97600E03C0B /* Round.swift in Sources */,
+				1F3573F725468EA200F02B9E /* SignUpViewController.swift in Sources */,
 				1F5ABF6224BDD97600E03C0B /* SignInWithAppleButton.swift in Sources */,
-				1FCD878824F1506A006A12E5 /* MiniPlayerViewController.swift in Sources */,
+				1FCFA2E32540EE5700ED365D /* PlaybackManager.swift in Sources */,
+				1F58ABF82547275F006B9A96 /* HomeViewController.swift in Sources */,
+				1FCFA2C62540D52200ED365D /* BasementProfile.swift in Sources */,
+				1F436F81254263B600948838 /* PlatformMatcher.swift in Sources */,
+				1F58AC1A25476C38006B9A96 /* TrackSelectionViewController.swift in Sources */,
+				1F3573F225468E9C00F02B9E /* SignInViewController.swift in Sources */,
+				1F3573FC254709B300F02B9E /* ConnectStreamingPlatformViewController.swift in Sources */,
 				1F5ABF3624BDD97600E03C0B /* Date.swift in Sources */,
+				1FCFA2F42540F77E00ED365D /* StreamingPlatform.swift in Sources */,
 				1F2CFC5124BF7153009FDD3A /* TimeInterval.swift in Sources */,
+				1F58AC0F254734E4006B9A96 /* SessionViewController.swift in Sources */,
+				1FCFA2FF2540F84500ED365D /* AppleMusic.swift in Sources */,
 				1F5ABF2C24BDD97600E03C0B /* Presentable.swift in Sources */,
+				1F58AC0A25473462006B9A96 /* TrackListViewController.swift in Sources */,
 				1F5ABF3D24BDD97600E03C0B /* String.swift in Sources */,
 				1F89725824F4246400360472 /* SessionManager.swift in Sources */,
 				1F5ABF3B24BDD97600E03C0B /* UITableView.swift in Sources */,
-				1F89725A24F425BF00360472 /* PlaybackManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -835,7 +747,6 @@
 		};
 		1FA50C4A24AA773F0026577D /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D5C547580320CC0205365DA6 /* Pods-Basement.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -843,11 +754,6 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 3V93A3ACV9;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Basement/Resources",
-					"$(PROJECT_DIR)/Basement/_Resources",
-				);
 				INFOPLIST_FILE = "$(SRCROOT)/Basement/Resources/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -857,7 +763,6 @@
 				MARKETING_VERSION = 0.9;
 				PRODUCT_BUNDLE_IDENTIFIER = com.g30r93g.Basement;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "Basement/Basement-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -865,7 +770,6 @@
 		};
 		1FA50C4B24AA773F0026577D /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4F2F46E25F669DFE1C21ED7E /* Pods-Basement.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -873,11 +777,6 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 3V93A3ACV9;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Basement/Resources",
-					"$(PROJECT_DIR)/Basement/_Resources",
-				);
 				INFOPLIST_FILE = "$(SRCROOT)/Basement/Resources/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -887,7 +786,6 @@
 				MARKETING_VERSION = 0.9;
 				PRODUCT_BUNDLE_IDENTIFIER = com.g30r93g.Basement;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "Basement/Basement-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -895,7 +793,6 @@
 		};
 		1FA50C4D24AA773F0026577D /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E7272F98C76A003650D5B9D9 /* Pods-BasementTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -918,7 +815,6 @@
 		};
 		1FA50C4E24AA773F0026577D /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BF882AC294EAFA7A2BE0E6D7 /* Pods-BasementTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -941,7 +837,6 @@
 		};
 		1FA50C5024AA773F0026577D /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 34532477239776B14676CB44 /* Pods-Basement-BasementUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -962,7 +857,6 @@
 		};
 		1FA50C5124AA773F0026577D /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7C0269A0B70D7E127B0B8271 /* Pods-Basement-BasementUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -1031,6 +925,14 @@
 				kind = branch;
 			};
 		};
+		1F31321E2548E98C00796C28 /* XCRemoteSwiftPackageReference "SDWebImage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImage";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 		1F3DB2F824E03B4C001C2F40 /* XCRemoteSwiftPackageReference "PromiseKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/mxcl/PromiseKit";
@@ -1039,25 +941,9 @@
 				kind = branch;
 			};
 		};
-		1F5D077724D17F29004FF719 /* XCRemoteSwiftPackageReference "Retry" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/icanzilb/Retry.git";
-			requirement = {
-				branch = master;
-				kind = branch;
-			};
-		};
 		1F71D65724BE34D300B353B8 /* XCRemoteSwiftPackageReference "KeychainAccess" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/kishikawakatsumi/KeychainAccess.git";
-			requirement = {
-				branch = master;
-				kind = branch;
-			};
-		};
-		1FCD448B24AA7C4F00FCB990 /* XCRemoteSwiftPackageReference "CodableFirebase" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/alickbass/CodableFirebase.git";
 			requirement = {
 				branch = master;
 				kind = branch;
@@ -1087,6 +973,14 @@
 				kind = branch;
 			};
 		};
+		1FDFA28725311C8900BA77A8 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1095,25 +989,30 @@
 			package = 1F24EF9E24BEE711002D263C /* XCRemoteSwiftPackageReference "SPAlert" */;
 			productName = SPAlert;
 		};
+		1F31321F2548E98D00796C28 /* SDWebImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1F31321E2548E98C00796C28 /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			productName = SDWebImage;
+		};
+		1F3573DA25464AAF00F02B9E /* FirebaseFirestoreSwift-Beta */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1FDFA28725311C8900BA77A8 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = "FirebaseFirestoreSwift-Beta";
+		};
+		1F3573DC25464AAF00F02B9E /* FirebaseStorageSwift-Beta */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1FDFA28725311C8900BA77A8 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = "FirebaseStorageSwift-Beta";
+		};
 		1F3DB2F924E03B4C001C2F40 /* PromiseKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 1F3DB2F824E03B4C001C2F40 /* XCRemoteSwiftPackageReference "PromiseKit" */;
 			productName = PromiseKit;
 		};
-		1F5D077824D17F29004FF719 /* Retry */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 1F5D077724D17F29004FF719 /* XCRemoteSwiftPackageReference "Retry" */;
-			productName = Retry;
-		};
 		1F71D65824BE34D300B353B8 /* KeychainAccess */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 1F71D65724BE34D300B353B8 /* XCRemoteSwiftPackageReference "KeychainAccess" */;
 			productName = KeychainAccess;
-		};
-		1FCD448C24AA7C4F00FCB990 /* CodableFirebase */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 1FCD448B24AA7C4F00FCB990 /* XCRemoteSwiftPackageReference "CodableFirebase" */;
-			productName = CodableFirebase;
 		};
 		1FCD449224AA7C9700FCB990 /* MarqueeLabel */ = {
 			isa = XCSwiftPackageProductDependency;
@@ -1129,6 +1028,31 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 1FCD878924F15841006A12E5 /* XCRemoteSwiftPackageReference "Amber" */;
 			productName = Amber;
+		};
+		1FDFA28825311C8900BA77A8 /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1FDFA28725311C8900BA77A8 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+		1FDFA28C25311C8900BA77A8 /* FirebaseStorage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1FDFA28725311C8900BA77A8 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseStorage;
+		};
+		1FDFA28E25311C8900BA77A8 /* FirebaseFunctions */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1FDFA28725311C8900BA77A8 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFunctions;
+		};
+		1FDFA29025311C8900BA77A8 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1FDFA28725311C8900BA77A8 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		1FDFA29425311C8900BA77A8 /* FirebaseMessaging */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1FDFA28725311C8900BA77A8 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseMessaging;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

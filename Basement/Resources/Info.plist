@@ -35,6 +35,8 @@
 	<true/>
 	<key>NSAppleMusicUsageDescription</key>
 	<string>To select and play content from Apple Music.</string>
+	<key>kTCCServiceMediaLibrary</key>
+	<string>To select and play content from Apple Music.</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>

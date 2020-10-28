@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 class ContentCell: UITableViewCell {
     
@@ -14,10 +15,9 @@ class ContentCell: UITableViewCell {
     @IBOutlet weak private var artwork: UIImageView!
     @IBOutlet weak private var title: UILabel!
     @IBOutlet weak private var subtitle: UILabel!
-    @IBOutlet weak private var options: UIButton?
+    
     
     // MARK: Properties
-    var optionsPresentationDelegate: PresentableOptions? = nil
     var musicContent: Music.Content?
     
     // MARK: Override Methods
@@ -25,24 +25,29 @@ class ContentCell: UITableViewCell {
         super.prepareForReuse()
         
         self.artwork.image = nil
+        self.deselect()
     }
     
     // MARK: Methods
     public func setupCell(from data: Music.Content) {
-        self.artwork.image = data.streamingInformation.artwork?.image
+        self.musicContent = data
+        
+        self.artwork.sd_setImage(with: data.streamingInformation.artworkURL, placeholderImage: nil, options: [])
         self.title.text = data.name
         
         if let song = data as? Music.Song {
-            self.subtitle.text = "\(song.artist)"
+            self.subtitle.text = "\(song.artist) • \(song.album)"
         } else if let album = data as? Music.Album {
-            self.subtitle.text = ""
+            self.subtitle.text = "\(album.artist)"
         }
     }
     
-    // MARK: IBActions
-    @IBAction private func optionsTapped(_ sender: UIButton) {
-        // TOOD: Present options to user
-        self.optionsPresentationDelegate?.presentOptions()
+    public func select() {
+        self.accessoryType = .checkmark
+    }
+    
+    public func deselect() {
+        self.accessoryType = .none
     }
     
 }
