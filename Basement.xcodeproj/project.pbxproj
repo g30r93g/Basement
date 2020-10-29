@@ -9,7 +9,9 @@
 /* Begin PBXBuildFile section */
 		1F24EFA024BEE711002D263C /* SPAlert in Frameworks */ = {isa = PBXBuildFile; productRef = 1F24EF9F24BEE711002D263C /* SPAlert */; };
 		1F2CFC5124BF7153009FDD3A /* TimeInterval.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2CFC5024BF7153009FDD3A /* TimeInterval.swift */; };
-		1F31321A254859C000796C28 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F313219254859C000796C28 /* StoreKit.framework */; };
+		1F2ED00A254A889000E26166 /* PlatformMatchingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2ED009254A889000E26166 /* PlatformMatchingViewController.swift */; };
+		1F2ED00F254AA7EE00E26166 /* Spotify.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2ED00E254AA7EE00E26166 /* Spotify.swift */; };
+		1F2ED014254AC00300E26166 /* SpotifyiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F2ED013254AC00300E26166 /* SpotifyiOS.framework */; };
 		1F3132202548E98D00796C28 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 1F31321F2548E98D00796C28 /* SDWebImage */; };
 		1F3573DB25464AAF00F02B9E /* FirebaseFirestoreSwift-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = 1F3573DA25464AAF00F02B9E /* FirebaseFirestoreSwift-Beta */; };
 		1F3573DD25464AAF00F02B9E /* FirebaseStorageSwift-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = 1F3573DC25464AAF00F02B9E /* FirebaseStorageSwift-Beta */; };
@@ -94,7 +96,10 @@
 
 /* Begin PBXFileReference section */
 		1F2CFC5024BF7153009FDD3A /* TimeInterval.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeInterval.swift; sourceTree = "<group>"; };
-		1F313219254859C000796C28 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		1F2ED009254A889000E26166 /* PlatformMatchingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlatformMatchingViewController.swift; sourceTree = "<group>"; };
+		1F2ED00E254AA7EE00E26166 /* Spotify.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spotify.swift; sourceTree = "<group>"; };
+		1F2ED013254AC00300E26166 /* SpotifyiOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SpotifyiOS.framework; sourceTree = "<group>"; };
+		1F2ED01B254AC14B00E26166 /* Basement-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Basement-Bridging-Header.h"; sourceTree = "<group>"; };
 		1F3573EC25468E8B00F02B9E /* Auth.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Auth.storyboard; sourceTree = "<group>"; };
 		1F3573F125468E9C00F02B9E /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		1F3573F625468EA200F02B9E /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
@@ -169,11 +174,11 @@
 				1F3132202548E98D00796C28 /* SDWebImage in Frameworks */,
 				1F71D65924BE34D300B353B8 /* KeychainAccess in Frameworks */,
 				1F3DB2FA24E03B4C001C2F40 /* PromiseKit in Frameworks */,
+				1F2ED014254AC00300E26166 /* SpotifyiOS.framework in Frameworks */,
 				1FDFA29525311C8900BA77A8 /* FirebaseMessaging in Frameworks */,
 				1F24EFA024BEE711002D263C /* SPAlert in Frameworks */,
 				1FDFA28D25311C8900BA77A8 /* FirebaseStorage in Frameworks */,
 				1F3573DB25464AAF00F02B9E /* FirebaseFirestoreSwift-Beta in Frameworks */,
-				1F31321A254859C000796C28 /* StoreKit.framework in Frameworks */,
 				1FCD449324AA7C9700FCB990 /* MarqueeLabel in Frameworks */,
 				1FDFA28925311C8900BA77A8 /* FirebaseFirestore in Frameworks */,
 			);
@@ -228,6 +233,7 @@
 				1F58AC0425472C46006B9A96 /* SetupSessionViewController.swift */,
 				1F58AC0925473462006B9A96 /* TrackListViewController.swift */,
 				1F58AC1925476C38006B9A96 /* TrackSelectionViewController.swift */,
+				1F2ED009254A889000E26166 /* PlatformMatchingViewController.swift */,
 				1F58ABFC25472773006B9A96 /* JoinSessionViewController.swift */,
 				1F58AC0E254734E4006B9A96 /* SessionViewController.swift */,
 			);
@@ -237,6 +243,7 @@
 		1F5ABED724BDD97600E03C0B /* Basement */ = {
 			isa = PBXGroup;
 			children = (
+				1F2ED01B254AC14B00E26166 /* Basement-Bridging-Header.h */,
 				1F5ABEF424BDD97600E03C0B /* Basement.entitlements */,
 				1F5ABEE824BDD97600E03C0B /* GoogleService-Info.plist */,
 				1F5ABEFB24BDD97600E03C0B /* AppDelegate.swift */,
@@ -252,6 +259,7 @@
 		1F5ABED924BDD97600E03C0B /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				1F2ED013254AC00300E26166 /* SpotifyiOS.framework */,
 				1F5ABEE424BDD97600E03C0B /* Info.plist */,
 				1F5ABEDB24BDD97600E03C0B /* Assets.xcassets */,
 				1F5ABEDE24BDD97600E03C0B /* LaunchScreen.storyboard */,
@@ -368,6 +376,7 @@
 				1FCFA2F32540F77E00ED365D /* StreamingPlatform.swift */,
 				1F436F80254263B600948838 /* PlatformMatcher.swift */,
 				1FCFA2FE2540F84500ED365D /* AppleMusic.swift */,
+				1F2ED00E254AA7EE00E26166 /* Spotify.swift */,
 			);
 			path = "Streaming Platforms";
 			sourceTree = "<group>";
@@ -375,7 +384,6 @@
 		58EF2E197C577D31049E3BCE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				1F313219254859C000796C28 /* StoreKit.framework */,
 				1FDAC8A424AE2307004F7533 /* SpotifyiOS.framework */,
 				1FCD449E24AA7D4000FCB990 /* AuthenticationServices.framework */,
 			);
@@ -565,6 +573,7 @@
 				1F5ABF3824BDD97600E03C0B /* Array.swift in Sources */,
 				1F5ABF2F24BDD97600E03C0B /* Round.swift in Sources */,
 				1F3573F725468EA200F02B9E /* SignUpViewController.swift in Sources */,
+				1F2ED00A254A889000E26166 /* PlatformMatchingViewController.swift in Sources */,
 				1F5ABF6224BDD97600E03C0B /* SignInWithAppleButton.swift in Sources */,
 				1FCFA2E32540EE5700ED365D /* PlaybackManager.swift in Sources */,
 				1F58ABF82547275F006B9A96 /* HomeViewController.swift in Sources */,
@@ -582,6 +591,7 @@
 				1F58AC0A25473462006B9A96 /* TrackListViewController.swift in Sources */,
 				1F5ABF3D24BDD97600E03C0B /* String.swift in Sources */,
 				1F89725824F4246400360472 /* SessionManager.swift in Sources */,
+				1F2ED00F254AA7EE00E26166 /* Spotify.swift in Sources */,
 				1F5ABF3B24BDD97600E03C0B /* UITableView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -753,6 +763,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 3V93A3ACV9;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Basement/Resources",
+				);
 				INFOPLIST_FILE = "$(SRCROOT)/Basement/Resources/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -760,8 +774,10 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 0.9;
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.g30r93g.Basement;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Basement/Basement-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -775,6 +791,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 3V93A3ACV9;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Basement/Resources",
+				);
 				INFOPLIST_FILE = "$(SRCROOT)/Basement/Resources/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -782,8 +802,10 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 0.9;
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.g30r93g.Basement;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Basement/Basement-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -975,7 +997,7 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
 			requirement = {
-				branch = master;
+				branch = "7.0-spm-beta";
 				kind = branch;
 			};
 		};

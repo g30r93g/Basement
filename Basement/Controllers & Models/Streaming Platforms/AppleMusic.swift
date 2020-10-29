@@ -86,9 +86,9 @@ class AppleMusic {
                             .replacingOccurrences(of: "{h}", with: "\(playlist.attributes?.artwork?.height ?? 1000)") ?? ""
                         let artworkURL = URL(string: artworkURLString)
                         
-                        let streamingInfo = Music.StreamingInfo(platform: .appleMusic, identifier: playlistIdentifier, artworkURL: artworkURL)
+                        let streamingInfo = Music.StreamingInfo(platform: .appleMusic, identifier: playlistIdentifier)
                         
-                        playlists.append(Music.Playlist(name: name, contentCreator: .me, streamingInformation: streamingInfo))
+                        playlists.append(Music.Playlist(name: name, artworkURL: artworkURL, contentCreator: .me, streamingInformation: [streamingInfo]))
                     }
                 case .failure(let error):
                     print("[AppleMusic] Failed to fetch playlists - \(error.localizedDescription)")
@@ -133,7 +133,7 @@ class AppleMusic {
     func search(text: String, completion: @escaping([Music.Content]?) -> Void) {
         guard let amber = self.amber else { completion(nil); return }
         
-        amber.searchCatalogResources(searchTerm: text, completion: { (result) in
+        amber.searchCatalogResources(searchTerm: text, limit: 20, completion: { (result) in
             switch result {
             case .success(let results):
                 let matchingSongs = results.songs?.data?.compactMap({ Music.Song(amber: $0.attributes) })
@@ -194,8 +194,9 @@ class AppleMusic {
     // MARK: Queue Methods
     func updateQueue(with tracks: [SessionManager.Track], completion: (Bool) -> Void) {
         guard let player = self.amber?.player else { completion(false); return }
+        let tracks = tracks.map({$0.content}).flatMap({$0.streamingInformation.filter({$0.platform == .appleMusic})})
         
-        player.updateQueue(tracks.map({$0.streamInformation.streamingInformation.identifier}))
+        player.updateQueue(tracks.map({$0.identifier}))
         
         completion(true)
     }

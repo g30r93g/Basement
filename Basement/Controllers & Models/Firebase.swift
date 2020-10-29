@@ -412,31 +412,41 @@ class FirestoreHandler {
     }
     
     public func fetchTrackListDetails(_ tracks: [SessionManager.Track], completion: @escaping(Result<[SessionManager.Track], Firebase.FirebaseError>) -> Void) {
-        let trackFetchDispatch = DispatchGroup()
+        
+        let trackListFetchDispatch = DispatchGroup()
         
         var fetchedTracks: [SessionManager.Track] = []
-        var failedFetches = 0
         
         for track in tracks {
-            let trackInformation = track.streamInformation.streamingInformation
+            trackListFetchDispatch.enter()
             
-            trackFetchDispatch.enter()
-            self.fetchTrackDetails(platform: trackInformation.platform, identifier: trackInformation.identifier) { (result) in
-                switch result {
-                case .success(let fetchedTrack):
-                    fetchedTracks.append(SessionManager.Track(playbackIndex: track.playbackIndex, streamInformation: fetchedTrack))
-                case .failure(_):
-                    failedFetches += 1
+            let trackFetchDispatch = DispatchGroup()
+            
+            let playbackIndex = track.playbackIndex
+            var streamingInfo: [Music.StreamingInfo] = []
+            var failedFetches = 0
+            
+            for info in track.content.streamingInformation {
+                trackFetchDispatch.enter()
+                
+                self.fetchTrackDetails(platform: info.platform, identifier: info.identifier) { (result) in
+                    switch result {
+                    case .success(let track):
+                        track.streamingInformation.forEach({ streamingInfo.append($0) })
+                    case .failure(_):
+                        failedFetches += 1
+                    }
+                    
+                    trackFetchDispatch.leave()
                 }
-                trackFetchDispatch.leave()
             }
-        }
-        
-        trackFetchDispatch.notify(queue: .global(qos: .userInitiated)) {
-            guard failedFetches + fetchedTracks.count == tracks.count else { return }
-            guard !fetchedTracks.isEmpty else { completion(.failure(.undefined)); return }
             
-            completion(.success(fetchedTracks))
+            trackFetchDispatch.notify(queue: .global(qos: .userInitiated)) {
+                guard streamingInfo.count + failedFetches > 1 else { return }
+                let trackDetails = Music.Content(name: track.content.name, artworkURL: track.content.artwork, streamingInformation: streamingInfo)
+                
+                fetchedTracks.append(SessionManager.Track(playbackIndex: playbackIndex, content: trackDetails))
+            }
         }
     }
     

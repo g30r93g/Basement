@@ -32,7 +32,7 @@ class ContentCell: UITableViewCell {
     public func setupCell(from data: Music.Content) {
         self.musicContent = data
         
-        self.artwork.sd_setImage(with: data.streamingInformation.artworkURL, placeholderImage: nil, options: [])
+        self.artwork.sd_setImage(with: data.artwork, placeholderImage: nil, options: [])
         self.title.text = data.name
         
         if let song = data as? Music.Song {

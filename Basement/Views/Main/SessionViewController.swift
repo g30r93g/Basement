@@ -117,10 +117,10 @@ class SessionViewController: UIViewController {
     
     private func updateNowPlaying() {
         guard let nowPlaying = PlaybackManager.current.nowPlaying,
-              let track = nowPlaying.streamInformation as? Music.Song
+              let track = nowPlaying.content as? Music.Song
         else { return }
         
-        self.nowPlayingArtwork.sd_setImage(with: track.streamingInformation.artworkURL, placeholderImage: nil, options: [])
+        self.nowPlayingArtwork.sd_setImage(with: track.artwork, placeholderImage: nil, options: [])
         self.nowPlayingTrackName.text = track.name
         self.nowPlayingTrackDetails.text = "\(track.artist) • \(track.album)"
         self.nowPlayingSlider.minimumValue = 0
@@ -275,7 +275,7 @@ extension SessionViewController: UITableViewDelegate, UITableViewDataSource {
                   let queuedItem = PlaybackManager.current.queue?[indexPath.row]
             else { return UITableViewCell() }
             
-            cell.setupCell(from: queuedItem.streamInformation)
+            cell.setupCell(from: queuedItem.content)
             
             return cell
         case 1:
@@ -303,7 +303,7 @@ extension SessionViewController: UITableViewDelegate, UITableViewDataSource {
         let movedItem = queue[sourceIndexPath.row]
         
         queue.remove(at: sourceIndexPath.row)
-        queue.insert(SessionManager.Track(playbackIndex: destinationIndexPath.row, streamInformation: movedItem.streamInformation),
+        queue.insert(SessionManager.Track(playbackIndex: destinationIndexPath.row, content: movedItem.content),
                          at: destinationIndexPath.row)
         
         PlaybackManager.current.updateQueue(with: queue) { (_) in

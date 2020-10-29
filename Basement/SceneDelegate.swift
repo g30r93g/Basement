@@ -10,9 +10,9 @@ import UIKit
 import FirebaseAuth
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
-
+    
     var window: UIWindow?
-
+    
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
@@ -23,17 +23,29 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         self.determineStoryboard()
     }
     
-//    func sceneDidBecomeActive(_ scene: UIScene) {
-//        
-//    }
-//    
-//    func sceneWillResignActive(_ scene: UIScene) {
-//        
-//    }
-//    
-//    func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
-//        
-//    }
+    func sceneDidBecomeActive(_ scene: UIScene) {
+        if StreamingPlatform.spotify.accessToken != nil {
+            StreamingPlatform.spotify.appRemote.connect()
+        }
+    }
+
+    func sceneWillResignActive(_ scene: UIScene) {
+        if StreamingPlatform.spotify.appRemote.isConnected {
+            StreamingPlatform.spotify.appRemote.disconnect()
+        }
+    }
+    
+    func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
+        guard let url = URLContexts.first?.url else { return }
+        
+        let parameters = StreamingPlatform.spotify.appRemote.authorizationParameters(from: url)
+        
+        if let accessToken = parameters?[SPTAppRemoteAccessTokenKey] {
+            StreamingPlatform.spotify.updateAccessToken(accessToken)
+        } else if let authError = parameters?[SPTAppRemoteErrorDescriptionKey] {
+            print("Spotify Error during auth: \(authError)")
+        }
+    }
     
     private func determineStoryboard() {
         var storyboard: UIStoryboard {
@@ -48,5 +60,5 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         self.window?.rootViewController = initialVC
         self.window?.makeKeyAndVisible()
     }
-
+    
 }

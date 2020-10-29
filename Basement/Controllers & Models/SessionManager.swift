@@ -213,7 +213,7 @@ class SessionManager {
     
     struct Track: Codable, Comparable {
         let playbackIndex: Int
-        let streamInformation: Music.Content
+        let content: Music.Content
         
         static func < (lhs: SessionManager.Track, rhs: SessionManager.Track) -> Bool {
             return lhs.playbackIndex < rhs.playbackIndex

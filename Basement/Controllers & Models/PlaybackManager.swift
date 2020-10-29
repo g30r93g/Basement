@@ -58,7 +58,8 @@ class PlaybackManager {
         switch nowPlaying {
         case .success(let trackID):
             guard let tracks = SessionManager.current.activeSession?.tracks,
-                  let matchingTrack = tracks.first(where: {$0.streamInformation.streamingInformation.identifier == trackID})
+                  let authorisedPlatform = self.streamingPlatform.authorizedPlatform,
+                  let matchingTrack = tracks.first(where: {$0.content.streamingInformation.first(where: {$0.platform == authorisedPlatform})?.identifier == trackID})
             else { return nil }
             
             return matchingTrack
@@ -71,8 +72,10 @@ class PlaybackManager {
         
         switch nowPlaying {
         case .success(let trackIDs):
-            guard let tracks = SessionManager.current.activeSession?.tracks else { return nil }
-            let matchingTracks = tracks.filter({trackIDs.contains($0.streamInformation.streamingInformation.identifier)})
+            guard let tracks = SessionManager.current.activeSession?.tracks,
+                  let authorisedPlatform = self.streamingPlatform.authorizedPlatform
+            else { return nil }
+            let matchingTracks = tracks.filter({ trackIDs.contains($0.content.streamingInformation.first(where: {$0.platform == authorisedPlatform})?.identifier ?? "") })
             
             return matchingTracks
         case .failure(_):

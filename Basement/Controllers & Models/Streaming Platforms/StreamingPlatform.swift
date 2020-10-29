@@ -11,19 +11,37 @@ class StreamingPlatform {
     
     // MARK: Static Instances
     static let appleMusic = AppleMusic()
-    //    static let spotify = Spotify()
+    static let spotify = Spotify()
     
     // MARK: Initialisers
-    init() { }
+    init() {
+        BasementProfile.shared.fetchCurrentUser { (result) in
+            switch result {
+            case .success(let profile):
+                self.authorizedPlatform = profile.details.connectedService?.platform
+            case .failure(_):
+                break
+            }
+        }
+    }
     
     // MARK: Properties
-    private var authorizedPlatform: Platforms? = .appleMusic
+    private(set) var authorizedPlatform: Platforms?
     private var platformMatcher = PlatformMatcher()
     
     // MARK: Enums
-    enum Platforms: String, Codable {
+    enum Platforms: String, Codable, Equatable {
         case appleMusic = "appleMusic"
-        //        case spotify
+        case spotify = "spotify"
+        
+        func textualRepresentation() -> String {
+            switch self {
+            case .appleMusic:
+                return "Apple Music"
+            case .spotify:
+                return "Spotify"
+            }
+        }
     }
     
     enum PlatformAuthError: Error {
@@ -50,6 +68,8 @@ class StreamingPlatform {
                     completion(.failure(.undefined))
                 }
             }
+        case .spotify:
+            fatalError("Not Implemeneted")
         }
     }
     
@@ -63,6 +83,8 @@ class StreamingPlatform {
             let currentPlaybackPosition = Int(player.controller.currentPlaybackTime)
             
             return .success(currentPlaybackPosition * 1000)
+        case .spotify:
+            fatalError("Not Implemeneted")
         }
     }
     
@@ -76,6 +98,8 @@ class StreamingPlatform {
             } else {
                 return .failure(.undefined)
             }
+        case .spotify:
+            fatalError("Not Implemeneted")
         }
     }
     
@@ -89,6 +113,8 @@ class StreamingPlatform {
             } else {
                 return .failure(.undefined)
             }
+        case .spotify:
+            fatalError("Not Implemeneted")
         }
     }
     
@@ -104,6 +130,8 @@ class StreamingPlatform {
                     completion(.failure(.undefined))
                 }
             }
+        case .spotify:
+            fatalError("Not Implemeneted")
         }
     }
     
@@ -121,6 +149,8 @@ class StreamingPlatform {
                     completion(.failure(.undefined))
                 }
             }
+        case .spotify:
+            fatalError("Not Implemeneted")
         }
     }
     
@@ -136,6 +166,8 @@ class StreamingPlatform {
                     completion(.failure(.undefined))
                 }
             }
+        case .spotify:
+            fatalError("Not Implemeneted")
         }
     }
     
@@ -152,6 +184,8 @@ class StreamingPlatform {
                     completion(.failure(.undefined))
                 }
             }
+        case .spotify:
+            fatalError("Not Implemeneted")
         }
     }
     
@@ -165,6 +199,8 @@ class StreamingPlatform {
                     completion(.failure(.undefined))
                 }
             }
+        case .spotify:
+            fatalError("Not Implemeneted")
         }
     }
     

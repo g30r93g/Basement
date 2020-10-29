@@ -23,16 +23,38 @@ class Music {
     // MARK: Classes
     class Content: Equatable, Codable {
         let name: String
-        let streamingInformation: StreamingInfo
+        let artwork: URL?
+        let streamingInformation: [StreamingInfo]
 
-        init(name: String, streamingInformation: StreamingInfo) {
+        init(name: String, artworkURL: URL?, streamingInformation: [StreamingInfo]) {
             self.name = name
+            self.artwork = artworkURL
             self.streamingInformation = streamingInformation
         }
 
         // MARK: Equatable
         static func == (lhs: Music.Content, rhs: Music.Content) -> Bool {
-            return lhs.streamingInformation.identifier == rhs.streamingInformation.identifier
+            return lhs.streamingInformation == rhs.streamingInformation
+        }
+        
+        // MARK: Codable
+        private enum CodingKeys: String, CodingKey {
+            case name, streamingInfo
+        }
+        
+        required init(from decoder: Decoder) throws {
+            let container = try decoder.container(keyedBy: CodingKeys.self)
+            
+            self.name = try container.decode(String.self, forKey: .name)
+            self.streamingInformation = try container.decode([StreamingInfo].self, forKey: .streamingInfo)
+            self.artwork = nil
+        }
+        
+        func encode(to encoder: Encoder) throws {
+            var container = encoder.container(keyedBy: CodingKeys.self)
+            
+            try container.encode(self.name, forKey: .name)
+            try container.encode(self.streamingInformation, forKey: .streamingInfo)
         }
     }
 
@@ -46,9 +68,9 @@ class Music {
     class ContentContainer: Content {
         var songs: [Song]
 
-        init(name: String, songs: [Song], streamingInformation: StreamingInfo) {
+        init(name: String, songs: [Song], artworkURL: URL?, streamingInformation: [StreamingInfo]) {
             self.songs = songs
-            super.init(name: name, streamingInformation: streamingInformation)
+            super.init(name: name, artworkURL: artworkURL, streamingInformation: streamingInformation)
         }
 
         required init(from decoder: Decoder) throws {
@@ -86,12 +108,10 @@ class Music {
     class StreamingInfo: Equatable, Codable {
         let platform: StreamingPlatform.Platforms
         var identifier: String
-        let artworkURL: URL?
 
-        init(platform: StreamingPlatform.Platforms, identifier: String, artworkURL: URL?) {
+        init(platform: StreamingPlatform.Platforms, identifier: String) {
             self.platform = platform
             self.identifier = identifier
-            self.artworkURL = artworkURL
         }
 
         static func == (lhs: Music.StreamingInfo, rhs: Music.StreamingInfo) -> Bool {
@@ -99,7 +119,7 @@ class Music {
         }
 
         enum CodingKeys: String, CodingKey {
-            case platform, identifier, artworkURL
+            case platform, identifier
         }
 
         required init(from decoder: Decoder) throws {
@@ -108,14 +128,6 @@ class Music {
             self.identifier = try container.decode(String.self, forKey: .identifier)
 
             self.platform = try container.decode(StreamingPlatform.Platforms.self, forKey: .platform)
-            
-            if let artworkURLString = try container.decodeIfPresent(String.self, forKey: .artworkURL),
-               !artworkURLString.isEmpty,
-               let artworkURL = URL(string: artworkURLString) {
-                self.artworkURL = artworkURL
-            } else {
-                self.artworkURL = nil
-            }
         }
 
         func encode(to encoder: Encoder) throws {
@@ -123,16 +135,15 @@ class Music {
 
             try container.encode(self.identifier, forKey: .identifier)
             try container.encode(self.platform, forKey: .platform)
-            try container.encodeIfPresent(self.artworkURL?.absoluteString, forKey: .artworkURL)
         }
     }
 
     class Playlist: ContentContainer {
         let contentCreator: ContentCreator
 
-        init(name: String, songs: [Song] = [], contentCreator: ContentCreator, streamingInformation: StreamingInfo) {
+        init(name: String, songs: [Song] = [], artworkURL: URL?, contentCreator: ContentCreator, streamingInformation: [StreamingInfo]) {
             self.contentCreator = contentCreator
-            super.init(name: name, songs: songs, streamingInformation: streamingInformation)
+            super.init(name: name, songs: songs, artworkURL: artworkURL, streamingInformation: streamingInformation)
         }
 
         init(amber: PlaylistAttributes?, contentCreator: ContentCreator = .me) {
@@ -143,13 +154,13 @@ class Music {
                 .replacingOccurrences(of: "{h}", with: "\(amber?.artwork?.height ?? 1000)") ?? ""
             let artworkURL = URL(string: artworkURLString)
 
-            let streamingInfo = Music.StreamingInfo(platform: .appleMusic, identifier: playlistIdentifier, artworkURL: artworkURL)
+            let streamingInfo = Music.StreamingInfo(platform: .appleMusic, identifier: playlistIdentifier)
             let isContentCreator = amber?.playlistType == "user-shared"
             let curatorName = amber?.curatorName ?? ""
             let contentCreator: Music.ContentCreator = isContentCreator ? .me : Music.ContentCreator(name: curatorName, isLibrary: false)
 
             self.contentCreator = contentCreator
-            super.init(name: name, songs: [], streamingInformation: streamingInfo)
+            super.init(name: name, songs: [], artworkURL: artworkURL, streamingInformation: [streamingInfo])
         }
 
         required init(from decoder: Decoder) throws {
@@ -168,9 +179,11 @@ class Music {
 
         /// Updates the songs in the playlist
         func updateSongs(completion: (([Song]?) -> Void)? = nil) {
-            switch self.streamingInformation.platform {
+            guard let streamingInfo = self.streamingInformation.first else { completion?(nil); return }
+            
+            switch streamingInfo.platform {
             case .appleMusic:
-                StreamingPlatform.appleMusic.amber?.getCatalogPlaylist(identifier: streamingInformation.identifier, include: [.tracks], completion: { (result) in
+                StreamingPlatform.appleMusic.amber?.getCatalogPlaylist(identifier: streamingInfo.identifier, include: [.tracks], completion: { (result) in
                     switch result {
                     case .success(let playlist):
                         var songs: [Song] = []
@@ -185,6 +198,8 @@ class Music {
                         completion?(nil)
                     }
                 })
+            case .spotify:
+                fatalError("Not Implemented")
             }
         }
     }
@@ -192,10 +207,10 @@ class Music {
     class Album: ContentContainer {
         let artist: String
 
-        init(name: String, artist: String, songs: [Song] = [], streamingInformation: StreamingInfo) {
+        init(name: String, artist: String, artworkURL: URL?, songs: [Song] = [], streamingInformation: [StreamingInfo]) {
             self.artist = artist
 
-            super.init(name: name, songs: songs, streamingInformation: streamingInformation)
+            super.init(name: name, songs: songs, artworkURL: artworkURL, streamingInformation: streamingInformation)
         }
 
         init(amber: AlbumAttributes?, songs: [Song] = []) {
@@ -207,10 +222,10 @@ class Music {
                 .replacingOccurrences(of: "{h}", with: "\(amber?.artwork?.height ?? 1000)") ?? ""
             let artworkURL = URL(string: artworkURLString)
 
-            let streamingInfo = Music.StreamingInfo(platform: .appleMusic, identifier: albumIdentifier, artworkURL: artworkURL)
+            let streamingInfo = Music.StreamingInfo(platform: .appleMusic, identifier: albumIdentifier)
 
             self.artist = artistName
-            super.init(name: name, songs: songs, streamingInformation: streamingInfo)
+            super.init(name: name, songs: songs, artworkURL: artworkURL, streamingInformation: [streamingInfo])
         }
 
         required init(from decoder: Decoder) throws {
@@ -227,11 +242,13 @@ class Music {
             return self.songs.count
         }
 
-        /// Updates the songs in  the album
+        /// Updates the songs in the album
         func updateSongs(completion: (([Song]?) -> Void)? = nil) {
-            switch self.streamingInformation.platform {
+            guard let streamingInfo = self.streamingInformation.first else { completion?(nil); return }
+            
+            switch streamingInfo.platform {
             case .appleMusic:
-                StreamingPlatform.appleMusic.amber?.getCatalogAlbum(identifier: streamingInformation.identifier, include: [.tracks], completion: { (result) in
+                StreamingPlatform.appleMusic.amber?.getCatalogAlbum(identifier: streamingInfo.identifier, include: [.tracks], completion: { (result) in
                     switch result {
                     case .success(let playlist):
                         var songs: [Song] = []
@@ -246,6 +263,8 @@ class Music {
                         completion?(nil)
                     }
                 })
+            case .spotify:
+                fatalError("Not Implemented")
             }
         }
     }
@@ -255,12 +274,12 @@ class Music {
         let album: String
         let runtime: Int // In miliseconds
 
-        init(name: String, artist: String, album: String, runtime: Int, streamingInformation: StreamingInfo) {
+        init(name: String, artist: String, album: String, runtime: Int, artworkURL: URL?, streamingInformation: [StreamingInfo]) {
             self.artist = artist
             self.album = album
             self.runtime = runtime
 
-            super.init(name: name, streamingInformation: streamingInformation)
+            super.init(name: name, artworkURL: artworkURL, streamingInformation: streamingInformation)
         }
 
         init(amber: SongAttributes?) {
@@ -274,13 +293,13 @@ class Music {
                 .replacingOccurrences(of: "{h}", with: "1000") ?? ""
             let artworkURL = URL(string: artworkURLString)
 
-            let streamingInfo = StreamingInfo(platform: .appleMusic, identifier: identifier, artworkURL: artworkURL)
+            let streamingInfo = StreamingInfo(platform: .appleMusic, identifier: identifier)
 
             self.artist = artist
             self.album = album
             self.runtime = runtime
 
-            super.init(name: name, streamingInformation: streamingInfo)
+            super.init(name: name, artworkURL: artworkURL, streamingInformation: [streamingInfo])
         }
 
         required init(from decoder: Decoder) throws {

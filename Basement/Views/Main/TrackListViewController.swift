@@ -91,7 +91,7 @@ class TrackListViewController: UIViewController {
 extension TrackListViewController: TrackSelectionDelegate {
     
     func addTrack(track: Music.Song) {
-        let trackToAdd = SessionManager.Track(playbackIndex: self.trackList.count, streamInformation: track)
+        let trackToAdd = SessionManager.Track(playbackIndex: self.trackList.count, content: track)
         
         self.trackList.append(trackToAdd)
         Haptics.success()
@@ -113,7 +113,7 @@ extension TrackListViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "Selected Track", for: indexPath) as? ContentCell else { return UITableViewCell() }
-        let song = self.trackList[indexPath.row].streamInformation
+        let song = self.trackList[indexPath.row].content
         
         cell.setupCell(from: song)
         
@@ -132,7 +132,7 @@ extension TrackListViewController: UITableViewDelegate, UITableViewDataSource {
         let movedItem = self.trackList[sourceIndexPath.row]
         
         trackList.remove(at: sourceIndexPath.row)
-        trackList.insert(SessionManager.Track(playbackIndex: destinationIndexPath.row, streamInformation: movedItem.streamInformation),
+        trackList.insert(SessionManager.Track(playbackIndex: destinationIndexPath.row, content: movedItem.content),
                          at: destinationIndexPath.row)
     }
     
